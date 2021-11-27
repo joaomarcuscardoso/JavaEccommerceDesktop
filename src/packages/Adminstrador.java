@@ -5,12 +5,14 @@
  */
 package packages;
 
+import java.util.Set;
+
 
 public class Adminstrador extends Cargo {
     
     
     
-    public Adminstrador(String nomeDoCargo, int privilegios, String setor) {
+    public Adminstrador(String nomeDoCargo, int privilegios, Set<Setor> setor) {
         super(nomeDoCargo, privilegios, setor);
     }
 }

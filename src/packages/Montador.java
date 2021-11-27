@@ -6,6 +6,7 @@
 package packages;
 
 import java.util.Date;
+import java.util.Set;
 
 public class Montador extends Cargo {
     private String trabalhoAtual;
@@ -13,11 +14,11 @@ public class Montador extends Cargo {
     private boolean feito;
     private int qtdTrabalhoPorMes;
     
-    public Montador(String nomeDoCargo, int privilegios, String setor) {
+    public Montador(String nomeDoCargo, int privilegios, Set<Setor> setor) {
         super(nomeDoCargo, privilegios, setor);
     }
     
-    public Montador(String nomeDoCargo, int privilegios, String setor, String trabalhoAtual, Date prazo, boolean feito) {
+    public Montador(String nomeDoCargo, int privilegios, Set<Setor> setor, String trabalhoAtual, Date prazo, boolean feito) {
         super(nomeDoCargo, privilegios, setor);
         this.trabalhoAtual = trabalhoAtual;
         this.prazo = prazo;
