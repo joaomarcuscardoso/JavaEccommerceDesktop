@@ -6,6 +6,8 @@
 package packages;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -16,11 +18,11 @@ public class Cargo implements ICargo {
     private int privilegios;
     private int salario;
     private boolean disponivel;
-    private String setor;
+    private Set<Setor> setor = new HashSet<>();
     private Date inicioDoTurno;
     private Date fimDoTurno;
     
-    public Cargo(String nomeDoCargo, int privilegios, String setor) {
+    public Cargo(String nomeDoCargo, int privilegios, Set<Setor> setor) {
         this.nomeDoCargo = nomeDoCargo;
         this.privilegios = privilegios;
         this.setor = setor;
@@ -47,7 +49,7 @@ public class Cargo implements ICargo {
     }
     
     @Override
-    public String getSetor() {
+    public Set<Setor> getSetor() {
         return this.setor;
     }
 

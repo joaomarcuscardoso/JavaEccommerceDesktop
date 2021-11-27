@@ -6,6 +6,7 @@
 package packages;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  *
@@ -18,7 +19,7 @@ public interface ICargo {
     public boolean getDisponivel();
     public void setDisponivel(boolean disponivel);
     public int getSalario();
-    public String getSetor();
+    public Set<Setor> getSetor();
     public Date getInicioDeTurno();
     public Date getFimDeTurno();
 
