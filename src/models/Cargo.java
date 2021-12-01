@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package packages;
+package models;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -15,16 +15,12 @@ import java.util.Set;
  */
 public class Cargo implements ICargo {
     private String nomeDoCargo;
-    private int privilegios;
-    private int salario;
-    private boolean disponivel;
     private Set<Setor> setor = new HashSet<>();
     private Date inicioDoTurno;
     private Date fimDoTurno;
     
-    public Cargo(String nomeDoCargo, int privilegios, Set<Setor> setor) {
+    public Cargo(String nomeDoCargo,  Set<Setor> setor) {
         this.nomeDoCargo = nomeDoCargo;
-        this.privilegios = privilegios;
         this.setor = setor;
     }
     
@@ -33,21 +29,6 @@ public class Cargo implements ICargo {
         return this.nomeDoCargo;
     }
 
-    @Override
-    public int getPrivilegios() {
-        return this.privilegios;
-    }
-
-    @Override
-    public boolean getDisponivel() {
-        return this.disponivel;
-    }
-
-    @Override
-    public int getSalario() {
-        return this.salario;
-    }
-    
     @Override
     public Set<Setor> getSetor() {
         return this.setor;
@@ -63,8 +44,4 @@ public class Cargo implements ICargo {
         return this.fimDoTurno;
     }
 
-    @Override
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
-    }
 }

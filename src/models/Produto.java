@@ -1,4 +1,4 @@
-package packages;
+package models;
 
 import java.text.DecimalFormat;
 
@@ -8,14 +8,16 @@ public class Produto {
     private String categoria;
     private String recomendacao;
     private int quantidade;
+    private int quantidadeIdeal;
     private double preco;
     
     
-       public Produto(String nome, String descricao, String categoria, int quantidade, double preco) {
+       public Produto(String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal) {
           this.nome = nome;
           this.descricao = descricao;
           this.categoria = categoria;
           this.quantidade = quantidade;
+          this.quantidadeIdeal = quantidadeIdeal;
           this.preco = preco;
        }
        
@@ -32,6 +34,11 @@ public class Produto {
        }
        
        public int getQuantidade() {
+           return this.quantidade;
+       }
+       
+       public int removeQuantidade() {
+           this.quantidade -= 1;
            return this.quantidade;
        }
        

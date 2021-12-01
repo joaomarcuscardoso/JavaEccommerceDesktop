@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package packages;
+package models;
 
 import java.util.Date;
 import java.util.Set;
@@ -15,10 +15,6 @@ import java.util.Set;
 public interface ICargo {
     
     public String getNomeDoCargo();
-    public int getPrivilegios();
-    public boolean getDisponivel();
-    public void setDisponivel(boolean disponivel);
-    public int getSalario();
     public Set<Setor> getSetor();
     public Date getInicioDeTurno();
     public Date getFimDeTurno();

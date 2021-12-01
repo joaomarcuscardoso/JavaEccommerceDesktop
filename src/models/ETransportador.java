@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package packages;
+package models;
 
 /**
  *
  * @author rfcjo
  */
-public enum EStatus {
-    Instalado, Em_teste,Em_andamento, Concluido;
+public enum ETransportador {
+    Caminhao, Carro, Moto, Bicicleta;
 }
