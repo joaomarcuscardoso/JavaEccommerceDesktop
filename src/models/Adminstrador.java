@@ -7,7 +7,7 @@ public class Adminstrador extends Cargo {
     
     
     
-    public Adminstrador(String nomeDoCargo, Set<Setor> setor) {
-        super(nomeDoCargo, setor);
+    public Adminstrador(int id, String nomeDoCargo, Setor setor) {
+        super(id, nomeDoCargo, setor);
     }
 }

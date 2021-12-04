@@ -5,8 +5,6 @@
  */
 package models;
 
-import java.util.Set;
-
 /**
  *
  * @author rfcjo
@@ -15,11 +13,11 @@ public class Vendedor extends Cargo {
     private String codigo;
     
     
-    public Vendedor(String nomeDoCargo, Set<Setor> setor) {
-        super(nomeDoCargo, setor);
+    public Vendedor(int id, String nomeDoCargo, Setor setor) {
+        super(id, nomeDoCargo, setor);
     }
-    public Vendedor(String nomeDoCargo, Set<Setor> setor, String codigo) {
-        super(nomeDoCargo, setor);
+    public Vendedor(int id, String nomeDoCargo, Setor setor, String codigo) {
+        super(id, nomeDoCargo, setor);
         this.codigo = codigo;
     }
     

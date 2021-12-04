@@ -43,5 +43,20 @@ public abstract class Pessoa implements Comparable<Pessoa> {
 
     public abstract void setTelefone(String telefone);
     
+    @Override
+    public int compareTo(Pessoa p) {
+        if(!p.getEmail().equals(email)) {
+            // Pode criar Cliente
+            return 1;
+        } else {
+            // Não pode criar Cliente
+            return 0;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" + "nome=" + nome + ", sobrenome=" + sobrenome + ", email=" + email + ", telefone=" + telefone + '}';
+    }
     
 }

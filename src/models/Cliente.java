@@ -120,16 +120,10 @@ public class Cliente extends Pessoa {
             System.out.println(e.getMessage());
         }
     }
-
+    
     @Override
-    public int compareTo(Pessoa p) {
-        if(!p.getEmail().equals(super.email)) {
-            // Pode criar Cliente
-            return 1;
-        } else {
-            // Não pode criar Cliente
-            return 0;
-        }
+    public String toString() {
+        return super.toString();
     }
     
 }

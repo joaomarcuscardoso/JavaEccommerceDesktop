@@ -9,12 +9,12 @@ public class Montador extends Cargo {
     private boolean feito;
     private int qtdTrabalhoPorMes;
     
-    public Montador(String nomeDoCargo, Set<Setor> setor) {
-        super(nomeDoCargo, setor);
+    public Montador(int id, String nomeDoCargo, Setor setor) {
+        super(id, nomeDoCargo, setor);
     }
     
-    public Montador(String nomeDoCargo, Set<Setor> setor, String trabalhoAtual, Date prazo, boolean feito) {
-        super(nomeDoCargo, setor);
+    public Montador(int id, String nomeDoCargo, Setor setor, String trabalhoAtual, Date prazo, boolean feito) {
+        super(id, nomeDoCargo, setor);
         this.trabalhoAtual = trabalhoAtual;
         this.prazo = prazo;
         this.feito = feito;

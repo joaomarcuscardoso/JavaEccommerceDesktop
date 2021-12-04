@@ -5,14 +5,12 @@
  */
 package models;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * @author rfcjo
- */
-public class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa{
     
     private Map<String, Cargo> cargo = new HashMap<>();
     private int salario;
@@ -68,20 +66,11 @@ public class Funcionario extends Pessoa {
     }
 
     @Override
-    public int compareTo(Pessoa p) {
-        if(!p.getEmail().equals(super.email)) {
-            // Pode criar Cliente
-            return 1;
-        } else {
-            // Não pode criar Cliente
-            return 0;
-        }
-    }
-
-    @Override
     public String toString() {
         return super.getNome();
     }
+
+
     
     
     
