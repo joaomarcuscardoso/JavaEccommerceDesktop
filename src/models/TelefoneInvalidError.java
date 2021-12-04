@@ -5,16 +5,13 @@
  */
 package models;
 
-import java.util.Date;
-import java.util.Set;
-
 /**
  *
  * @author rfcjo
  */
-public interface ICargo {
-    public String getNomeDoCargo();
-    public Set<Setor> getSetor();
-    public Date getInicioDeTurno();
-    public Date getFimDeTurno();
+public class TelefoneInvalidError extends Exception {
+    public TelefoneInvalidError(String msg) {
+        super(msg);
+    }
+    
 }

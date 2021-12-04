@@ -10,5 +10,5 @@ package models;
  * @author rfcjo
  */
 public enum EStatus {
-    Instalado, Em_teste,Em_andamento, Concluido;
+    instalado, em_teste,em_andamento, concluido;
 }

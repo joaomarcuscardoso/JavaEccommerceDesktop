@@ -5,7 +5,7 @@
  */
 package models;
 
-class Setor {
+public class Setor {
     private String nomeDoSetor;
     private int metaPorSetor;
 

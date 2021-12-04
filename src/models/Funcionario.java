@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author rfcjo
  */
-class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa {
     
     private Map<String, Cargo> cargo = new HashMap<>();
     private int salario;
@@ -21,12 +21,13 @@ class Funcionario extends Pessoa {
     private boolean disponivel = true;
     
     
-    public Funcionario(String nome, String sobrenome, String email, String telefone) {
-        super(nome, sobrenome, email, telefone);
+    public Funcionario(String nome, String sobrenome, String email) {
+        super(nome, sobrenome, email);
     }
-    public Funcionario(String nome, String sobrenome, String email, String telefone, Map<String, Cargo> cargo, int salario, int privilegio) {
-        super(nome, sobrenome, email, telefone);
-        this.cargo = cargo;
+    public Funcionario(String nome, String sobrenome, String email, Cargo cargo, int salario, int privilegio) {
+        super(nome, sobrenome, email);
+        
+        this.cargo.put(String.valueOf(cargo.getId()), cargo);
         this.salario = salario;
         this.privilegio = privilegio;
     }
@@ -46,6 +47,43 @@ class Funcionario extends Pessoa {
     public void setDisponivel(boolean disponivel) {
          this.disponivel = disponivel;
     }
+    
+    @Override
+    public void setTelefone(String telefone) {
+        
+        String pattern = "^\\([1-9]{2}\\)(?:[2-8]|9[1-9])[0-9]{3}\\-[0-9]{4}$";    
+        try {
+            
+            if (telefone.matches(pattern)) {
+                System.out.println("telefone invalido!");
+                telefone = telefone;
+                System.out.println("telefone: "+telefone);
+             } else {
+                   System.out.println("telefone valido!");
+                   throw new TelefoneInvalidError("O número de telefone não condiz com o padrão (dd)xxxxx-xxxx");
+            }
+        } catch(TelefoneInvalidError e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public int compareTo(Pessoa p) {
+        if(!p.getEmail().equals(super.email)) {
+            // Pode criar Cliente
+            return 1;
+        } else {
+            // Não pode criar Cliente
+            return 0;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return super.getNome();
+    }
+    
+    
     
     
 }

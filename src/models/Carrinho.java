@@ -6,6 +6,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -15,6 +16,15 @@ public class Carrinho {
     private ArrayList<Produto> produtos = new ArrayList<Produto>();
     private Pagamento pagamento;
     private Transportadora transportadora;
+    private Cliente cliente;
+
+    public Carrinho(Pagamento pagamento, Transportadora transportadora, Cliente cliente) {
+        this.pagamento = pagamento;
+        this.transportadora = transportadora;
+        this.cliente = cliente;
+    }
+    
+    
     
     public void addProduto(Produto produto) {
         this.produtos.add(produto);

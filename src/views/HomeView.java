@@ -6,13 +6,18 @@
 package views;
 
 import java.awt.ComponentOrientation;
+import java.io.Console;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import models.Produto;
 
 /**
  *
  * @author rfcjo
  */
 public class HomeView extends javax.swing.JFrame {
-
+    private Map<Integer, Produto> listaProdutos = new HashMap<>();
     /**
      * Creates new form HomeView
      */
@@ -33,8 +38,8 @@ public class HomeView extends javax.swing.JFrame {
         buscaContainer = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnPesquisa = new javax.swing.JButton();
+        btnAddProduto = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -83,7 +88,6 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
-        jTable1.setMinimumSize(new java.awt.Dimension(45, 144));
         jTable1.setSurrendersFocusOnKeystroke(true);
         jScrollPane2.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
@@ -95,25 +99,29 @@ public class HomeView extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(2).setPreferredWidth(150);
         }
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setForeground(new java.awt.Color(204, 204, 204));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/magnifying-glass.png"))); // NOI18N
-        jButton1.setLabel("");
-        jButton1.setMaximumSize(new java.awt.Dimension(25, 25));
-        jButton1.setMinimumSize(new java.awt.Dimension(25, 25));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisa.setBackground(new java.awt.Color(204, 204, 204));
+        btnPesquisa.setForeground(new java.awt.Color(204, 204, 204));
+        btnPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/magnifying-glass.png"))); // NOI18N
+        btnPesquisa.setMaximumSize(new java.awt.Dimension(25, 25));
+        btnPesquisa.setMinimumSize(new java.awt.Dimension(25, 25));
+        btnPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPesquisaActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(191, 75, 75));
-        jButton2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Criar Produto");
-        jButton2.setBorderPainted(false);
-        jButton2.setMaximumSize(new java.awt.Dimension(120, 25));
-        jButton2.setMinimumSize(new java.awt.Dimension(120, 25));
+        btnAddProduto.setBackground(new java.awt.Color(191, 75, 75));
+        btnAddProduto.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        btnAddProduto.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddProduto.setText("Criar Produto");
+        btnAddProduto.setBorderPainted(false);
+        btnAddProduto.setMaximumSize(new java.awt.Dimension(120, 25));
+        btnAddProduto.setMinimumSize(new java.awt.Dimension(120, 25));
+        btnAddProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddProdutoActionPerformed(evt);
+            }
+        });
 
         jMenuBar1.setBackground(java.awt.Color.darkGray);
         jMenuBar1.setAlignmentY(0.5F);
@@ -137,9 +145,9 @@ public class HomeView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buscaContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -147,11 +155,11 @@ public class HomeView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(btnPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buscaContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
@@ -163,12 +171,28 @@ public class HomeView extends javax.swing.JFrame {
 
     private void buscaContainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaContainerActionPerformed
         // TODO add your handling code here:
+                System.out.println("Oi1");
+
     }//GEN-LAST:event_buscaContainerActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+                System.out.println("Oi2");
 
+    }//GEN-LAST:event_btnPesquisaActionPerformed
+
+    private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
+        // TODO add your handling code here:
+        new CriarProdutoView().setVisible(true);
+    }//GEN-LAST:event_btnAddProdutoActionPerformed
+
+    
+    public void addProdutoInLista(Produto prod) {
+        if(prod != null) 
+            listaProdutos.put((listaProdutos.size()+1), prod);
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -196,6 +220,7 @@ public class HomeView extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -207,9 +232,9 @@ public class HomeView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddProduto;
+    private javax.swing.JButton btnPesquisa;
     private javax.swing.JTextField buscaContainer;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

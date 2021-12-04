@@ -60,11 +60,15 @@ public class Produto {
        public String getRecomendacao() {
            return this.recomendacao;
        }
+
+    @Override
+    public String toString() {
+        return "\nProduto{" + "\n nome=" + nome + "\n descricao=" + descricao + "\n categoria=" + categoria + "\n recomendacao=" + recomendacao + "\n quantidade=" + quantidade + "\n quantidadeIdeal=" + quantidadeIdeal + "\n preco=" + preco +"\n"+ '}';
+    }
        
-       public String toString() {
-           DecimalFormat df = new DecimalFormat("#.00");
-           return "Produto: "+nome+"\n descrição: "+descricao+"\n categoria: "+categoria+"\n quantidade: "+quantidade+"\n Preço: R$"+df.format(preco)+"\n";
-       }
+       
+       
+  
        
     
 }

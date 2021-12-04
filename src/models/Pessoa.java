@@ -9,17 +9,16 @@ package models;
  *
  * @author rfcjo
  */
-public class Pessoa {
+public abstract class Pessoa implements Comparable<Pessoa> {
     private String nome;
     private String sobrenome;
-    private String email;
-    private String telefone;
+    protected String email;
+    protected String telefone;
 
-    public Pessoa(String nome, String sobrenome, String email, String telefone) {
+    public Pessoa(String nome, String sobrenome, String email) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
-        this.telefone = telefone;
     }
 
     public String getNome() {
@@ -40,8 +39,9 @@ public class Pessoa {
     public String getTelefone() {
         return telefone;
     }
+    
 
-
+    public abstract void setTelefone(String telefone);
     
     
 }

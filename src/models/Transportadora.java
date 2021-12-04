@@ -13,12 +13,12 @@ class Transportadora {
     private ETransportador transporte;
     private String tempoParaEntrega;
     private double preco;
-    private informacaoAdicionais infosEndereco;
-
-    public Transportadora(ETransportador transporte, String tempoParaEntrega, informacaoAdicionais infosEndereco) {
+    private Cliente cliente;
+    
+    public Transportadora(ETransportador transporte, String tempoParaEntrega, Cliente cliente) {
         this.transporte = transporte;
         this.tempoParaEntrega = tempoParaEntrega;
-        this.infosEndereco = infosEndereco;
+        this.cliente = cliente;
     }
     
     
@@ -36,8 +36,8 @@ class Transportadora {
         return tempoParaEntrega;
     }
 
-    public informacaoAdicionais getInfosEndereco() {
-        return infosEndereco;
+    public Cliente getInfosEndereco() {
+        return cliente;
     }
     
     

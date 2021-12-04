@@ -14,15 +14,23 @@ import java.util.Set;
  * @author rfcjo
  */
 public class Cargo implements ICargo {
+    private int id;
     private String nomeDoCargo;
     private Set<Setor> setor = new HashSet<>();
     private Date inicioDoTurno;
     private Date fimDoTurno;
     
-    public Cargo(String nomeDoCargo,  Set<Setor> setor) {
+    public Cargo( int id, String nomeDoCargo,  Setor setor) {
+        this.id= id;
         this.nomeDoCargo = nomeDoCargo;
-        this.setor = setor;
+        this.setor.add(setor);
     }
+    
+    
+    public int getId() {
+        return this.id;
+    }
+
     
     @Override
     public String getNomeDoCargo() {

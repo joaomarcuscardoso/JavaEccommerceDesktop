@@ -2,6 +2,8 @@ package models;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -17,12 +19,25 @@ public class Pedidos {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyyy HH:mm:ss");
     
     
-    public Pedidos(Cliente cliente, ArrayList<Produto> produtos, EStatus status, Set<Funcionario> responsavel) {
+    public Pedidos(Cliente cliente, ArrayList<Produto> produtos, EStatus status, Funcionario responsavel) {
         this.cliente = cliente;
         this.produtos = produtos;
         this.status = status;
-        this.responsavel = responsavel;
+        this.responsavel.add(responsavel);
        
+    }
+    
+    public void ordenarProdutosPorNome() {
+        Collections.sort(produtos, new Comparator<Produto>() {
+           @Override
+           public int compare(Produto p1, Produto p2) {
+               return p1.getNome().compareTo(p2.getNome());
+            } 
+        });
+    }
+    
+    public void addProdutos(Produto p) {
+        produtos.add(p);
     }
     
     public boolean setTermino(Date data) {
@@ -62,8 +77,8 @@ public class Pedidos {
     public String toString() {
         
         return "O pedidos foi realizado pelo cliente: "+cliente.getNome()+
-                ", contendo as peças: \n"+produtos.toString()+
-                "\n e o status é "+status+
+                " e o status é "+status+
+                ", os produtos selecionado são: \n"+produtos.toString()+
                 "\n Ass por "+responsavel.toString()+
                 "\n Finalizado "+termino;
     }
