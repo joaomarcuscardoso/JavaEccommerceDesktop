@@ -19,11 +19,11 @@ public class Funcionario extends Pessoa{
     private boolean disponivel = true;
     
     
-    public Funcionario(String nome, String sobrenome, String email) {
-        super(nome, sobrenome, email);
+    public Funcionario(String nome, String sobrenome, String email, String senha) {
+        super(nome, sobrenome, email, senha);
     }
-    public Funcionario(String nome, String sobrenome, String email, Cargo cargo, int salario, int privilegio) {
-        super(nome, sobrenome, email);
+    public Funcionario(String nome, String sobrenome, String email, String senha, Cargo cargo, int salario, int privilegio) {
+        super(nome, sobrenome, email, senha);
         
         this.cargo.put(String.valueOf(cargo.getId()), cargo);
         this.salario = salario;

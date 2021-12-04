@@ -26,8 +26,8 @@ public class App {
 
     public static void main(String[] args) {
         // Cliente
-        Cliente cliente = new Cliente("João", "Marcus", "rfcjoujou1@gmail.com");
-        Cliente cliente2 = new Cliente("José", "Antonio", "rfcjoujou1@gmail.com");
+        Cliente cliente = new Cliente("João", "Marcus", "rfcjoujou1@gmail.com", "123");
+        Cliente cliente2 = new Cliente("José", "Antonio", "rfcjoujou1@gmail.com", "345");
         
         cliente.setTelefone("(48) 99111-2601");
         //System.out.println(cliente.toString());
@@ -56,10 +56,10 @@ public class App {
         
         // Funcionario
         ArrayList<Funcionario> listaFuncionario = new ArrayList<Funcionario>();
-        Funcionario montador = new Funcionario("Roberto", "Machado", "machado@gmail.com", cargoMon, 0, 1);
-        Funcionario adminstrador = new Funcionario("Carlos", "Silva", "silvao@gmail.com", cargoAdm, 0, 2);
-        Funcionario adminstrador2 = new Funcionario("ADebora", "Souza", "souza@gmail.com", cargoAdm, 0, 2);
-        Funcionario montador2 = new Funcionario("Antonio", "Silveira", "silveirinha@gmail.com", cargoMon, 0, 1);
+        Funcionario montador = new Funcionario("Roberto", "Machado", "machado@gmail.com", "789", cargoMon, 0, 1);
+        Funcionario adminstrador = new Funcionario("Carlos", "Silva", "silvao@gmail.com", "789", cargoAdm, 0, 2);
+        Funcionario adminstrador2 = new Funcionario("ADebora", "Souza", "souza@gmail.com", "789", cargoAdm, 0, 2);
+        Funcionario montador2 = new Funcionario("Antonio", "Silveira", "silveirinha@gmail.com", "789", cargoMon, 0, 1);
         
         listaFuncionario.add(montador);
         listaFuncionario.add(adminstrador2);

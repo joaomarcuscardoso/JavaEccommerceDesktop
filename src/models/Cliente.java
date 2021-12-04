@@ -26,12 +26,12 @@ public class Cliente extends Pessoa {
     private String cidade;
     private int numero;
     
-    public Cliente(String nome, String sobrenome, String email) {
-        super(nome, sobrenome, email);
+    public Cliente(String nome, String sobrenome, String email, String senha) {
+        super(nome, sobrenome, email, senha);
     }
     
-    public Cliente(String nome, String sobrenome, String email, Date dataNascimento, String rua, int cep, String complemento, String estado, String cidade, int numero, String cpf) {
-        super(nome, sobrenome, email);
+    public Cliente(String nome, String sobrenome, String email, String senha, Date dataNascimento, String rua, int cep, String complemento, String estado, String cidade, int numero, String cpf) {
+        super(nome, sobrenome, email, senha);
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.rua = rua;

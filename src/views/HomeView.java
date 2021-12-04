@@ -7,9 +7,11 @@ package views;
 
 import java.awt.ComponentOrientation;
 import java.io.Console;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import models.Cliente;
 import models.Produto;
 
 /**
@@ -37,17 +39,20 @@ public class HomeView extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         buscaContainer = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablePrincipal = new javax.swing.JTable();
         btnPesquisa = new javax.swing.JButton();
         btnAddProduto = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        btnProdutos = new javax.swing.JMenu();
+        btnMontarPc = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        btnLogin = new javax.swing.JMenuItem();
+        btnRegistrar = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(238, 238, 238));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(500, 500));
 
@@ -59,11 +64,11 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setBackground(new java.awt.Color(204, 204, 204));
-        jTable1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablePrincipal.setAutoCreateRowSorter(true);
+        tablePrincipal.setBackground(new java.awt.Color(204, 204, 204));
+        tablePrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tablePrincipal.setForeground(new java.awt.Color(0, 0, 0));
+        tablePrincipal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Ryzen 7 3700x", "R$ 2.100,00", "Processador"},
                 {"Memoria Ram Vulcan 16 Gb", "R$ 650,00", "Memoria"},
@@ -87,16 +92,16 @@ public class HomeView extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
-        jTable1.setSurrendersFocusOnKeystroke(true);
-        jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(180);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(130);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(150);
+        tablePrincipal.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        tablePrincipal.setSurrendersFocusOnKeystroke(true);
+        jScrollPane2.setViewportView(tablePrincipal);
+        if (tablePrincipal.getColumnModel().getColumnCount() > 0) {
+            tablePrincipal.getColumnModel().getColumn(0).setResizable(false);
+            tablePrincipal.getColumnModel().getColumn(0).setPreferredWidth(180);
+            tablePrincipal.getColumnModel().getColumn(1).setResizable(false);
+            tablePrincipal.getColumnModel().getColumn(1).setPreferredWidth(130);
+            tablePrincipal.getColumnModel().getColumn(2).setResizable(false);
+            tablePrincipal.getColumnModel().getColumn(2).setPreferredWidth(150);
         }
 
         btnPesquisa.setBackground(new java.awt.Color(204, 204, 204));
@@ -126,11 +131,36 @@ public class HomeView extends javax.swing.JFrame {
         jMenuBar1.setBackground(java.awt.Color.darkGray);
         jMenuBar1.setAlignmentY(0.5F);
 
-        jMenu1.setText("Produtos");
-        jMenuBar1.add(jMenu1);
+        btnProdutos.setText("Produtos");
+        jMenuBar1.add(btnProdutos);
 
-        jMenu2.setText("Montar Pc");
-        jMenuBar1.add(jMenu2);
+        btnMontarPc.setText("Montar Pc");
+        btnMontarPc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMontarPcActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(btnMontarPc);
+
+        jMenu4.setText("Conta");
+
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+        jMenu4.add(btnLogin);
+
+        btnRegistrar.setText("Registrar-se");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+        jMenu4.add(btnRegistrar);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -155,14 +185,14 @@ public class HomeView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(btnPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buscaContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -184,7 +214,22 @@ public class HomeView extends javax.swing.JFrame {
     private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
         // TODO add your handling code here:
         new CriarProdutoView().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAddProdutoActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        new LoginView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMontarPcActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMontarPcActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        new RegistrarView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     
     public void addProdutoInLista(Produto prod) {
@@ -233,13 +278,16 @@ public class HomeView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduto;
+    private javax.swing.JMenuItem btnLogin;
+    private javax.swing.JMenu btnMontarPc;
     private javax.swing.JButton btnPesquisa;
+    private javax.swing.JMenu btnProdutos;
+    private javax.swing.JMenuItem btnRegistrar;
     private javax.swing.JTextField buscaContainer;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablePrincipal;
     // End of variables declaration//GEN-END:variables
 }

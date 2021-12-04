@@ -3,17 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/main/App.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/models/Produto.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/models/Cliente.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/models/EStatus.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/models/Estoque.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/models/Carrinho.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/models/Pessoa.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/models/Setor.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/models/Funcionario.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/models/Cargo.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/models/Pedidos.java</file>
+            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/views/LoginView.java</file>
+            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/views/RegistrarView.java</file>
+            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/views/HomeView.java</file>
         </group>
     </open-files>
 </project-private>

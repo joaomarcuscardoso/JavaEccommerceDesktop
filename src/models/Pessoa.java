@@ -14,13 +14,19 @@ public abstract class Pessoa implements Comparable<Pessoa> {
     private String sobrenome;
     protected String email;
     protected String telefone;
+    protected String senha;
 
-    public Pessoa(String nome, String sobrenome, String email) {
+    public Pessoa(String nome, String sobrenome, String email, String senha) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
+        this.senha = senha;
     }
 
+    public String getSenha() {
+        return this.senha;
+    }
+    
     public String getNome() {
         return nome;
     }
