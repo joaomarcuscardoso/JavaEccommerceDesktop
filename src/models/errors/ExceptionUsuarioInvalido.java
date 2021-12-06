@@ -5,6 +5,7 @@
  */
 package models.errors;
 
+import java.awt.Component;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,9 +14,9 @@ import javax.swing.JOptionPane;
  */
 public class ExceptionUsuarioInvalido  extends Exception{
     
-    public ExceptionUsuarioInvalido(String msg) {
+    public ExceptionUsuarioInvalido(Component view, String msg) {
         super(msg);
-        JOptionPane.showMessageDialog(null, msg);
+        JOptionPane.showMessageDialog(view, msg);
 
     }
 }

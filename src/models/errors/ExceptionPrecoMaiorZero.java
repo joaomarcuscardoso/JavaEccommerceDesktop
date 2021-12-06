@@ -12,11 +12,9 @@ import javax.swing.JOptionPane;
  *
  * @author rfcjo
  */
-public class ExceptionDadosIncompletos extends Exception {
-
-    public ExceptionDadosIncompletos(Component view, String msg) {
+public class ExceptionPrecoMaiorZero extends Exception {
+    public ExceptionPrecoMaiorZero(Component view, String msg) {
         super(msg);
-        JOptionPane.showMessageDialog(view, msg);
+        JOptionPane.showMessageDialog(view, msg);   
     }
-    
 }

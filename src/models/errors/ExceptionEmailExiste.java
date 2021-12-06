@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
  */
 public class ExceptionEmailExiste extends Exception {
 
-    public ExceptionEmailExiste(String msg) {
+    public ExceptionEmailExiste(Component view, String msg) {
         super(msg);
-        JOptionPane.showMessageDialog(null, msg);
+        JOptionPane.showMessageDialog(view, msg);
 
     }
     

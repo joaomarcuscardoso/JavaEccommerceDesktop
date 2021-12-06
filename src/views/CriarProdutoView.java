@@ -7,7 +7,10 @@ package views;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import models.Produto;
+import models.errors.ExceptionDadosIncompletos;
+import models.errors.ExceptionPrecoMaiorZero;
 
 /**
  *
@@ -49,11 +52,11 @@ public class CriarProdutoView extends javax.swing.JFrame {
         inputQuantidade = new javax.swing.JSpinner();
         labelRS = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        btnMenuProduto = new javax.swing.JMenu();
+        bntMenuMontarPc = new javax.swing.JMenu();
+        btnMenuContainerConta = new javax.swing.JMenu();
+        btnMenuLogin = new javax.swing.JMenuItem();
+        btnMenuRegistrar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,26 +104,41 @@ public class CriarProdutoView extends javax.swing.JFrame {
         jMenuBar1.setBackground(java.awt.Color.darkGray);
         jMenuBar1.setAlignmentY(0.5F);
 
-        jMenu1.setText("Produtos");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Montar Pc");
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Conta");
-
-        jMenuItem1.setText("Login");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+        btnMenuProduto.setText("Produtos");
+        btnMenuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuProdutoMouseClicked(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
+        btnMenuProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuProdutoActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(btnMenuProduto);
 
-        jMenuItem2.setText("Registrar-se");
-        jMenu3.add(jMenuItem2);
+        bntMenuMontarPc.setText("Montar Pc");
+        bntMenuMontarPc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntMenuMontarPcActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(bntMenuMontarPc);
 
-        jMenuBar1.add(jMenu3);
+        btnMenuContainerConta.setText("Conta");
+
+        btnMenuLogin.setText("Login");
+        btnMenuLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuLoginActionPerformed(evt);
+            }
+        });
+        btnMenuContainerConta.add(btnMenuLogin);
+
+        btnMenuRegistrar.setText("Registrar-se");
+        btnMenuContainerConta.add(btnMenuRegistrar);
+
+        jMenuBar1.add(btnMenuContainerConta);
 
         setJMenuBar(jMenuBar1);
 
@@ -208,30 +226,66 @@ public class CriarProdutoView extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-        if(!InputPreco.getText().equals("") 
+        try {
+
+                
+
+
+            if(!InputPreco.getText().equals("") 
                 && !inputCategoria.getText().equals("") 
                 && !inputDescricao.getText().equals("") 
                 && !inputNome.getText().equals("") 
                 && inputQuantidade.getValue() != null 
                 && inputQuantidadeIdeal.getValue() != null 
                 && !inputRecomendado.getText().equals(""))
-        {
-            if(Double.parseDouble(InputPreco.getText()) > 0) {
-                adicionarProduto(inputNome.getText(), inputDescricao.getText(), inputCategoria.getText(), (Integer) inputQuantidade.getValue(), Double.parseDouble(InputPreco.getText()), (Integer) inputQuantidadeIdeal.getValue());
-                
+            {
+                try {
+                    if(Double.parseDouble(InputPreco.getText()) > 0) {
+                        adicionarProduto(inputNome.getText(), inputDescricao.getText(), inputCategoria.getText(), (Integer) inputQuantidade.getValue(), Double.parseDouble(InputPreco.getText()), (Integer) inputQuantidadeIdeal.getValue());
+
+                    } else {
+                        throw new ExceptionPrecoMaiorZero(this, "Preço deve ser maior que zero");
+                        }
+                } catch(ExceptionPrecoMaiorZero error) {
+                            error.printStackTrace();
+                }
+                    
+            } else {
+                throw new ExceptionDadosIncompletos(this, "Preencha todos os dados");
             }
+        } catch(ExceptionDadosIncompletos e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void btnMenuLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuLoginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        new LoginView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuLoginActionPerformed
+
+    private void btnMenuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuProdutoActionPerformed
+        // TODO add your handling code here:
+        new HomeView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuProdutoActionPerformed
+
+    private void bntMenuMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntMenuMontarPcActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntMenuMontarPcActionPerformed
+
+    private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
+        // TODO add your handling code here:
+        new HomeView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuProdutoMouseClicked
 
     private void adicionarProduto(String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal) {
         // String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal
         Produto prod = new Produto(nome, descricao, categoria, quantidade, preco, quantidadeIdeal);
         HomeView home = new HomeView();
         home.addProdutoInLista(prod);
+        JOptionPane.showMessageDialog(this, "Adicionou produto.");
         System.out.println("Adicionou produto:"+prod.toString());
         new CriarProdutoView().setVisible(false);
     }
@@ -266,6 +320,11 @@ public class CriarProdutoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField InputPreco;
+    private javax.swing.JMenu bntMenuMontarPc;
+    private javax.swing.JMenu btnMenuContainerConta;
+    private javax.swing.JMenuItem btnMenuLogin;
+    private javax.swing.JMenu btnMenuProduto;
+    private javax.swing.JMenuItem btnMenuRegistrar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField inputCategoria;
     private javax.swing.JTextArea inputDescricao;
@@ -274,12 +333,7 @@ public class CriarProdutoView extends javax.swing.JFrame {
     private javax.swing.JSpinner inputQuantidadeIdeal;
     private javax.swing.JTextField inputRecomendado;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCategoria;
     private javax.swing.JLabel labelDescricao;

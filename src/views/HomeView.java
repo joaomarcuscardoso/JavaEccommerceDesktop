@@ -6,11 +6,14 @@
 package views;
 
 import java.awt.ComponentOrientation;
+import java.awt.Dimension;
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import models.Cliente;
 import models.Produto;
 
@@ -19,14 +22,14 @@ import models.Produto;
  * @author rfcjo
  */
 public class HomeView extends javax.swing.JFrame {
-    private Map<Integer, Produto> listaProdutos = new HashMap<>();
+    private ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
     /**
      * Creates new form HomeView
      */
     public HomeView() {
         initComponents();
     }
-
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,10 +41,10 @@ public class HomeView extends javax.swing.JFrame {
 
         jMenu3 = new javax.swing.JMenu();
         buscaContainer = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablePrincipal = new javax.swing.JTable();
         btnPesquisa = new javax.swing.JButton();
         btnAddProduto = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablePrincipal = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         btnProdutos = new javax.swing.JMenu();
         btnMontarPc = new javax.swing.JMenu();
@@ -54,7 +57,6 @@ public class HomeView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(238, 238, 238));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(500, 500));
 
         buscaContainer.setBackground(new java.awt.Color(204, 204, 204));
         buscaContainer.setMinimumSize(new java.awt.Dimension(15, 25));
@@ -63,46 +65,6 @@ public class HomeView extends javax.swing.JFrame {
                 buscaContainerActionPerformed(evt);
             }
         });
-
-        tablePrincipal.setAutoCreateRowSorter(true);
-        tablePrincipal.setBackground(new java.awt.Color(204, 204, 204));
-        tablePrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        tablePrincipal.setForeground(new java.awt.Color(0, 0, 0));
-        tablePrincipal.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Ryzen 7 3700x", "R$ 2.100,00", "Processador"},
-                {"Memoria Ram Vulcan 16 Gb", "R$ 650,00", "Memoria"},
-                {"Ryzen 5 2700", "R$ 1.500,00", "Processador"},
-                {"Fonte ATW 500w", "R$ 500,00", "Fonte"},
-                {"Memoria Ram Vulcan 8 Gb", "R$ 650,00", "Memoria"},
-                {"Placa de video Geforce 1660", "R$ 1600,00", "GPU"},
-                {"Water Coller Dinamic", "R$ 700,00", "Cooller"},
-                {"Ryzen 7 3700x", "R$ 2.100,00", "Processador"},
-                {"Ryzen 5 2700", "R$ 1.500,00", "Processador"}
-            },
-            new String [] {
-                "Nome", "Preço", "Categoria"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tablePrincipal.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
-        tablePrincipal.setSurrendersFocusOnKeystroke(true);
-        jScrollPane2.setViewportView(tablePrincipal);
-        if (tablePrincipal.getColumnModel().getColumnCount() > 0) {
-            tablePrincipal.getColumnModel().getColumn(0).setResizable(false);
-            tablePrincipal.getColumnModel().getColumn(0).setPreferredWidth(180);
-            tablePrincipal.getColumnModel().getColumn(1).setResizable(false);
-            tablePrincipal.getColumnModel().getColumn(1).setPreferredWidth(130);
-            tablePrincipal.getColumnModel().getColumn(2).setResizable(false);
-            tablePrincipal.getColumnModel().getColumn(2).setPreferredWidth(150);
-        }
 
         btnPesquisa.setBackground(new java.awt.Color(204, 204, 204));
         btnPesquisa.setForeground(new java.awt.Color(204, 204, 204));
@@ -128,10 +90,64 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
 
+        TablePrincipal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nome", "Categoria", "Quantidade", "Preço"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        TablePrincipal.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(TablePrincipal);
+        TablePrincipal.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
         jMenuBar1.setBackground(java.awt.Color.darkGray);
         jMenuBar1.setAlignmentY(0.5F);
 
         btnProdutos.setText("Produtos");
+        btnProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProdutosMouseClicked(evt);
+            }
+        });
+        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProdutosActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(btnProdutos);
 
         btnMontarPc.setText("Montar Pc");
@@ -170,13 +186,13 @@ public class HomeView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buscaContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(202, 202, 202)
                         .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -185,15 +201,15 @@ public class HomeView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(btnPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buscaContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
         pack();
@@ -231,10 +247,30 @@ public class HomeView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btnProdutosActionPerformed
+
+    private void btnProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProdutosMouseClicked
+        // TODO add your handling code here:
+        new HomeView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnProdutosMouseClicked
+
     
     public void addProdutoInLista(Produto prod) {
+        System.out.println("Entrou addProdutoInsta: "+prod.toString());
         if(prod != null) 
-            listaProdutos.put((listaProdutos.size()+1), prod);
+        {
+            //, prod.getCategoria(), prod.getQuantidade(), prod.getPreco()}
+            listaProdutos.add(prod);
+            TablePrincipal.setValueAt(prod.getNome(), 0 , 0);
+            TablePrincipal.setValueAt(prod.getCategoria(), 0 , 1);
+            TablePrincipal.setValueAt(prod.getQuantidade(), 0 ,2);
+            TablePrincipal.setValueAt(prod.getPreco(), 0 , 3);
+        }
+        
     }
     
     
@@ -247,6 +283,7 @@ public class HomeView extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -263,20 +300,23 @@ public class HomeView extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(HomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
+        //tablePrincipal.add(new Object[]{)
+               
         
+        //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new HomeView().setVisible(true);
             }
         });
+
     }
-    
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablePrincipal;
     private javax.swing.JButton btnAddProduto;
     private javax.swing.JMenuItem btnLogin;
     private javax.swing.JMenu btnMontarPc;
@@ -287,7 +327,6 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tablePrincipal;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

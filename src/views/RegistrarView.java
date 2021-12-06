@@ -43,11 +43,11 @@ public class RegistrarView extends javax.swing.JFrame {
         inputEmail = new javax.swing.JTextField();
         labelEmail = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        btnMenuProduto = new javax.swing.JMenu();
+        btnMenuMontarPc = new javax.swing.JMenu();
+        btnContainerConta = new javax.swing.JMenu();
+        btnMenuLogin = new javax.swing.JMenuItem();
+        btnMenuRegistrar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,31 +148,41 @@ public class RegistrarView extends javax.swing.JFrame {
         jMenuBar1.setBackground(java.awt.Color.darkGray);
         jMenuBar1.setAlignmentY(0.5F);
 
-        jMenu1.setText("Produtos");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Montar Pc");
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Conta");
-
-        jMenuItem1.setText("Login");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+        btnMenuProduto.setText("Produtos");
+        btnMenuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuProdutoMouseClicked(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
-
-        jMenuItem2.setText("Registrar-se");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        btnMenuProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                btnMenuProdutoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem2);
+        jMenuBar1.add(btnMenuProduto);
 
-        jMenuBar1.add(jMenu3);
+        btnMenuMontarPc.setText("Montar Pc");
+        jMenuBar1.add(btnMenuMontarPc);
+
+        btnContainerConta.setText("Conta");
+
+        btnMenuLogin.setText("Login");
+        btnMenuLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuLoginActionPerformed(evt);
+            }
+        });
+        btnContainerConta.add(btnMenuLogin);
+
+        btnMenuRegistrar.setText("Registrar-se");
+        btnMenuRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuRegistrarActionPerformed(evt);
+            }
+        });
+        btnContainerConta.add(btnMenuRegistrar);
+
+        jMenuBar1.add(btnContainerConta);
 
         setJMenuBar(jMenuBar1);
 
@@ -190,13 +200,13 @@ public class RegistrarView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void btnMenuLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuLoginActionPerformed
         // TODO add your handling code here:
         LoginView login = new LoginView();
         login.addLista(clientesCadastrados);
         login.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_btnMenuLoginActionPerformed
 
     private void inputNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNomeActionPerformed
         // TODO add your handling code here:
@@ -219,17 +229,19 @@ public class RegistrarView extends javax.swing.JFrame {
                     try {
                         
                         if(verificarEmailExiste(inputEmail.getText()) == true) {
-                            throw new ExceptionEmailExiste("Email já existe, por favor digite um email diferente.");
+                            throw new ExceptionEmailExiste(this, "Email já existe, por favor digite um email diferente.");
                         }  
                         clientesCadastrados.add(new Cliente(inputNome.getText(), inputSobrenome.getText(), inputEmail.getText(), inputSenha.getText()));
-                        System.out.println("Usuário Cadastrado com sucesso");
+                        JOptionPane.showMessageDialog(this, "Usuário Cadastrado com sucesso");
+                        this.dispose();
+                       new HomeView().setVisible(true);
                     } catch(ExceptionEmailExiste error) {
                         error.printStackTrace();
                     }
                     
                 } else {
                     
-                    throw new ExceptionDadosIncompletos("Preencha todos os dados, por fazor!");
+                    throw new ExceptionDadosIncompletos(this,"Preencha todos os dados, por fazor!");
                 }
             } catch(ExceptionDadosIncompletos e ){
                     e.printStackTrace();
@@ -237,9 +249,22 @@ public class RegistrarView extends javax.swing.JFrame {
             
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void btnMenuRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuRegistrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_btnMenuRegistrarActionPerformed
+
+    private void btnMenuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuProdutoActionPerformed
+        // TODO add your handling code here:
+        new HomeView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuProdutoActionPerformed
+
+    private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
+        // TODO add your handling code here:
+        new HomeView().setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_btnMenuProdutoMouseClicked
     public ArrayList<Cliente> getClientesCadastrados() {
         return clientesCadastrados;
     }
@@ -290,18 +315,18 @@ public class RegistrarView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu btnContainerConta;
+    private javax.swing.JMenuItem btnMenuLogin;
+    private javax.swing.JMenu btnMenuMontarPc;
+    private javax.swing.JMenu btnMenuProduto;
+    private javax.swing.JMenuItem btnMenuRegistrar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JTextField inputNome;
     private javax.swing.JTextField inputSenha;
     private javax.swing.JTextField inputSobrenome;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelEmail;
     private javax.swing.JLabel labelNome;

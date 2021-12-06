@@ -6,6 +6,7 @@
 package views;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import models.Cliente;
 import models.errors.ExceptionDadosIncompletos;
 import models.errors.ExceptionUsuarioInvalido;
@@ -32,6 +33,9 @@ public class LoginView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         inputEmail = new javax.swing.JTextField();
         labelEmail = new javax.swing.JLabel();
@@ -40,11 +44,19 @@ public class LoginView extends javax.swing.JFrame {
         inputSenha = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        btnProdutos = new javax.swing.JMenu();
-        btnMontarPc = new javax.swing.JMenu();
+        btnMenuProduto = new javax.swing.JMenu();
+        btnMenuMontarPc = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         btnLogin1 = new javax.swing.JMenuItem();
         btnRegistrar = new javax.swing.JMenuItem();
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
@@ -116,21 +128,21 @@ public class LoginView extends javax.swing.JFrame {
         jMenuBar1.setBackground(java.awt.Color.darkGray);
         jMenuBar1.setAlignmentY(0.5F);
 
-        btnProdutos.setText("Produtos");
-        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProdutosActionPerformed(evt);
+        btnMenuProduto.setText("Produtos");
+        btnMenuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuProdutoMouseClicked(evt);
             }
         });
-        jMenuBar1.add(btnProdutos);
+        jMenuBar1.add(btnMenuProduto);
 
-        btnMontarPc.setText("Montar Pc");
-        btnMontarPc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMontarPcActionPerformed(evt);
+        btnMenuMontarPc.setText("Montar Pc");
+        btnMenuMontarPc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuMontarPcMouseClicked(evt);
             }
         });
-        jMenuBar1.add(btnMontarPc);
+        jMenuBar1.add(btnMenuMontarPc);
 
         jMenu4.setText("Conta");
 
@@ -201,24 +213,22 @@ public class LoginView extends javax.swing.JFrame {
                 try {
                     
                     if(verificarLogin(inputEmail.getText(), inputSenha.getText()) == true) {
-                        System.out.println("Entrou agora");
+                       JOptionPane.showMessageDialog(this, "Usuário logado com sucesso.");
+                       this.dispose();
+                       new HomeView().setVisible(true);
                     } else {
-                        throw new ExceptionUsuarioInvalido("E-mail ou senha invalidos");
+                        throw new ExceptionUsuarioInvalido(this, "E-mail ou senha invalidos");
                     } 
                 } catch(ExceptionUsuarioInvalido error) {
                     error.printStackTrace();
                 } 
             } else {
-                throw new ExceptionDadosIncompletos("Preencha todos os dados, por fazor!");
+                throw new ExceptionDadosIncompletos(this, "Preencha todos os dados, por fazor!");
             }
         } catch(ExceptionDadosIncompletos e ) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnLoginActionPerformed
-
-    private void btnMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMontarPcActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMontarPcActionPerformed
 
     private void btnLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin1ActionPerformed
         new LoginView().setVisible(true);
@@ -231,11 +241,15 @@ public class LoginView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
+    private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
         // TODO add your handling code here:
         new HomeView().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnProdutosActionPerformed
+    }//GEN-LAST:event_btnMenuProdutoMouseClicked
+
+    private void btnMenuMontarPcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMontarPcMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMenuMontarPcMouseClicked
 
     /**
      * @param args the command line arguments
@@ -276,15 +290,18 @@ public class LoginView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JMenuItem btnLogin1;
-    private javax.swing.JMenu btnMontarPc;
-    private javax.swing.JMenu btnProdutos;
+    private javax.swing.JMenu btnMenuMontarPc;
+    private javax.swing.JMenu btnMenuProduto;
     private javax.swing.JMenuItem btnRegistrar;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JTextField inputSenha;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JLabel labelEmail;
     private javax.swing.JLabel labelSenha;
     // End of variables declaration//GEN-END:variables

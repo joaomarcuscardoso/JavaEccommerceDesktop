@@ -33,8 +33,12 @@ public class Produto {
            return this.categoria;
        }
        
-       public int getQuantidade() {
+       public Integer getQuantidade() {
            return this.quantidade;
+       }
+       
+       public Integer getQuantidadeIdeal() {
+           return this.quantidadeIdeal;
        }
        
        public int removeQuantidade() {
@@ -42,7 +46,7 @@ public class Produto {
            return this.quantidade;
        }
        
-       public double getPreco() {
+       public Double getPreco() {
            return this.preco;
        }
        
