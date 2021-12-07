@@ -287,7 +287,7 @@ public class CriarProdutoView extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Adicionou produto.");
         System.out.println("Adicionou produto:"+prod.toString());
         home.setVisible(true);
-        new CriarProdutoView().setVisible(false);
+        setVisible(false);
     }
 
     

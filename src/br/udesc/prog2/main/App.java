@@ -36,7 +36,6 @@ public class App {
     public static void main(String[] args) {
         popularSistema();
         HomeView homeView = new HomeView();
-        homeView.adicionarLinhasInicias(produtos);
         homeView.mostrarTela();
         
 

@@ -131,10 +131,10 @@
                           <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="inputEmail" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputSenha" max="32767" attributes="0"/>
                               <Component id="labelEmail" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
                               <Component id="labelSenha" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="btnLogin" alignment="0" pref="342" max="32767" attributes="0"/>
+                              <Component id="inputSenha" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -153,7 +153,7 @@
                   <Component id="inputEmail" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="labelSenha" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Component id="inputSenha" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
@@ -189,8 +189,6 @@
             <Property name="text" type="java.lang.String" value="senha"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="inputSenha">
-        </Component>
         <Component class="javax.swing.JButton" name="btnLogin">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -201,6 +199,11 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoginActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="inputSenha">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputSenhaActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

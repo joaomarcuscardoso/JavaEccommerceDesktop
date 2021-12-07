@@ -30,7 +30,7 @@ import javax.swing.table.TableModel;
  * @author rfcjo
  */
 public class HomeView extends javax.swing.JFrame {
-    private ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+    private ArrayList<Produto> listaProdutos;
     private DefaultTableModel model;
     
     /**
@@ -39,6 +39,8 @@ public class HomeView extends javax.swing.JFrame {
     public HomeView() {
         initComponents();
         model = (DefaultTableModel) tbPrincipal.getModel();
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        adicionarLinhasInicias(produtoDAO.getProdutos());
     }
 
     public void adicionarLinhasInicias(ArrayList<Produto> produtos) {
@@ -289,10 +291,8 @@ public class HomeView extends javax.swing.JFrame {
         System.out.println("Entrou addProdutoInsta: "+prod.toString());
         if(prod != null) 
         {
-           ProdutoDAO produtoDAO = new ProdutoDAO();
-           listaProdutos = produtoDAO.getProdutos();
-           listaProdutos.add(prod);
-           adicionarLinhasInicias(listaProdutos);
+           Object[] obj = {prod.getNome(), prod.getCategoria(), String.valueOf(prod.getQuantidade()), String.valueOf(prod.getPreco())};
+           model.addRow(obj);
         }
     }
     

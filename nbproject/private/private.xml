@@ -5,9 +5,8 @@
         <group>
             <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/main/App.java</file>
             <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/views/CriarProdutoView.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Setor.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/views/ProdutosView.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/dao/ProdutoDAO.java</file>
+            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/views/LoginView.java</file>
+            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/views/RegistrarView.java</file>
         </group>
     </open-files>
 </project-private>

@@ -17,8 +17,8 @@ public class ClienteDAO {
     private static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     
     public void setClientes() {
-        clientes.add(new Cliente("João", "Marcus", "rfcjoujou1@gmail.com", "123"));
-        clientes.add(new Cliente("José", "Antonio", "rfcjoujou1@gmail.com", "345"));
+        clientes.add(new Cliente("João", "Marcus", "joao@gmail.com", "123"));
+        clientes.add(new Cliente("José", "Antonio", "jose@gmail.com", "345"));
     }
     
     public ArrayList<Cliente> getClientes() {

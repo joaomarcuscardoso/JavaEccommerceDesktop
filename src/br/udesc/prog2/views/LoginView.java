@@ -5,6 +5,7 @@
  */
 package br.udesc.prog2.views;
 
+import br.udesc.prog2.dao.ClienteDAO;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import br.udesc.prog2.models.Cliente;
@@ -17,11 +18,14 @@ import br.udesc.prog2.models.errors.ExceptionUsuarioInvalido;
  */
 public class LoginView extends javax.swing.JFrame {
     
-    private ArrayList<Cliente> clientesCadastrados = new ArrayList<Cliente>();;
+    private ArrayList<Cliente> clientesCadastrados = new ArrayList<Cliente>();
 
     
     public LoginView() {
         initComponents();
+        ClienteDAO clienteDAO = new ClienteDAO();
+        clienteDAO.setClientes();
+        addLista(clienteDAO.getClientes());
     }
 
     /**
@@ -41,8 +45,8 @@ public class LoginView extends javax.swing.JFrame {
         labelEmail = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         labelSenha = new javax.swing.JLabel();
-        inputSenha = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
+        inputSenha = new javax.swing.JPasswordField();
         jMenuBar1 = new javax.swing.JMenuBar();
         btnMenuProduto = new javax.swing.JMenu();
         btnMenuMontarPc = new javax.swing.JMenu();
@@ -88,6 +92,12 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
+        inputSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputSenhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -101,10 +111,10 @@ public class LoginView extends javax.swing.JFrame {
                         .addGap(92, 92, 92)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(inputEmail)
-                            .addComponent(inputSenha)
                             .addComponent(labelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelSenha)
-                            .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))))
+                            .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                            .addComponent(inputSenha))))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -118,7 +128,7 @@ public class LoginView extends javax.swing.JFrame {
                 .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(labelSenha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addComponent(inputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLogin)
@@ -193,7 +203,9 @@ public class LoginView extends javax.swing.JFrame {
     
     public boolean verificarLogin(String email, String senha) {
         System.out.println("Chamou: "+clientesCadastrados.size());
-         for(Cliente cliente : clientesCadastrados) {
+
+        
+        for(Cliente cliente : clientesCadastrados) {
              System.out.println(cliente.getEmail());
              System.out.println(cliente.getSenha());
              
@@ -251,6 +263,10 @@ public class LoginView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMenuMontarPcMouseClicked
 
+    private void inputSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputSenhaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -294,7 +310,7 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JMenu btnMenuProduto;
     private javax.swing.JMenuItem btnRegistrar;
     private javax.swing.JTextField inputEmail;
-    private javax.swing.JTextField inputSenha;
+    private javax.swing.JPasswordField inputSenha;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu4;

@@ -36,12 +36,12 @@ public class RegistrarView extends javax.swing.JFrame {
         labelNome = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         labelSenha = new javax.swing.JLabel();
-        inputSenha = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         inputSobrenome = new javax.swing.JTextField();
         labelSobrenome = new javax.swing.JLabel();
         inputEmail = new javax.swing.JTextField();
         labelEmail = new javax.swing.JLabel();
+        inputSenha = new javax.swing.JPasswordField();
         jMenuBar1 = new javax.swing.JMenuBar();
         btnMenuProduto = new javax.swing.JMenu();
         btnMenuMontarPc = new javax.swing.JMenu();
@@ -110,13 +110,13 @@ public class RegistrarView extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(labelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(inputNome)
-                            .addComponent(inputSenha)
                             .addComponent(labelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelSenha)
                             .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(inputSobrenome)
-                            .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                            .addComponent(labelSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputSenha))
                         .addGap(73, 73, 73))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -138,7 +138,7 @@ public class RegistrarView extends javax.swing.JFrame {
                 .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelSenha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addComponent(inputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegistrar)
@@ -234,7 +234,10 @@ public class RegistrarView extends javax.swing.JFrame {
                         clientesCadastrados.add(new Cliente(inputNome.getText(), inputSobrenome.getText(), inputEmail.getText(), inputSenha.getText()));
                         JOptionPane.showMessageDialog(this, "Usuário Cadastrado com sucesso");
                         this.dispose();
-                       new HomeView().setVisible(true);
+                        LoginView loginView = new LoginView();
+                        loginView.addLista(clientesCadastrados);
+                        loginView.setVisible(true);
+                       
                     } catch(ExceptionEmailExiste error) {
                         error.printStackTrace();
                     }
@@ -323,7 +326,7 @@ public class RegistrarView extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JTextField inputNome;
-    private javax.swing.JTextField inputSenha;
+    private javax.swing.JPasswordField inputSenha;
     private javax.swing.JTextField inputSobrenome;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
