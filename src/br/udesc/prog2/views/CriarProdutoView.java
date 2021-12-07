@@ -5,6 +5,7 @@
  */
 package br.udesc.prog2.views;
 
+import br.udesc.prog2.dao.ProdutoDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -227,10 +228,6 @@ public class CriarProdutoView extends javax.swing.JFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
         try {
-
-                
-
-
             if(!InputPreco.getText().equals("") 
                 && !inputCategoria.getText().equals("") 
                 && !inputDescricao.getText().equals("") 
@@ -282,11 +279,14 @@ public class CriarProdutoView extends javax.swing.JFrame {
 
     private void adicionarProduto(String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal) {
         // String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal
+        ProdutoDAO produtoDAO = new ProdutoDAO();
         Produto prod = new Produto(nome, descricao, categoria, quantidade, preco, quantidadeIdeal);
+
         HomeView home = new HomeView();
         home.addProdutoInLista(prod);
         JOptionPane.showMessageDialog(this, "Adicionou produto.");
         System.out.println("Adicionou produto:"+prod.toString());
+        home.setVisible(true);
         new CriarProdutoView().setVisible(false);
     }
 

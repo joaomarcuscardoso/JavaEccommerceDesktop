@@ -44,7 +44,6 @@ public class HomeView extends javax.swing.JFrame {
     public void adicionarLinhasInicias(ArrayList<Produto> produtos) {
    
         for(int i =0; i< produtos.size();i++) {
-            listaProdutos.add(produtos.get(i));
             Object[] obj = {produtos.get(i).getNome(), produtos.get(i).getCategoria(), String.valueOf(produtos.get(i).getQuantidade()), String.valueOf(produtos.get(i).getPreco())};
             model.addRow(obj);
             
@@ -290,7 +289,10 @@ public class HomeView extends javax.swing.JFrame {
         System.out.println("Entrou addProdutoInsta: "+prod.toString());
         if(prod != null) 
         {
+           ProdutoDAO produtoDAO = new ProdutoDAO();
+           listaProdutos = produtoDAO.getProdutos();
            listaProdutos.add(prod);
+           adicionarLinhasInicias(listaProdutos);
         }
     }
     
