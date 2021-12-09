@@ -7,10 +7,7 @@ package br.udesc.prog2.models;
 
 import java.util.Comparator;
 
-/**
- *
- * @author rfcjo
- */
+
 public class FuncionarioComparatorPrivilegio implements Comparator<Funcionario> {
 
     @Override

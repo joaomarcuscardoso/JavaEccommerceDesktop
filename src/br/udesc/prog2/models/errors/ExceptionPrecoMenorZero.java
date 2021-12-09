@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
  *
  * @author rfcjo
  */
-public class ExceptionPrecoMaiorZero extends Exception {
-    public ExceptionPrecoMaiorZero(Component view, String msg) {
+public class ExceptionPrecoMenorZero extends Exception {
+    public ExceptionPrecoMenorZero(Component view, String msg) {
         super(msg);
         JOptionPane.showMessageDialog(view, msg);   
     }

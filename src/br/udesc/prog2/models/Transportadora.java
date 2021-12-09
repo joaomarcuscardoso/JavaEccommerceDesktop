@@ -5,10 +5,7 @@
  */
 package br.udesc.prog2.models;
 
-/**
- *
- * @author rfcjo
- */
+
 class Transportadora {
     private ETransportador transporte;
     private String tempoParaEntrega;

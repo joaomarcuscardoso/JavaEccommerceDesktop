@@ -9,10 +9,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- *
- * @author rfcjo
- */
 public class Cargo implements ICargo {
     private int id;
     private String nomeDoCargo;

@@ -8,10 +8,7 @@ package br.udesc.prog2.models;
 import java.util.Date;
 import java.util.Set;
 
-/**
- *
- * @author rfcjo
- */
+
 public interface ICargo {
     public String getNomeDoCargo();
     public Set<Setor> getSetor();

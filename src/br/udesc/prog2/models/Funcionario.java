@@ -5,6 +5,7 @@
  */
 package br.udesc.prog2.models;
 
+import br.udesc.prog2.models.errors.TelefoneInvalidError;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

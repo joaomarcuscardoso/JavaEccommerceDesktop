@@ -8,10 +8,6 @@ package br.udesc.prog2.models;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- *
- * @author rfcjo
- */
 public class Carrinho {
     private ArrayList<Produto> produtos = new ArrayList<Produto>();
     private Pagamento pagamento;

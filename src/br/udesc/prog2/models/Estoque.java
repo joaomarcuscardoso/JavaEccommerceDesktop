@@ -10,10 +10,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- *
- * @author rfcjo
- */
 public class Estoque {
     private Map<String, Produto> produtos = new HashMap<String, Produto>();
     private Set<Setor> setor = new HashSet<>();

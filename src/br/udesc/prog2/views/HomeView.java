@@ -69,7 +69,6 @@ public class HomeView extends javax.swing.JFrame {
         buscaContainer = new javax.swing.JTextField();
         btnPesquisa = new javax.swing.JButton();
         btnAddProduto = new javax.swing.JButton();
-        btnRelatorio = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPrincipal = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -114,19 +113,6 @@ public class HomeView extends javax.swing.JFrame {
         btnAddProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddProdutoActionPerformed(evt);
-            }
-        });
-
-        btnRelatorio.setBackground(new java.awt.Color(191, 75, 75));
-        btnRelatorio.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        btnRelatorio.setForeground(new java.awt.Color(255, 255, 255));
-        btnRelatorio.setText("Gerar Relatorio");
-        btnRelatorio.setBorderPainted(false);
-        btnRelatorio.setMaximumSize(new java.awt.Dimension(120, 25));
-        btnRelatorio.setMinimumSize(new java.awt.Dimension(120, 25));
-        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRelatorioActionPerformed(evt);
             }
         });
 
@@ -206,9 +192,7 @@ public class HomeView extends javax.swing.JFrame {
                         .addComponent(buscaContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99)
-                        .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(213, 213, 213)
                         .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -221,9 +205,7 @@ public class HomeView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buscaContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,12 +258,6 @@ public class HomeView extends javax.swing.JFrame {
         new HomeView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnProdutosMouseClicked
-
-    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
-        // TODO add your handling code here:
-        new RelatorioView().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnRelatorioActionPerformed
 
     public void mostrarTela() {
         setVisible(true);
@@ -345,7 +321,6 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JButton btnPesquisa;
     private javax.swing.JMenu btnProdutos;
     private javax.swing.JMenuItem btnRegistrar;
-    private javax.swing.JButton btnRelatorio;
     private javax.swing.JTextField buscaContainer;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;

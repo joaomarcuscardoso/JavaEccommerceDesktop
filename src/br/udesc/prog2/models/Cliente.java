@@ -5,6 +5,7 @@
  */
 package br.udesc.prog2.models;
 
+import br.udesc.prog2.models.errors.TelefoneInvalidError;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -12,10 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author rfcjo
- */
+
 public class Cliente extends Pessoa {
     private Date dataNascimento;
     private String cpf;

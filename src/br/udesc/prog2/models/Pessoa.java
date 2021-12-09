@@ -5,10 +5,6 @@
  */
 package br.udesc.prog2.models;
 
-/**
- *
- * @author rfcjo
- */
 public abstract class Pessoa implements Comparable<Pessoa> {
     private String nome;
     private String sobrenome;

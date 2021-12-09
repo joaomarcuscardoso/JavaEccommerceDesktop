@@ -11,7 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import br.udesc.prog2.models.Produto;
 import br.udesc.prog2.models.errors.ExceptionDadosIncompletos;
-import br.udesc.prog2.models.errors.ExceptionPrecoMaiorZero;
+import br.udesc.prog2.models.errors.ExceptionPrecoMenorZero;
 
 /**
  *
@@ -241,9 +241,9 @@ public class CriarProdutoView extends javax.swing.JFrame {
                         adicionarProduto(inputNome.getText(), inputDescricao.getText(), inputCategoria.getText(), (Integer) inputQuantidade.getValue(), Double.parseDouble(InputPreco.getText()), (Integer) inputQuantidadeIdeal.getValue());
 
                     } else {
-                        throw new ExceptionPrecoMaiorZero(this, "Preço deve ser maior que zero");
+                        throw new ExceptionPrecoMenorZero(this, "Preço deve ser maior que zero");
                         }
-                } catch(ExceptionPrecoMaiorZero error) {
+                } catch(ExceptionPrecoMenorZero error) {
                             error.printStackTrace();
                 }
                     
