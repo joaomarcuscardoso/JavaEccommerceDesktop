@@ -12,6 +12,9 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="btnMenuProduto">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Produtos"/>
           </Properties>
           <Events>
@@ -21,6 +24,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="bntMenuMontarPc">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Montar Pc"/>
           </Properties>
           <Events>
@@ -29,6 +35,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="btnMenuContainerConta">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Conta"/>
           </Properties>
           <SubComponents>

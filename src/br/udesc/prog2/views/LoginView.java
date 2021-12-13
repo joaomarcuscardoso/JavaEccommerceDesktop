@@ -138,6 +138,7 @@ public class LoginView extends javax.swing.JFrame {
         jMenuBar1.setBackground(java.awt.Color.darkGray);
         jMenuBar1.setAlignmentY(0.5F);
 
+        btnMenuProduto.setForeground(new java.awt.Color(255, 255, 255));
         btnMenuProduto.setText("Produtos");
         btnMenuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -146,6 +147,7 @@ public class LoginView extends javax.swing.JFrame {
         });
         jMenuBar1.add(btnMenuProduto);
 
+        btnMenuMontarPc.setForeground(new java.awt.Color(255, 255, 255));
         btnMenuMontarPc.setText("Montar Pc");
         btnMenuMontarPc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -154,6 +156,7 @@ public class LoginView extends javax.swing.JFrame {
         });
         jMenuBar1.add(btnMenuMontarPc);
 
+        jMenu4.setForeground(new java.awt.Color(255, 255, 255));
         jMenu4.setText("Conta");
 
         btnLogin1.setText("Login");

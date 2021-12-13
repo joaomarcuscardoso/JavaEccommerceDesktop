@@ -2,31 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Cargo.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Produto.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/main/App.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/ICargo.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/FuncionarioComparatorNome.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/EStatus.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/views/HomeView.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Funcionario.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Pagamento.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/views/CriarProdutoView.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/views/LoginView.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Vendedor.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Cliente.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Setor.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Carrinho.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/ETransportador.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Pessoa.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Estoque.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Pedidos.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Montador.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/FuncionarioComparatorPrivilegio.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Transportadora.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/views/RegistrarView.java</file>
-            <file>file:/C:/Users/rfcjo/OneDrive/Documentos/NetBeansProjects/TrabalhoPro2/src/br/udesc/prog2/models/Adminstrador.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
