@@ -117,4 +117,20 @@ public class ProdutoDAO {
     }
 
     
+    public void deletarProdutoPorId(int id) {
+        criarTabela();
+        Connection conexao = ConexaoDB.getConnection();
+        String sql = "DELETE FROM produtos WHERE id = ?";
+        PreparedStatement pstmt;
+        try {
+            pstmt = conexao.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.execute();
+            System.out.println("Produto apagada com sucesso!");
+
+        } catch(SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
 }

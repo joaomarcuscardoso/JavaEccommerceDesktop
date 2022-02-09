@@ -41,48 +41,55 @@ public class Produto {
     public void setPreco(double preco) {
         this.preco = preco;
     }
+    
+    
        
-       public String getNome() {
-           return this.nome;
-       }
+    public String getNome() {
+        return this.nome;
+    }
+
+    public String getDescricao() {
+        return this.nome;
+    }
+
+    public String getCategoria() {
+        return this.categoria;
+    }
+
+    public Integer getQuantidade() {
+        return this.quantidade;
+    }
+
+    public Integer getQuantidadeIdeal() {
+        return this.quantidadeIdeal;
+    }
+
+    public int removeQuantidade() {
+        this.quantidade -= 1;
+        return this.quantidade;
+    }
+
+    public Double getPreco() {
+        return this.preco;
+    }
+
+    public void setRecomendacao(String recomendacao) {
+         this.recomendacao = recomendacao;
+    }
+
+    public int getId() {
+        return id;
+    }
        
-       public String getDescricao() {
-           return this.nome;
-       }
+   
        
-       public String getCategoria() {
-           return this.categoria;
-       }
-       
-       public Integer getQuantidade() {
-           return this.quantidade;
-       }
-       
-       public Integer getQuantidadeIdeal() {
-           return this.quantidadeIdeal;
-       }
-       
-       public int removeQuantidade() {
-           this.quantidade -= 1;
-           return this.quantidade;
-       }
-       
-       public Double getPreco() {
-           return this.preco;
-       }
-       
-       public void setRecomendacao(String recomendacao) {
-            this.recomendacao = recomendacao;
-       }
-       
-       
-       public String getRecomendacao() {
-           return this.recomendacao;
-       }
+    public String getRecomendacao() {
+        return this.recomendacao;
+    }
 
     @Override
     public String toString() {
-        return "\nProduto{" + "\n nome=" + nome + "\n descricao=" + descricao + "\n categoria=" + categoria + "\n recomendacao=" + recomendacao + "\n quantidade=" + quantidade + "\n quantidadeIdeal=" + quantidadeIdeal + "\n preco=" + preco +"\n"+ '}';
+        return "\nProduto{"+"\n id="+id+ "\n nome=" + nome + "\n descricao=" + descricao + "\n categoria=" + categoria + "\n recomendacao=" + recomendacao + "\n quantidade=" + quantidade + "\n quantidadeIdeal=" + quantidadeIdeal + "\n preco=" + preco +"\n"+ '}';
     }
        
        
