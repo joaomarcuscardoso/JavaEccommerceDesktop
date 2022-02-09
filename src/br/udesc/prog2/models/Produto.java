@@ -21,6 +21,16 @@ public class Produto {
        this.quantidadeIdeal = quantidadeIdeal;
        this.preco = preco;
     }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setQuantidadeIdeal(int quantidadeIdeal) {
+        this.quantidadeIdeal = quantidadeIdeal;
+    }
+    
+    
     
     public void setId(int id) {
         this.id = id;
@@ -49,7 +59,7 @@ public class Produto {
     }
 
     public String getDescricao() {
-        return this.nome;
+        return this.descricao;
     }
 
     public String getCategoria() {

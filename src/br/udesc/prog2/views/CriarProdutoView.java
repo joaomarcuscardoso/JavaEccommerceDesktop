@@ -249,7 +249,14 @@ public class CriarProdutoView extends javax.swing.JFrame {
             {
                 try {
                     if(Double.parseDouble(InputPreco.getText()) > 0) {
-                        adicionarProduto(inputNome.getText(), inputDescricao.getText(), inputCategoria.getSelectedItem().toString(), (Integer) inputQuantidade.getValue(), Double.parseDouble(InputPreco.getText()), (Integer) inputQuantidadeIdeal.getValue());
+                        adicionarProduto(inputNome.getText(), 
+                                inputDescricao.getText(), 
+                                inputCategoria.getSelectedItem().toString(), 
+                                (Integer) inputQuantidade.getValue(), 
+                                Double.parseDouble(InputPreco.getText()), 
+                                (Integer) inputQuantidadeIdeal.getValue(),
+                                inputRecomendado.getText()
+                        );
 
                     } else {
                         throw new ExceptionPrecoMenorZero(this, "Preço deve ser maior que zero");
@@ -288,9 +295,10 @@ public class CriarProdutoView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnMenuProdutoMouseClicked
 
-    private void adicionarProduto(String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal) {
+    private void adicionarProduto(String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal, String recomendacao) {
         ProdutoDAO produtoDAO = new ProdutoDAO();
         Produto prod = new Produto(nome, descricao, categoria, quantidade, preco, quantidadeIdeal);
+        prod.setRecomendacao(recomendacao);
         produtoDAO.setProduto(prod);
         HomeView home = new HomeView();
         JOptionPane.showMessageDialog(this, "Adicionou produto.");

@@ -67,11 +67,12 @@ public class ProdutoDAO {
                 int id = resultado.getInt(1);
                 produto.setId(id);
             }
-            
+            ConexaoDB.desconectarDB();
             return true;
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            ConexaoDB.desconectarDB();
             return false;
         }
         
@@ -131,6 +132,56 @@ public class ProdutoDAO {
         } catch(SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        
+        ConexaoDB.desconectarDB();
+    }
+    
+    public boolean editarProduto(
+        int id, 
+        String nome, 
+        String descricao,
+        String categoria, 
+        int quantidade, 
+        double preco,
+        int quantidade_ideal, 
+        String recomendacao
+    ) 
+    {
+        criarTabela();
+        Connection conexao = ConexaoDB.getConnection();
+        String sql = "UPDATE produtos SET "
+                + "nome = ?,"
+                + " descricao = ?,"
+                + " categoria = ?,"
+                + " quantidade = ?,"
+                + " quantidade_ideal = ?,"
+                + " preco = ?, "
+                + " recomendacao = ?"
+                + " WHERE id = ?";
+        PreparedStatement pstmt;
+
+        try {
+            pstmt = conexao.prepareStatement(sql);
+            pstmt.setString(1, nome);
+            pstmt.setString(2, descricao);
+            pstmt.setString(3, categoria);
+            pstmt.setInt(4, quantidade);
+            pstmt.setInt(5, quantidade_ideal);
+            pstmt.setDouble(6, preco);
+            pstmt.setString(7, recomendacao);
+            pstmt.setInt(8, id);
+            pstmt.execute();
+
+            System.out.println("Producto atualizado com sucesso!");
+            
+            ConexaoDB.desconectarDB(); 
+            return true;
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            ConexaoDB.desconectarDB();
+            return false;
+        } 
     }
     
 }
