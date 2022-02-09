@@ -3,6 +3,7 @@ package br.udesc.prog2.models;
 import java.text.DecimalFormat;
 
 public class Produto {
+    private int id;
     private String nome;
     private String descricao;
     private String categoria;
@@ -12,14 +13,18 @@ public class Produto {
     private double preco;
     
     
-       public Produto(String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal) {
-          this.nome = nome;
-          this.descricao = descricao;
-          this.categoria = categoria;
-          this.quantidade = quantidade;
-          this.quantidadeIdeal = quantidadeIdeal;
-          this.preco = preco;
-       }
+    public Produto(String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal) {
+       this.nome = nome;
+       this.descricao = descricao;
+       this.categoria = categoria;
+       this.quantidade = quantidade;
+       this.quantidadeIdeal = quantidadeIdeal;
+       this.preco = preco;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -66,14 +71,8 @@ public class Produto {
            return this.preco;
        }
        
-       public boolean setRecomendacao(String recomendacao) {
-            if(!recomendacao.isEmpty()) {
-             this.recomendacao = recomendacao;
-                return true;   
-            } else  {
-                return false;
-  
-            }  
+       public void setRecomendacao(String recomendacao) {
+            this.recomendacao = recomendacao;
        }
        
        

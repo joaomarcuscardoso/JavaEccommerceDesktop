@@ -34,11 +34,12 @@ public class CriarProdutoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         labelNome = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
         inputNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        inputCategoria = new javax.swing.JTextField();
         labelCategoria = new javax.swing.JLabel();
         labelDescricao = new javax.swing.JLabel();
         inputRecomendado = new javax.swing.JTextField();
@@ -52,12 +53,17 @@ public class CriarProdutoView extends javax.swing.JFrame {
         inputQuantidadeIdeal = new javax.swing.JSpinner();
         inputQuantidade = new javax.swing.JSpinner();
         labelRS = new javax.swing.JLabel();
+        inputCategoria = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         btnMenuProduto = new javax.swing.JMenu();
         bntMenuMontarPc = new javax.swing.JMenu();
         btnMenuContainerConta = new javax.swing.JMenu();
         btnMenuLogin = new javax.swing.JMenuItem();
         btnMenuRegistrar = new javax.swing.JMenuItem();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +107,8 @@ public class CriarProdutoView extends javax.swing.JFrame {
         inputQuantidade.setPreferredSize(new java.awt.Dimension(70, 26));
 
         labelRS.setText("R$");
+
+        inputCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
 
         jMenuBar1.setBackground(java.awt.Color.darkGray);
         jMenuBar1.setAlignmentY(0.5F);
@@ -156,7 +164,6 @@ public class CriarProdutoView extends javax.swing.JFrame {
                     .addComponent(labelCategoria)
                     .addComponent(labelNome)
                     .addComponent(labelDescricao)
-                    .addComponent(labelRecomendado)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelPreco)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -174,13 +181,14 @@ public class CriarProdutoView extends javax.swing.JFrame {
                         .addComponent(inputQuantidadeIdeal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1)
                     .addComponent(inputNome)
-                    .addComponent(inputCategoria)
-                    .addComponent(inputRecomendado, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputRecomendado, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                    .addComponent(labelRecomendado)
+                    .addComponent(inputCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(150, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(202, 202, 202))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(188, 188, 188))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,11 +203,11 @@ public class CriarProdutoView extends javax.swing.JFrame {
                 .addComponent(labelDescricao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(labelCategoria)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(3, 3, 3)
                 .addComponent(inputCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(labelRecomendado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputRecomendado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,7 +240,7 @@ public class CriarProdutoView extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if(!InputPreco.getText().equals("") 
-                && !inputCategoria.getText().equals("") 
+                && !inputCategoria.getSelectedItem().toString().equals("") 
                 && !inputDescricao.getText().equals("") 
                 && !inputNome.getText().equals("") 
                 && inputQuantidade.getValue() != null 
@@ -241,7 +249,7 @@ public class CriarProdutoView extends javax.swing.JFrame {
             {
                 try {
                     if(Double.parseDouble(InputPreco.getText()) > 0) {
-                        adicionarProduto(inputNome.getText(), inputDescricao.getText(), inputCategoria.getText(), (Integer) inputQuantidade.getValue(), Double.parseDouble(InputPreco.getText()), (Integer) inputQuantidadeIdeal.getValue());
+                        adicionarProduto(inputNome.getText(), inputDescricao.getText(), inputCategoria.getSelectedItem().toString(), (Integer) inputQuantidade.getValue(), Double.parseDouble(InputPreco.getText()), (Integer) inputQuantidadeIdeal.getValue());
 
                     } else {
                         throw new ExceptionPrecoMenorZero(this, "Preço deve ser maior que zero");
@@ -281,12 +289,10 @@ public class CriarProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuProdutoMouseClicked
 
     private void adicionarProduto(String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal) {
-        // String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal
         ProdutoDAO produtoDAO = new ProdutoDAO();
         Produto prod = new Produto(nome, descricao, categoria, quantidade, preco, quantidadeIdeal);
-
+        produtoDAO.setProduto(prod);
         HomeView home = new HomeView();
-        home.addProdutoInLista(prod);
         JOptionPane.showMessageDialog(this, "Adicionou produto.");
         System.out.println("Adicionou produto:"+prod.toString());
         home.setVisible(true);
@@ -329,12 +335,14 @@ public class CriarProdutoView extends javax.swing.JFrame {
     private javax.swing.JMenu btnMenuProduto;
     private javax.swing.JMenuItem btnMenuRegistrar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JTextField inputCategoria;
+    private javax.swing.JComboBox<String> inputCategoria;
     private javax.swing.JTextArea inputDescricao;
     private javax.swing.JTextField inputNome;
     private javax.swing.JSpinner inputQuantidade;
     private javax.swing.JSpinner inputQuantidadeIdeal;
     private javax.swing.JTextField inputRecomendado;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;

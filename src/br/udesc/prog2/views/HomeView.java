@@ -81,11 +81,12 @@ public class HomeView extends javax.swing.JFrame {
         jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(238, 238, 238));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setSize(new java.awt.Dimension(650, 559));
 
         buscaContainer.setBackground(new java.awt.Color(204, 204, 204));
-        buscaContainer.setMinimumSize(new java.awt.Dimension(15, 25));
+        buscaContainer.setMaximumSize(new java.awt.Dimension(500, 500));
+        buscaContainer.setMinimumSize(null);
         buscaContainer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscaContainerActionPerformed(evt);
@@ -95,8 +96,8 @@ public class HomeView extends javax.swing.JFrame {
         btnPesquisa.setBackground(new java.awt.Color(204, 204, 204));
         btnPesquisa.setForeground(new java.awt.Color(204, 204, 204));
         btnPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/udesc/prog2/assets/images/magnifying-glass.png"))); // NOI18N
-        btnPesquisa.setMaximumSize(new java.awt.Dimension(25, 25));
-        btnPesquisa.setMinimumSize(new java.awt.Dimension(25, 25));
+        btnPesquisa.setMaximumSize(new java.awt.Dimension(500, 500));
+        btnPesquisa.setMinimumSize(null);
         btnPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisaActionPerformed(evt);
@@ -108,30 +109,34 @@ public class HomeView extends javax.swing.JFrame {
         btnAddProduto.setForeground(new java.awt.Color(255, 255, 255));
         btnAddProduto.setText("Criar Produto");
         btnAddProduto.setBorderPainted(false);
-        btnAddProduto.setMaximumSize(new java.awt.Dimension(120, 25));
-        btnAddProduto.setMinimumSize(new java.awt.Dimension(120, 25));
+        btnAddProduto.setMaximumSize(new java.awt.Dimension(500, 500));
+        btnAddProduto.setMinimumSize(null);
         btnAddProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddProdutoActionPerformed(evt);
             }
         });
 
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(500, 500));
+        jScrollPane1.setMinimumSize(null);
+
         tbPrincipal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "Categoria", "Quantidade", "Preço"
+                "Nome", "Categoria", "Quantidade", "Preço", "editar", "deletar"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
+        tbPrincipal.setMaximumSize(new java.awt.Dimension(500, 500));
         jScrollPane1.setViewportView(tbPrincipal);
 
         jMenuBar1.setBackground(java.awt.Color.darkGray);
@@ -188,31 +193,28 @@ public class HomeView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buscaContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(213, 213, 213)
-                        .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(btnPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buscaContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(buscaContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
@@ -266,14 +268,6 @@ public class HomeView extends javax.swing.JFrame {
         setVisible(true);
     }
     
-    public void addProdutoInLista(Produto prod) {
-        System.out.println("Entrou addProdutoInsta: "+prod.toString());
-        if(prod != null) 
-        {
-           Object[] obj = {prod.getNome(), prod.getCategoria(), String.valueOf(prod.getQuantidade()), String.valueOf(prod.getPreco())};
-           model.addRow(obj);
-        }
-    }
     
     
     /**
