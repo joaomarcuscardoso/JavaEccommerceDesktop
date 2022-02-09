@@ -5,8 +5,8 @@
  */
 package br.udesc.prog2.dao;
 
-import br.udesc.prog2.models.Cargo;
-import br.udesc.prog2.models.Setor;
+import br.udesc.prog2.models.positions.Cargo;
+import br.udesc.prog2.models.positions.Setor;
 import java.util.ArrayList;
 import java.util.Optional;
 

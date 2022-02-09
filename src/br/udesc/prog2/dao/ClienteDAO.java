@@ -5,7 +5,7 @@
  */
 package br.udesc.prog2.dao;
 
-import br.udesc.prog2.models.Cliente;
+import br.udesc.prog2.models.workers.Cliente;
 import java.util.ArrayList;
 import java.util.Optional;
 

@@ -6,7 +6,7 @@
 package br.udesc.prog2.views;
 
 import br.udesc.prog2.dao.ProdutoDAO;
-import br.udesc.prog2.models.Produto;
+import br.udesc.prog2.models.products.Produto;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JFrame;

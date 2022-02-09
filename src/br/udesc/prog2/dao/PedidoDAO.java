@@ -5,11 +5,11 @@
  */
 package br.udesc.prog2.dao;
 
-import br.udesc.prog2.models.Cliente;
-import br.udesc.prog2.models.EStatus;
-import br.udesc.prog2.models.Funcionario;
-import br.udesc.prog2.models.Pedidos;
-import br.udesc.prog2.models.Produto;
+import br.udesc.prog2.models.workers.Cliente;
+import br.udesc.prog2.models.products.EStatus;
+import br.udesc.prog2.models.workers.Funcionario;
+import br.udesc.prog2.models.clients.Pedidos;
+import br.udesc.prog2.models.products.Produto;
 import java.util.ArrayList;
 
 /**
