@@ -78,6 +78,41 @@ public class ProdutoDAO {
         
     }
     
+    public ArrayList<Produto> getProdutosByName(String nomeSearch) {
+        ArrayList<Produto> produtos = new ArrayList<Produto>();
+
+        criarTabela();
+        Connection conexao = ConexaoDB.getConnection();
+        String sql = "SELECT * FROM produtos WHERE nome LIKE ?";
+        try {
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            pstmt.setString(1,"%" + nomeSearch + "%"); 
+            
+            ResultSet resultado = pstmt.executeQuery();
+
+            while(resultado.next()) {
+                int id = resultado.getInt("id");
+                String nome = resultado.getString("nome");
+                String descricao = resultado.getString("descricao");
+                String categoria = resultado.getString("categoria");
+                int quantidade = resultado.getInt("quantidade");
+                double preco = resultado.getDouble("preco");
+                int quantidadeIdeal = resultado.getInt("quantidade_ideal");
+
+                Produto p = new Produto(nome, descricao, categoria, quantidade, preco, quantidadeIdeal);
+                p.setRecomendacao(resultado.getString("recomendacao"));
+                p.setId(id);
+                produtos.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+
+        ConexaoDB.desconectarDB();
+        return produtos;      
+    }
+    
     public ArrayList<Produto> getProdutos() {
         ArrayList<Produto> produtos = new ArrayList<Produto>();
 

@@ -5,6 +5,7 @@
  */
 package br.udesc.prog2.views.products;
 
+import br.udesc.prog2.controllers.products.ListarProdutosController;
 import br.udesc.prog2.views.accounts.LoginView;
 import br.udesc.prog2.views.accounts.RegistrarView;
 import br.udesc.prog2.views.products.EditarProdutoView;
@@ -25,7 +26,10 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 import br.udesc.prog2.models.workers.Cliente;
 import br.udesc.prog2.models.products.Produto;
+import br.udesc.prog2.models.products.table.ProdutoTableModel;
 import java.awt.ScrollPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelListener;
@@ -39,6 +43,7 @@ import javax.swing.table.TableModel;
 public class ProdutoView extends javax.swing.JFrame {
     private ArrayList<Produto> listaProdutos;
     private DefaultTableModel model;
+    private static String salvaBusca;
     
     /**
      * Creates new form HomeView
@@ -47,6 +52,10 @@ public class ProdutoView extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void salvarBuscarInput(String texto) {
+        
+    }
+    
     public void setTableModel(TableModel tableModel){
         tbPrincipal.setModel(tableModel);
     }
@@ -252,14 +261,20 @@ public class ProdutoView extends javax.swing.JFrame {
 
     private void buscaContainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaContainerActionPerformed
         // TODO add your handling code here:
-                System.out.println("Oi1");
 
     }//GEN-LAST:event_buscaContainerActionPerformed
 
     
     private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
         // TODO add your handling code here:
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        String buscaNome = buscaContainer.getText();
+        ArrayList<Produto> produtos = produtoDAO.getProdutosByName(buscaNome);
 
+        ListarProdutosController controlador = new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(produtos));
+        setVisible(false);
+
+        controlador.exibir();
     }//GEN-LAST:event_btnPesquisaActionPerformed
 
     private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
