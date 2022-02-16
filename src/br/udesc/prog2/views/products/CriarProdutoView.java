@@ -5,6 +5,7 @@
  */
 package br.udesc.prog2.views.products;
 
+import br.udesc.prog2.controllers.products.ListarProdutosController;
 import br.udesc.prog2.dao.ProdutoDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +13,9 @@ import javax.swing.JOptionPane;
 import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.exceptions.ExceptionDadosIncompletos;
 import br.udesc.prog2.exceptions.ExceptionPrecoMenorZero;
+import br.udesc.prog2.models.products.table.ProdutoTableModel;
 import static br.udesc.prog2.utils.CategoriaOpcao.categoriasOpcao;
 import br.udesc.prog2.utils.ComboItem;
-import br.udesc.prog2.views.workers.HomeView;
 import br.udesc.prog2.views.accounts.LoginView;
 
 /**
@@ -267,6 +268,7 @@ public class CriarProdutoView extends javax.swing.JFrame {
                                 inputRecomendado.getText()
                         );
 
+
                     } else {
                         throw new ExceptionPrecoMenorZero(this, "Preço deve ser maior que zero");
                         }
@@ -290,8 +292,11 @@ public class CriarProdutoView extends javax.swing.JFrame {
 
     private void btnMenuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuProdutoActionPerformed
         // TODO add your handling code here:
-        new HomeView().setVisible(true);
-        this.dispose();
+        System.out.println("");
+//        ProdutoDAO produtoDAO = new ProdutoDAO();
+//        ArrayList<Produto> produtos = produtoDAO.getProdutos();
+//        ListarProdutosController controlador = new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(produtos));
+//        controlador.exibir();
     }//GEN-LAST:event_btnMenuProdutoActionPerformed
 
     private void bntMenuMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntMenuMontarPcActionPerformed
@@ -300,7 +305,7 @@ public class CriarProdutoView extends javax.swing.JFrame {
 
     private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
         // TODO add your handling code here:
-        new HomeView().setVisible(true);
+        new ProdutoView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuProdutoMouseClicked
 
@@ -309,10 +314,14 @@ public class CriarProdutoView extends javax.swing.JFrame {
         Produto prod = new Produto(nome, descricao, categoria, quantidade, preco, quantidadeIdeal);
         prod.setRecomendacao(recomendacao);
         produtoDAO.setProduto(prod);
-        HomeView home = new HomeView();
+        
+        ArrayList<Produto> produtos = produtoDAO.getProdutos();
+        ListarProdutosController controlador = new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(produtos));
+        
         JOptionPane.showMessageDialog(this, "Adicionou produto.");
-        System.out.println("Adicionou produto:"+prod.toString());
-        home.setVisible(true);
+ 
+        controlador.exibir();
+        
         setVisible(false);
     }
 

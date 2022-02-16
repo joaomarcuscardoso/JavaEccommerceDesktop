@@ -111,7 +111,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnEditProduto" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnRmProduto" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnAddProduto" min="-2" pref="123" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
@@ -128,12 +128,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="buscaContainer" min="-2" max="-2" attributes="0"/>
                   <Component id="btnPesquisa" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnAddProduto" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnEditProduto" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnRmProduto" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Component id="btnAddProduto" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnEditProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -224,22 +222,16 @@
         <Component class="javax.swing.JTable" name="tbPrincipal">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="0">
+              <Table columnCount="5" rowCount="0">
                 <Column editable="true" title="Nome" type="java.lang.String"/>
                 <Column editable="true" title="Categoria" type="java.lang.String"/>
                 <Column editable="true" title="Quantidade" type="java.lang.String"/>
                 <Column editable="true" title="Pre&#xe7;o" type="java.lang.String"/>
-                <Column editable="true" title="editar" type="java.lang.Object"/>
-                <Column editable="true" title="deletar" type="java.lang.Object"/>
+                <Column editable="true" title="Excluir" type="java.lang.Long"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -298,7 +290,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditProdutoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnRmProduto">
+    <Component class="javax.swing.JButton" name="btnExcluir">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="4b" green="4b" red="bf" type="rgb"/>
@@ -316,7 +308,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRmProdutoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

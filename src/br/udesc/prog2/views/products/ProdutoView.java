@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.udesc.prog2.views.workers;
+package br.udesc.prog2.views.products;
 
 import br.udesc.prog2.views.accounts.LoginView;
 import br.udesc.prog2.views.accounts.RegistrarView;
@@ -27,6 +27,8 @@ import br.udesc.prog2.models.workers.Cliente;
 import br.udesc.prog2.models.products.Produto;
 import java.awt.ScrollPane;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -34,30 +36,19 @@ import javax.swing.table.TableModel;
  *
  * @author rfcjo
  */
-public class HomeView extends javax.swing.JFrame {
+public class ProdutoView extends javax.swing.JFrame {
     private ArrayList<Produto> listaProdutos;
     private DefaultTableModel model;
     
     /**
      * Creates new form HomeView
      */
-    public HomeView() {
+    public ProdutoView() {
         initComponents();
-        model = (DefaultTableModel) tbPrincipal.getModel();
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        adicionarLinhasInicias(produtoDAO.getProdutos());
     }
 
-    public void adicionarLinhasInicias(ArrayList<Produto> produtos) {
-   
-        for(int i =0; i< produtos.size();i++) {
-            Object[] obj = {produtos.get(i).getNome(), produtos.get(i).getCategoria(), String.valueOf(produtos.get(i).getQuantidade()), String.valueOf(produtos.get(i).getPreco())};
-            model.addRow(obj);
-            
-        }
-
-        model.fireTableRowsUpdated(ERROR, ERROR);
-        
+    public void setTableModel(TableModel tableModel){
+        tbPrincipal.setModel(tableModel);
     }
      
     /**
@@ -77,7 +68,7 @@ public class HomeView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPrincipal = new javax.swing.JTable();
         btnEditProduto = new javax.swing.JButton();
-        btnRmProduto = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         btnProdutos = new javax.swing.JMenu();
         btnMontarPc = new javax.swing.JMenu();
@@ -132,11 +123,11 @@ public class HomeView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Categoria", "Quantidade", "Preço", "editar", "deletar"
+                "Nome", "Categoria", "Quantidade", "Preço", "Excluir"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -158,15 +149,15 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
 
-        btnRmProduto.setBackground(new java.awt.Color(191, 75, 75));
-        btnRmProduto.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        btnRmProduto.setForeground(new java.awt.Color(255, 255, 255));
-        btnRmProduto.setText("Remover Produto");
-        btnRmProduto.setBorderPainted(false);
-        btnRmProduto.setMaximumSize(new java.awt.Dimension(500, 500));
-        btnRmProduto.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setBackground(new java.awt.Color(191, 75, 75));
+        btnExcluir.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setText("Remover Produto");
+        btnExcluir.setBorderPainted(false);
+        btnExcluir.setMaximumSize(new java.awt.Dimension(500, 500));
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRmProdutoActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
@@ -234,7 +225,7 @@ public class HomeView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEditProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRmProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)))
@@ -247,11 +238,10 @@ public class HomeView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buscaContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnEditProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRmProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnEditProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61))
@@ -269,7 +259,6 @@ public class HomeView extends javax.swing.JFrame {
     
     private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
         // TODO add your handling code here:
-                System.out.println("Oi2");
 
     }//GEN-LAST:event_btnPesquisaActionPerformed
 
@@ -298,29 +287,51 @@ public class HomeView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnProdutosActionPerformed
 
+    public String getIdLinhaSelecionada(){
+        if(tbPrincipal.getSelectedRow() == -1){
+            System.out.println("Nenhuma Linha selecionada");
+            return null;
+        }
+        
+        return tbPrincipal.getModel().getValueAt(tbPrincipal.getSelectedRow(), 0).toString();
+    }
+    
+    public void mostrarTela(){
+        setVisible(true);
+    }
+    
+    public void btnProdutosDelete(java.awt.event.ActionListener acao) {
+        btnExcluir.addActionListener(acao);
+    }
+    
     private void btnProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProdutosMouseClicked
         // TODO add your handling code here:
-        new HomeView().setVisible(true);
+        new ProdutoView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnProdutosMouseClicked
 
     private void btnEditProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditProdutoActionPerformed
         // TODO add your handling code here:
-        new EditarProdutoView().setVisible(true);
-        this.dispose();
+//        new EditarProdutoView().setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_btnEditProdutoActionPerformed
 
-    private void btnRmProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRmProdutoActionPerformed
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-        System.out.println("entrou");
-        new RemoverProdutoView().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnRmProdutoActionPerformed
+//        System.out.println("entrou");
+//        new RemoverProdutoView().setVisible(true);
+//        this.dispose();
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
-    public void mostrarTela() {
-        setVisible(true);
+    public void exibirMensagem(String msg){
+        JOptionPane.showMessageDialog(null, msg);
     }
     
+
+    
+    public void addEventAlterTable(TableModelListener l){
+        tbPrincipal.getModel().addTableModelListener(l);
+    }
     
     
     /**
@@ -341,14 +352,17 @@ public class HomeView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //tablePrincipal.add(new Object[]{)
+        //tablePrincipal.add(new Object[]{)
+        //tablePrincipal.add(new Object[]{)
         //tablePrincipal.add(new Object[]{)
                
         
@@ -356,7 +370,7 @@ public class HomeView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HomeView().setVisible(true);
+                new ProdutoView().setVisible(true);
             }
         });
 
@@ -367,12 +381,12 @@ public class HomeView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduto;
     private javax.swing.JButton btnEditProduto;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JMenuItem btnLogin;
     private javax.swing.JMenu btnMontarPc;
     private javax.swing.JButton btnPesquisa;
     private javax.swing.JMenu btnProdutos;
     private javax.swing.JMenuItem btnRegistrar;
-    private javax.swing.JButton btnRmProduto;
     private javax.swing.JTextField buscaContainer;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;

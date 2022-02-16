@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import br.udesc.prog2.models.workers.Cliente;
-import br.udesc.prog2.views.workers.HomeView;
+import br.udesc.prog2.views.products.ProdutoView;
 
 public class RegistrarView extends javax.swing.JFrame {
     public ArrayList<Cliente> clientesCadastrados = new ArrayList<Cliente>();;
@@ -262,13 +262,13 @@ public class RegistrarView extends javax.swing.JFrame {
 
     private void btnMenuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuProdutoActionPerformed
         // TODO add your handling code here:
-        new HomeView().setVisible(true);
+        new ProdutoView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuProdutoActionPerformed
 
     private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
         // TODO add your handling code here:
-        new HomeView().setVisible(true);
+        new ProdutoView().setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_btnMenuProdutoMouseClicked

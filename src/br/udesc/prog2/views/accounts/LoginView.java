@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import br.udesc.prog2.models.workers.Cliente;
 import br.udesc.prog2.exceptions.ExceptionDadosIncompletos;
 import br.udesc.prog2.exceptions.ExceptionUsuarioInvalido;
-import br.udesc.prog2.views.workers.HomeView;
+import br.udesc.prog2.views.products.ProdutoView;
 
 /**
  *
@@ -230,7 +230,7 @@ public class LoginView extends javax.swing.JFrame {
                     if(verificarLogin(inputEmail.getText(), inputSenha.getText()) == true) {
                        JOptionPane.showMessageDialog(this, "Usuário logado com sucesso.");
                        this.dispose();
-                       new HomeView().setVisible(true);
+                       new ProdutoView().setVisible(true);
                     } else {
                         throw new ExceptionUsuarioInvalido(this, "E-mail ou senha invalidos");
                     } 
@@ -258,7 +258,7 @@ public class LoginView extends javax.swing.JFrame {
 
     private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
         // TODO add your handling code here:
-        new HomeView().setVisible(true);
+        new ProdutoView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuProdutoMouseClicked
 

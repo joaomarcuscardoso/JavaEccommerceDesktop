@@ -10,7 +10,6 @@ import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.exceptions.ExceptionDadosIncompletos;
 import static br.udesc.prog2.utils.CategoriaOpcao.categoriasOpcao;
 import br.udesc.prog2.utils.ComboItem;
-import br.udesc.prog2.views.workers.HomeView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -352,7 +351,7 @@ public class EditarProdutoView extends javax.swing.JFrame {
 
                }
 
-                new HomeView().setVisible(true);
+                new ProdutoView().setVisible(true);
                 this.dispose();
             } else {
                 throw new ExceptionDadosIncompletos(this, "Preencha todos os dados por favor!");

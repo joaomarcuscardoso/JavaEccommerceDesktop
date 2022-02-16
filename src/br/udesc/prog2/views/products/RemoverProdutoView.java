@@ -8,7 +8,6 @@ package br.udesc.prog2.views.products;
 import br.udesc.prog2.dao.ProdutoDAO;
 import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.utils.ComboItem;
-import br.udesc.prog2.views.workers.HomeView;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -183,7 +182,7 @@ public class RemoverProdutoView extends javax.swing.JFrame {
            
            JOptionPane.showMessageDialog(this, "Produto excluido com sucesso!");
            
-            new HomeView().setVisible(true);
+            new ProdutoView().setVisible(true);
             this.dispose();
         } 
     }//GEN-LAST:event_btnSendDelProdutoActionPerformed

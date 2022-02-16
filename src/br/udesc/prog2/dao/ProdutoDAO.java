@@ -76,9 +76,6 @@ public class ProdutoDAO {
             return false;
         }
         
-//        produtos.add(new Produto("Memoria Ram", "Memoria ram boa", "Memoria", 10, 500, 12));
-//        produtos.add(new Produto("Ryzen 7 3700x", "Processador high End", "Processador", 50, 2300, 52));
-//        produtos.add(new Produto("Coller Xio", "Coller", "Coller", 20, 500, 20));
     }
     
     public ArrayList<Produto> getProdutos() {
@@ -118,7 +115,7 @@ public class ProdutoDAO {
     }
 
     
-    public void deletarProdutoPorId(int id) {
+    public boolean deletarProdutoPorId(int id) {
         criarTabela();
         Connection conexao = ConexaoDB.getConnection();
         String sql = "DELETE FROM produtos WHERE id = ?";
@@ -128,24 +125,16 @@ public class ProdutoDAO {
             pstmt.setInt(1, id);
             pstmt.execute();
             System.out.println("Produto apagada com sucesso!");
-
+            return true;
         } catch(SQLException ex) {
             System.out.println(ex.getMessage());
         }
         
         ConexaoDB.desconectarDB();
+        return false;
     }
     
-    public boolean editarProduto(
-        int id, 
-        String nome, 
-        String descricao,
-        String categoria, 
-        int quantidade, 
-        double preco,
-        int quantidade_ideal, 
-        String recomendacao
-    ) 
+    public boolean editarProduto(Produto produto) 
     {
         criarTabela();
         Connection conexao = ConexaoDB.getConnection();
@@ -162,14 +151,14 @@ public class ProdutoDAO {
 
         try {
             pstmt = conexao.prepareStatement(sql);
-            pstmt.setString(1, nome);
-            pstmt.setString(2, descricao);
-            pstmt.setString(3, categoria);
-            pstmt.setInt(4, quantidade);
-            pstmt.setInt(5, quantidade_ideal);
-            pstmt.setDouble(6, preco);
-            pstmt.setString(7, recomendacao);
-            pstmt.setInt(8, id);
+            pstmt.setString(1, produto.getNome());
+            pstmt.setString(2, produto.getDescricao());
+            pstmt.setString(3, produto.getCategoria());
+            pstmt.setInt(4, produto.getQuantidade());
+            pstmt.setInt(5, produto.getQuantidadeIdeal());
+            pstmt.setDouble(6, produto.getPreco());
+            pstmt.setString(7, produto.getRecomendacao());
+            pstmt.setInt(8, produto.getId());
             pstmt.execute();
 
             System.out.println("Producto atualizado com sucesso!");
