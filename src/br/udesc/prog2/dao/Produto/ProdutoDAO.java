@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.udesc.prog2.dao;
+package br.udesc.prog2.dao.Produto;
 
+import br.udesc.prog2.dao.ConexaoDB;
 import br.udesc.prog2.models.products.Produto;
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ public class ProdutoDAO {
     
     private static void criarTabela() {
         Connection conexao = ConexaoDB.getConnection();
-        System.out.println(conexao);
         String tabela = "CREATE TABLE IF NOT EXISTS produtos (id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT," +
                             "  nome VARCHAR(60)," +
                             "  descricao VARCHAR(60)," +

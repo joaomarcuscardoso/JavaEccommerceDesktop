@@ -11,7 +11,7 @@ import br.udesc.prog2.views.accounts.RegistrarView;
 import br.udesc.prog2.views.products.EditarProdutoView;
 import br.udesc.prog2.views.products.CriarProdutoView;
 import br.udesc.prog2.views.products.RemoverProdutoView;
-import br.udesc.prog2.dao.ProdutoDAO;
+import br.udesc.prog2.dao.Produto.ProdutoDAO;
 import br.udesc.prog2.main.App;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;

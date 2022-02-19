@@ -5,7 +5,7 @@
  */
 package br.udesc.prog2.dao;
 
-import br.udesc.prog2.models.workers.Cliente;
+import br.udesc.prog2.models.Conta;
 import br.udesc.prog2.models.products.EStatus;
 import br.udesc.prog2.models.workers.Funcionario;
 import br.udesc.prog2.models.clients.Pedidos;
@@ -19,8 +19,9 @@ import java.util.ArrayList;
 public class PedidoDAO {
    private static Pedidos pedidos;
    
-   public void setPedidos(Cliente cliente, ArrayList<Produto> listaProduto, EStatus estatus, Funcionario funcionario) {
-       pedidos = new Pedidos(cliente, listaProduto, estatus, funcionario);
+   
+   public void setPedidos(Conta conta, ArrayList<Produto> listaProduto, EStatus estatus, Funcionario funcionario) {
+       pedidos = new Pedidos(conta, listaProduto, estatus, funcionario);
    }
    
    

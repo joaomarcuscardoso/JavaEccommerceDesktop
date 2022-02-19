@@ -129,7 +129,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="inputEmail" alignment="0" max="32767" attributes="0"/>
@@ -138,10 +142,6 @@
                               <Component id="btnLogin" alignment="0" pref="342" max="32767" attributes="0"/>
                               <Component id="inputSenha" max="32767" attributes="0"/>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="66" max="32767" attributes="0"/>
@@ -159,11 +159,11 @@
                   <Component id="inputEmail" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="labelSenha" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   <Component id="inputSenha" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="287" max="32767" attributes="0"/>
+                  <EmptySpace pref="265" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -208,9 +208,6 @@
           </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="inputSenha">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputSenhaActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

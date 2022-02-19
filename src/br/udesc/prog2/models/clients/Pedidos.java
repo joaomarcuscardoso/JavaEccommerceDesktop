@@ -3,7 +3,6 @@ package br.udesc.prog2.models.clients;
 import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.models.products.EStatus;
 import br.udesc.prog2.models.workers.Funcionario;
-import br.udesc.prog2.models.workers.Cliente;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,10 +10,11 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import br.udesc.prog2.models.Conta;
 import java.util.Set;
 
 public class Pedidos {
-    private Cliente cliente;
+    private Conta conta;
     private ArrayList<Produto> produtos = new ArrayList<Produto>();
     private String componente;
     private EStatus status;
@@ -23,8 +23,8 @@ public class Pedidos {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyyy HH:mm:ss");
     
     
-    public Pedidos(Cliente cliente, ArrayList<Produto> produtos, EStatus status, Funcionario responsavel) {
-        this.cliente = cliente;
+    public Pedidos(Conta conta, ArrayList<Produto> produtos, EStatus status, Funcionario responsavel) {
+        this.conta = conta;
         this.produtos = produtos;
         this.status = status;
         this.responsavel.add(responsavel);
@@ -62,8 +62,8 @@ public class Pedidos {
         return this.termino;
     }
     
-    public Cliente getCliente() {
-        return this.cliente;
+    public Conta getConta() {
+        return this.conta;
     }
     
     public ArrayList<Produto> getProdutos() {
@@ -80,7 +80,7 @@ public class Pedidos {
     
     public String toString() {
         
-        return "O pedidos foi realizado pelo cliente: "+cliente.getNome()+
+        return "O pedidos foi realizado pelo conta: "+conta.getNome()+
                 " e o status é "+status+
                 ", os produtos selecionado são: \n"+produtos.toString()+
                 "\n Ass por "+responsavel.toString()+

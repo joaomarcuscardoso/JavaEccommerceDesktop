@@ -138,7 +138,7 @@
                   </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Component id="inputNome" alignment="0" max="32767" attributes="0"/>
-                  <Component id="inputRecomendado" alignment="0" pref="244" max="32767" attributes="0"/>
+                  <Component id="inputRecomendado" alignment="0" max="32767" attributes="0"/>
                   <Component id="labelRecomendado" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="inputCategoria" alignment="0" max="32767" attributes="0"/>
               </Group>

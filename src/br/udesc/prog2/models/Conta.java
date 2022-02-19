@@ -3,19 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.udesc.prog2.models.workers;
+package br.udesc.prog2.models;
 
-import br.udesc.prog2.models.Pessoa;
 import br.udesc.prog2.exceptions.TelefoneInvalidError;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
-public class Cliente extends Pessoa {
+public class Conta extends Pessoa {
+    public int id;
     private Date dataNascimento;
     private String cpf;
     private String rua;
@@ -25,11 +20,11 @@ public class Cliente extends Pessoa {
     private String cidade;
     private int numero;
     
-    public Cliente(String nome, String sobrenome, String email, String senha) {
+    public Conta(String nome, String sobrenome, String email, String senha) {
         super(nome, sobrenome, email, senha);
     }
     
-    public Cliente(String nome, String sobrenome, String email, String senha, Date dataNascimento, String rua, int cep, String complemento, String estado, String cidade, int numero, String cpf) {
+    public Conta(String nome, String sobrenome, String email, String senha, Date dataNascimento, String rua, int cep, String complemento, String estado, String cidade, int numero, String cpf) {
         super(nome, sobrenome, email, senha);
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
@@ -41,8 +36,16 @@ public class Cliente extends Pessoa {
         this.numero = numero;
 
     }
+ 
+    
+    public int getId() {
+        return id;
+    }
 
-   
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public Date getDataNascimento() {
         return dataNascimento;

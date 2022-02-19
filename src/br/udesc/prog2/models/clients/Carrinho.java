@@ -5,10 +5,10 @@
  */
 package br.udesc.prog2.models.clients;
 
+import br.udesc.prog2.models.Conta;
 import br.udesc.prog2.models.clients.Pagamento;
 import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.models.clients.Transportadora;
-import br.udesc.prog2.models.workers.Cliente;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -16,9 +16,9 @@ public class Carrinho {
     private ArrayList<Produto> produtos = new ArrayList<Produto>();
     private Pagamento pagamento;
     private Transportadora transportadora;
-    private Cliente cliente;
+    private Conta cliente;
 
-    public Carrinho(Pagamento pagamento, Transportadora transportadora, Cliente cliente) {
+    public Carrinho(Pagamento pagamento, Transportadora transportadora, Conta cliente) {
         this.pagamento = pagamento;
         this.transportadora = transportadora;
         this.cliente = cliente;

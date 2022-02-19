@@ -5,7 +5,7 @@
  */
 package br.udesc.prog2.models.products.table;
 
-import br.udesc.prog2.dao.ProdutoDAO;
+import br.udesc.prog2.dao.Produto.ProdutoDAO;
 import br.udesc.prog2.models.products.Produto;
 import java.awt.Dimension;
 import java.util.ArrayList;

@@ -5,7 +5,7 @@
  */
 package br.udesc.prog2.views.products;
 
-import br.udesc.prog2.dao.ProdutoDAO;
+import br.udesc.prog2.dao.Produto.ProdutoDAO;
 import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.exceptions.ExceptionDadosIncompletos;
 import static br.udesc.prog2.utils.CategoriaOpcao.categoriasOpcao;
@@ -330,18 +330,18 @@ public class EditarProdutoView extends javax.swing.JFrame {
                 ProdutoDAO produtoDAO = new ProdutoDAO();
                 Object selected = this.comboEdit.getSelectedItem();
                 int id = ((ComboItem)selected).getKey();
-
-                boolean editado = produtoDAO.editarProduto
-                (
-                        id,
-                        inputNome.getText(), 
-                        inputDescricao.getText(), 
-                        inputCategoria.getSelectedItem().toString(), 
-                        (Integer) inputQuantidade.getValue(), 
-                        Double.parseDouble(InputPreco.getText()), 
-                        (Integer) inputQuantidadeIdeal.getValue(),
-                        inputRecomendado.getText()
-                );
+                  boolean editado = true;
+//                boolean editado = produtoDAO.editarProduto
+//                (
+//                        id,
+//                        inputNome.getText(), 
+//                        inputDescricao.getText(), 
+//                        inputCategoria.getSelectedItem().toString(), 
+//                        (Integer) inputQuantidade.getValue(), 
+//                        Double.parseDouble(InputPreco.getText()), 
+//                        (Integer) inputQuantidadeIdeal.getValue(),
+//                        inputRecomendado.getText()
+//                );
 
                if(editado == true) {
 

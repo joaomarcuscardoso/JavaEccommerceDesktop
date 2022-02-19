@@ -6,7 +6,7 @@
 package br.udesc.prog2.views.products;
 
 import br.udesc.prog2.controllers.products.ListarProdutosController;
-import br.udesc.prog2.dao.ProdutoDAO;
+import br.udesc.prog2.dao.Produto.ProdutoDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;

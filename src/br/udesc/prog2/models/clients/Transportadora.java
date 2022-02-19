@@ -5,19 +5,19 @@
  */
 package br.udesc.prog2.models.clients;
 
-import br.udesc.prog2.models.workers.Cliente;
+import br.udesc.prog2.models.Conta;
 
 
 class Transportadora {
     private ETransportador transporte;
     private String tempoParaEntrega;
     private double preco;
-    private Cliente cliente;
+    private Conta conta;
     
-    public Transportadora(ETransportador transporte, String tempoParaEntrega, Cliente cliente) {
+    public Transportadora(ETransportador transporte, String tempoParaEntrega, Conta conta) {
         this.transporte = transporte;
         this.tempoParaEntrega = tempoParaEntrega;
-        this.cliente = cliente;
+        this.conta = conta;
     }
     
     
@@ -35,8 +35,8 @@ class Transportadora {
         return tempoParaEntrega;
     }
 
-    public Cliente getInfosEndereco() {
-        return cliente;
+    public Conta getInfosEndereco() {
+        return conta;
     }
     
     

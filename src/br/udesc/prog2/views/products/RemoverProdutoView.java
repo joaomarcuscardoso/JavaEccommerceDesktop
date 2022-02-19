@@ -5,7 +5,7 @@
  */
 package br.udesc.prog2.views.products;
 
-import br.udesc.prog2.dao.ProdutoDAO;
+import br.udesc.prog2.dao.Produto.ProdutoDAO;
 import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.utils.ComboItem;
 import java.util.ArrayList;
