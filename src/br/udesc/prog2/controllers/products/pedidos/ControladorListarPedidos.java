@@ -4,6 +4,7 @@
  */
 package br.udesc.prog2.controllers.products.pedidos;
 
+import br.udesc.prog2.dao.Conta.ContaDAO;
 import br.udesc.prog2.dao.Produto.PedidosDAO;
 import br.udesc.prog2.models.clients.Pedidos;
 import br.udesc.prog2.models.products.pedidos.table.PedidoTableModel;
@@ -45,7 +46,9 @@ public class ControladorListarPedidos {
     
     public void atualizarDados(){
         pedidoTableModel.fireTableDataChanged();
-        pedidoTableModel.setPedidos(pedidosDAO.getPedidos());
+        ContaDAO contaDAO = new ContaDAO();
+        
+        pedidoTableModel.setPedidos(pedidosDAO.getPedidos(contaDAO.isLogado()));
         System.out.print("Atualizando dados..");
     }
     
@@ -64,8 +67,9 @@ public class ControladorListarPedidos {
         if(idString != null) {
             
             int id = Integer.valueOf(idString);
-            
-            if(this.pedidosDAO.deletarPedidosPorId(id)){
+            ContaDAO contaDAO = new ContaDAO();
+
+            if(this.pedidosDAO.deletarPedidosPorId(id, contaDAO.isLogado())){
                 pedidosView.exibirMensagem("pedido excluido com sucesso");
                 atualizarDados();
             } else {

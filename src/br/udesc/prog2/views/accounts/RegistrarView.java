@@ -6,6 +6,7 @@
 package br.udesc.prog2.views.accounts;
 
 import br.udesc.prog2.controllers.contas.LoginController;
+import br.udesc.prog2.controllers.contas.RegistrarController;
 import br.udesc.prog2.controllers.products.ListarProdutosController;
 import br.udesc.prog2.dao.Conta.ContaDAO;
 import br.udesc.prog2.exceptions.ExceptionDadosIncompletos;
@@ -48,8 +49,6 @@ public class RegistrarView extends javax.swing.JFrame {
         labelEmail = new javax.swing.JLabel();
         inputSenha = new javax.swing.JPasswordField();
         jMenuBar1 = new javax.swing.JMenuBar();
-        btnMenuProduto = new javax.swing.JMenu();
-        btnMenuMontarPc = new javax.swing.JMenu();
         btnContainerConta = new javax.swing.JMenu();
         btnMenuLogin = new javax.swing.JMenuItem();
         btnMenuRegistrar = new javax.swing.JMenuItem();
@@ -159,26 +158,13 @@ public class RegistrarView extends javax.swing.JFrame {
         jMenuBar1.setBackground(java.awt.Color.darkGray);
         jMenuBar1.setAlignmentY(0.5F);
 
-        btnMenuProduto.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenuProduto.setText("Produtos");
-        btnMenuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMenuProdutoMouseClicked(evt);
-            }
-        });
-        btnMenuProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuProdutoActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(btnMenuProduto);
-
-        btnMenuMontarPc.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenuMontarPc.setText("Ver Pedidos");
-        jMenuBar1.add(btnMenuMontarPc);
-
         btnContainerConta.setForeground(new java.awt.Color(255, 255, 255));
         btnContainerConta.setText("Conta");
+        btnContainerConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContainerContaActionPerformed(evt);
+            }
+        });
 
         btnMenuLogin.setText("Login");
         btnMenuLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -216,6 +202,8 @@ public class RegistrarView extends javax.swing.JFrame {
 
     private void btnMenuLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuLoginActionPerformed
         // TODO add your handling code here:
+         new LoginController(new LoginView());
+         this.dispose();
     }//GEN-LAST:event_btnMenuLoginActionPerformed
 
     private void inputNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNomeActionPerformed
@@ -254,6 +242,7 @@ public class RegistrarView extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Usuário Cadastrado com sucesso");
                         
                         new LoginController(new LoginView());
+                        this.dispose( );
                        
                     } catch(ExceptionEmailExiste error) {
                         error.printStackTrace();
@@ -273,21 +262,14 @@ public class RegistrarView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMenuRegistrarActionPerformed
 
-    private void btnMenuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuProdutoActionPerformed
-        // TODO add your handling code here:
-        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
-        this.dispose();
-    }//GEN-LAST:event_btnMenuProdutoActionPerformed
-
-    private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
-        // TODO add your handling code here:
-        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
-        this.dispose();
-    }//GEN-LAST:event_btnMenuProdutoMouseClicked
-
     private void inputSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputSenhaActionPerformed
+
+    private void btnContainerContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContainerContaActionPerformed
+        // TODO add your handling code here:
+        new RegistrarController(new RegistrarView());
+    }//GEN-LAST:event_btnContainerContaActionPerformed
 
 
     /**
@@ -328,8 +310,6 @@ public class RegistrarView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu btnContainerConta;
     private javax.swing.JMenuItem btnMenuLogin;
-    private javax.swing.JMenu btnMenuMontarPc;
-    private javax.swing.JMenu btnMenuProduto;
     private javax.swing.JMenuItem btnMenuRegistrar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JTextField inputEmail;

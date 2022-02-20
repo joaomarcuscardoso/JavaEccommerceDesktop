@@ -9,6 +9,9 @@ import br.udesc.prog2.controllers.contas.LoginController;
 import br.udesc.prog2.controllers.contas.RegistrarController;
 import br.udesc.prog2.controllers.products.CriarProdutoController;
 import br.udesc.prog2.controllers.products.ListarProdutosController;
+import br.udesc.prog2.controllers.products.pedidos.ControladorListarPedidos;
+import br.udesc.prog2.dao.Conta.ContaDAO;
+import br.udesc.prog2.dao.Produto.PedidosDAO;
 import br.udesc.prog2.views.accounts.LoginView;
 import br.udesc.prog2.views.accounts.RegistrarView;
 import br.udesc.prog2.views.products.CriarProdutoView;
@@ -27,6 +30,7 @@ import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 import br.udesc.prog2.models.products.Produto;
+import br.udesc.prog2.models.products.pedidos.table.PedidoTableModel;
 import br.udesc.prog2.models.products.table.ProdutoTableModel;
 import br.udesc.prog2.utils.PegarTodosProdutoParaTableModels;
 import java.awt.ScrollPane;
@@ -74,6 +78,9 @@ public class ProdutoView extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu3 = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         buscaContainer = new javax.swing.JTextField();
         btnPesquisa = new javax.swing.JButton();
         btnAddProduto = new javax.swing.JButton();
@@ -82,12 +89,21 @@ public class ProdutoView extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         btnProdutos = new javax.swing.JMenu();
-        btnMontarPc = new javax.swing.JMenu();
+        btnMontarPc = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jMenu4 = new javax.swing.JMenu();
         btnLogin = new javax.swing.JMenuItem();
         btnRegistrar = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
+        jCheckBoxMenuItem2.setSelected(true);
+        jCheckBoxMenuItem2.setText("jCheckBoxMenuItem2");
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -182,16 +198,26 @@ public class ProdutoView extends javax.swing.JFrame {
                 btnProdutosActionPerformed(evt);
             }
         });
-        jMenuBar1.add(btnProdutos);
 
-        btnMontarPc.setForeground(new java.awt.Color(255, 255, 255));
-        btnMontarPc.setText("Ver Pedidos");
+        btnMontarPc.setSelected(true);
+        btnMontarPc.setText("Pedidos");
         btnMontarPc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMontarPcActionPerformed(evt);
             }
         });
-        jMenuBar1.add(btnMontarPc);
+        btnProdutos.add(btnMontarPc);
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("Produtos");
+        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem1ActionPerformed(evt);
+            }
+        });
+        btnProdutos.add(jRadioButtonMenuItem1);
+
+        jMenuBar1.add(btnProdutos);
 
         jMenu4.setForeground(new java.awt.Color(255, 255, 255));
         jMenu4.setText("Conta");
@@ -281,10 +307,6 @@ public class ProdutoView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void btnMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMontarPcActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMontarPcActionPerformed
-
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         new RegistrarController(new RegistrarView());
         this.dispose();
@@ -292,7 +314,9 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-        // TODO add your handling code here:
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        
+        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
 
     }//GEN-LAST:event_btnProdutosActionPerformed
 
@@ -313,8 +337,7 @@ public class ProdutoView extends javax.swing.JFrame {
     
     private void btnProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProdutosMouseClicked
         // TODO add your handling code here:
-        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
-        this.dispose();
+
     }//GEN-LAST:event_btnProdutosMouseClicked
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -323,6 +346,19 @@ public class ProdutoView extends javax.swing.JFrame {
 //        new EditarPedidosView().setVisible(true);
 //        this.dispose();
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
+        this.dispose();
+    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
+
+    private void btnMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMontarPcActionPerformed
+        // TODO add your handling code here:
+        PedidosDAO pedidosDAO = new PedidosDAO();
+        ContaDAO contaDAO = new ContaDAO();
+        new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos(contaDAO.isLogado())));
+    }//GEN-LAST:event_btnMontarPcActionPerformed
 
     public void exibirMensagem(String msg){
         JOptionPane.showMessageDialog(null, msg);
@@ -383,14 +419,18 @@ public class ProdutoView extends javax.swing.JFrame {
     private javax.swing.JButton btnAddProduto;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JMenuItem btnLogin;
-    private javax.swing.JMenu btnMontarPc;
+    private javax.swing.JRadioButtonMenuItem btnMontarPc;
     private javax.swing.JButton btnPesquisa;
     private javax.swing.JMenu btnProdutos;
     private javax.swing.JMenuItem btnRegistrar;
     private javax.swing.JTextField buscaContainer;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbPrincipal;
     // End of variables declaration//GEN-END:variables

@@ -6,7 +6,11 @@
 package br.udesc.prog2.views.products;
 
 import br.udesc.prog2.controllers.contas.LoginController;
+import br.udesc.prog2.controllers.contas.RegistrarController;
 import br.udesc.prog2.controllers.products.ListarProdutosController;
+import br.udesc.prog2.controllers.products.pedidos.ControladorListarPedidos;
+import br.udesc.prog2.dao.Conta.ContaDAO;
+import br.udesc.prog2.dao.Produto.PedidosDAO;
 import br.udesc.prog2.dao.Produto.ProdutoDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +18,13 @@ import javax.swing.JOptionPane;
 import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.exceptions.ExceptionDadosIncompletos;
 import br.udesc.prog2.exceptions.ExceptionPrecoMenorZero;
+import br.udesc.prog2.models.products.pedidos.table.PedidoTableModel;
 import br.udesc.prog2.models.products.table.ProdutoTableModel;
 import static br.udesc.prog2.utils.CategoriaOpcao.categoriasOpcao;
 import br.udesc.prog2.utils.ComboItem;
 import br.udesc.prog2.utils.PegarTodosProdutoParaTableModels;
 import br.udesc.prog2.views.accounts.LoginView;
+import br.udesc.prog2.views.accounts.RegistrarView;
 
 /**
  *
@@ -73,8 +79,9 @@ public class CriarProdutoView extends javax.swing.JFrame {
         labelRS = new javax.swing.JLabel();
         inputCategoria = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
-        btnMenuProduto = new javax.swing.JMenu();
-        bntMenuMontarPc = new javax.swing.JMenu();
+        btnProdutos = new javax.swing.JMenu();
+        btnMontarPc = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         btnMenuContainerConta = new javax.swing.JMenu();
         btnMenuLogin = new javax.swing.JMenuItem();
         btnMenuRegistrar = new javax.swing.JMenuItem();
@@ -129,28 +136,38 @@ public class CriarProdutoView extends javax.swing.JFrame {
         jMenuBar1.setBackground(java.awt.Color.darkGray);
         jMenuBar1.setAlignmentY(0.5F);
 
-        btnMenuProduto.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenuProduto.setText("Produtos");
-        btnMenuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnProdutos.setForeground(new java.awt.Color(255, 255, 255));
+        btnProdutos.setText("Produtos");
+        btnProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMenuProdutoMouseClicked(evt);
+                btnProdutosMouseClicked(evt);
             }
         });
-        btnMenuProduto.addActionListener(new java.awt.event.ActionListener() {
+        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuProdutoActionPerformed(evt);
+                btnProdutosActionPerformed(evt);
             }
         });
-        jMenuBar1.add(btnMenuProduto);
 
-        bntMenuMontarPc.setForeground(new java.awt.Color(255, 255, 255));
-        bntMenuMontarPc.setText("Ver Pedidos");
-        bntMenuMontarPc.addActionListener(new java.awt.event.ActionListener() {
+        btnMontarPc.setSelected(true);
+        btnMontarPc.setText("Pedidos");
+        btnMontarPc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntMenuMontarPcActionPerformed(evt);
+                btnMontarPcActionPerformed(evt);
             }
         });
-        jMenuBar1.add(bntMenuMontarPc);
+        btnProdutos.add(btnMontarPc);
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("Produtos");
+        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem1ActionPerformed(evt);
+            }
+        });
+        btnProdutos.add(jRadioButtonMenuItem1);
+
+        jMenuBar1.add(btnProdutos);
 
         btnMenuContainerConta.setForeground(new java.awt.Color(255, 255, 255));
         btnMenuContainerConta.setText("Conta");
@@ -164,6 +181,11 @@ public class CriarProdutoView extends javax.swing.JFrame {
         btnMenuContainerConta.add(btnMenuLogin);
 
         btnMenuRegistrar.setText("Registrar-se");
+        btnMenuRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuRegistrarActionPerformed(evt);
+            }
+        });
         btnMenuContainerConta.add(btnMenuRegistrar);
 
         jMenuBar1.add(btnMenuContainerConta);
@@ -265,16 +287,21 @@ public class CriarProdutoView extends javax.swing.JFrame {
             {
                 try {
                     if(Double.parseDouble(InputPreco.getText()) > 0) {
-                        adicionarProduto(inputNome.getText(), 
-                                inputDescricao.getText(), 
-                                inputCategoria.getSelectedItem().toString(), 
-                                (Integer) inputQuantidade.getValue(), 
-                                Double.parseDouble(InputPreco.getText()), 
-                                (Integer) inputQuantidadeIdeal.getValue(),
-                                inputRecomendado.getText()
-                        );
+                        ContaDAO contaDAO = new ContaDAO();
+                        if(contaDAO.isADmin() == true) {
+                            
+                            adicionarProduto(inputNome.getText(), 
+                                    inputDescricao.getText(), 
+                                    inputCategoria.getSelectedItem().toString(), 
+                                    (Integer) inputQuantidade.getValue(), 
+                                    Double.parseDouble(InputPreco.getText()), 
+                                    (Integer) inputQuantidadeIdeal.getValue(),
+                                    inputRecomendado.getText()
+                            );
 
-
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Você não tem permissão");
+                        }
                     } else {
                         throw new ExceptionPrecoMenorZero(this, "Preço deve ser maior que zero");
                         }
@@ -296,26 +323,33 @@ public class CriarProdutoView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnMenuLoginActionPerformed
 
-    private void btnMenuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuProdutoActionPerformed
+    private void btnMenuRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuRegistrarActionPerformed
         // TODO add your handling code here:
-        System.out.println("");
-//        ProdutoDAO produtoDAO = new ProdutoDAO();
-//        ArrayList<Produto> produtos = produtoDAO.getProdutos();
-//        ListarProdutosController controlador = new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(produtos));
-//        controlador.exibir();
-    }//GEN-LAST:event_btnMenuProdutoActionPerformed
+        new RegistrarController(new RegistrarView());
+    }//GEN-LAST:event_btnMenuRegistrarActionPerformed
 
-    private void bntMenuMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntMenuMontarPcActionPerformed
+    private void btnMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMontarPcActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bntMenuMontarPcActionPerformed
+        PedidosDAO pedidosDAO = new PedidosDAO();
+        ContaDAO contaDAO = new ContaDAO();
+        new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos(contaDAO.isLogado())));
+    }//GEN-LAST:event_btnMontarPcActionPerformed
 
-    private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
+    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
         // TODO add your handling code here:
-                
         new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
         this.dispose();
+    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
-    }//GEN-LAST:event_btnMenuProdutoMouseClicked
+    private void btnProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProdutosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProdutosMouseClicked
+
+    private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+
+        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
+    }//GEN-LAST:event_btnProdutosActionPerformed
 
     private void adicionarProduto(String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal, String recomendacao) {
         ProdutoDAO produtoDAO = new ProdutoDAO();
@@ -362,11 +396,11 @@ public class CriarProdutoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField InputPreco;
-    private javax.swing.JMenu bntMenuMontarPc;
     private javax.swing.JMenu btnMenuContainerConta;
     private javax.swing.JMenuItem btnMenuLogin;
-    private javax.swing.JMenu btnMenuProduto;
     private javax.swing.JMenuItem btnMenuRegistrar;
+    private javax.swing.JRadioButtonMenuItem btnMontarPc;
+    private javax.swing.JMenu btnProdutos;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<Object> inputCategoria;
     private javax.swing.JTextArea inputDescricao;
@@ -378,6 +412,7 @@ public class CriarProdutoView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCategoria;
     private javax.swing.JLabel labelDescricao;

@@ -46,6 +46,56 @@ public class ContaDAO {
         
     }
     
+    
+    public boolean isADmin() {
+        criarTabela();
+
+        Connection conexao = ConexaoDB.getConnection();
+
+        String sql = "SELECT * FROM contas WHERE logado = ? and admin = ?";
+        try {
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            pstmt.setBoolean(1, true);
+            pstmt.setBoolean(2, true);
+            
+            ResultSet resultado = pstmt.executeQuery();
+            if(resultado.next()) {
+                return true;
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        ConexaoDB.desconectarDB();
+        return false;
+    }
+    
+    public int isLogado() {
+        criarTabela();
+
+        Connection conexao = ConexaoDB.getConnection();
+
+        String sql = "SELECT * FROM contas WHERE logado = ?";
+        try {
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            pstmt.setBoolean(1, true);
+            
+            ResultSet resultado = pstmt.executeQuery();
+            while(resultado.next()) {
+                int id = resultado.getInt("id");
+                System.out.println("idUSer: "+id);
+                return id;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        System.out.println("Não entrou");
+
+        ConexaoDB.desconectarDB();
+        return 0;
+    }
         
     public boolean criarConta(Conta conta) {
         criarTabela();
@@ -67,7 +117,7 @@ public class ContaDAO {
 
             final ResultSet resultado = pstmt.getGeneratedKeys();
             if (resultado.next()) {
-                int id = resultado.getInt(1);
+                int id = resultado.getInt("id");
                 conta.setId(id);
                 
             }
@@ -132,8 +182,6 @@ public class ContaDAO {
         criarTabela();
 
         Connection conexao = ConexaoDB.getConnection();
-        System.out.println("email: "+email);
-        System.out.println("email: "+senha);
         String sql = "SELECT * FROM contas WHERE email = ? and senha = ?";
 
         try {
@@ -145,7 +193,6 @@ public class ContaDAO {
             if(resultado.next()) {
 
                 int id = resultado.getInt("id");
-                updateLogado(id);
                 
                 String nome = resultado.getString("nome");
                 String sobrenome = resultado.getString("sobrenome");
@@ -155,7 +202,7 @@ public class ContaDAO {
                 
                 conta.setId(id);
                 conta.setAdmin(admin);
-                
+                updateLogado(id);
                 return conta;
             }
         } catch (SQLException ex) {
@@ -164,6 +211,24 @@ public class ContaDAO {
 
         ConexaoDB.desconectarDB();
         return null;  
+    }
+    
+    public void deslogar() {
+        criarTabela();
+
+        Connection conexao = ConexaoDB.getConnection();     
+        
+        String sql = "Update contas SET logado = ?";
+        try {
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            pstmt.setBoolean(1, false);
+
+            pstmt.executeUpdate();
+ 
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
     }
     
     

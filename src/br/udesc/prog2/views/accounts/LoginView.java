@@ -24,20 +24,13 @@ import br.udesc.prog2.views.products.CompraView;
 import br.udesc.prog2.views.products.PedidosView;
 import br.udesc.prog2.views.products.ProdutoView;
 
-/**
- *
- * @author rfcjo
- */
 public class LoginView extends javax.swing.JFrame {
-    private Conta contaSalva;
-  
-    
-    public Conta getConta() {
-        return contaSalva;
-    }
     
     public LoginView() {
         initComponents();
+        ContaDAO contaDAO = new ContaDAO();
+        
+        contaDAO.deslogar();
     }
     
     public void mostrarTela(){
@@ -59,8 +52,6 @@ public class LoginView extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         inputSenha = new javax.swing.JPasswordField();
         jMenuBar1 = new javax.swing.JMenuBar();
-        btnMenuProduto = new javax.swing.JMenu();
-        btnMenuMontarPc = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         btnLogin1 = new javax.swing.JMenuItem();
         btnRegistrar = new javax.swing.JMenuItem();
@@ -142,24 +133,6 @@ public class LoginView extends javax.swing.JFrame {
         jMenuBar1.setBackground(java.awt.Color.darkGray);
         jMenuBar1.setAlignmentY(0.5F);
 
-        btnMenuProduto.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenuProduto.setText("Produtos");
-        btnMenuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMenuProdutoMouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(btnMenuProduto);
-
-        btnMenuMontarPc.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenuMontarPc.setText("Ver Pedidos");
-        btnMenuMontarPc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMenuMontarPcMouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(btnMenuMontarPc);
-
         jMenu4.setForeground(new java.awt.Color(255, 255, 255));
         jMenu4.setText("Conta");
 
@@ -216,7 +189,6 @@ public class LoginView extends javax.swing.JFrame {
                     Conta conta = contaDAO.verificarLoginDaConta(inputEmail.getText(), senhaCriptografada);
                     if( conta != null) {
                         
-                        contaSalva = conta;
                         JOptionPane.showMessageDialog(this, "Usuário logado com sucesso.");
                         
                         if(conta.isAdmin() == true ) {
@@ -226,12 +198,9 @@ public class LoginView extends javax.swing.JFrame {
                             this.dispose();
                             
                         } else {
-                            
                             PedidosDAO pedidosDAO = new PedidosDAO();
-        
-                            new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos()));
                             
-//                          new CompraController(new CompraView());
+                            new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos(contaDAO.isLogado())));
                             this.dispose();
                         }
                        
@@ -257,18 +226,6 @@ public class LoginView extends javax.swing.JFrame {
         new RegistrarController(new RegistrarView());
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
-        // TODO add your handling code here:
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        
-        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
-    
-    }//GEN-LAST:event_btnMenuProdutoMouseClicked
-
-    private void btnMenuMontarPcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMontarPcMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMenuMontarPcMouseClicked
 
     /**
      * @param args the command line arguments
@@ -309,8 +266,6 @@ public class LoginView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JMenuItem btnLogin1;
-    private javax.swing.JMenu btnMenuMontarPc;
-    private javax.swing.JMenu btnMenuProduto;
     private javax.swing.JMenuItem btnRegistrar;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JPasswordField inputSenha;

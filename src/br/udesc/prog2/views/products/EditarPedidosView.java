@@ -5,14 +5,23 @@
  */
 package br.udesc.prog2.views.products;
 
+import br.udesc.prog2.controllers.contas.LoginController;
+import br.udesc.prog2.controllers.contas.RegistrarController;
+import br.udesc.prog2.controllers.products.ListarProdutosController;
 import br.udesc.prog2.controllers.products.pedidos.ControladorListarPedidos;
+import br.udesc.prog2.dao.Conta.ContaDAO;
 import br.udesc.prog2.dao.Produto.PedidosDAO;
 import br.udesc.prog2.dao.Produto.ProdutoDAO;
+import br.udesc.prog2.models.Conta;
 import br.udesc.prog2.models.clients.Pedidos;
 import br.udesc.prog2.models.products.EStatus;
 import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.models.products.pedidos.table.PedidoTableModel;
+import br.udesc.prog2.models.products.table.ProdutoTableModel;
 import br.udesc.prog2.utils.ComboItem;
+import br.udesc.prog2.utils.PegarTodosProdutoParaTableModels;
+import br.udesc.prog2.views.accounts.LoginView;
+import br.udesc.prog2.views.accounts.RegistrarView;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -31,13 +40,16 @@ public class EditarPedidosView extends javax.swing.JFrame {
     
     public void mostrarTela(){
         setVisible(true);
+        
     }
     
     
     public void popularComboBox() {
         PedidosDAO pedidosDAO = new PedidosDAO();
+        ContaDAO contaDAO = new ContaDAO();
+
         
-        ArrayList<Pedidos> pedidos = pedidosDAO.getPedidos();
+        ArrayList<Pedidos> pedidos = pedidosDAO.getPedidos(contaDAO.isLogado());
 
         for(Pedidos p : pedidos) {
             comboEdit.addItem(new ComboItem(p.getId(), p.toString()));
@@ -64,8 +76,9 @@ public class EditarPedidosView extends javax.swing.JFrame {
         labelCategoria1 = new javax.swing.JLabel();
         comboEstatus = new javax.swing.JComboBox();
         jMenuBar1 = new javax.swing.JMenuBar();
-        btnMenuProduto = new javax.swing.JMenu();
-        btnMenuMontarPc = new javax.swing.JMenu();
+        btnProdutos = new javax.swing.JMenu();
+        btnMontarPc = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         btnContainerConta = new javax.swing.JMenu();
         btnMenuLogin = new javax.swing.JMenuItem();
         btnMenuRegistrar = new javax.swing.JMenuItem();
@@ -103,23 +116,38 @@ public class EditarPedidosView extends javax.swing.JFrame {
         jMenuBar1.setBackground(java.awt.Color.darkGray);
         jMenuBar1.setAlignmentY(0.5F);
 
-        btnMenuProduto.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenuProduto.setText("Produtos");
-        btnMenuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnProdutos.setForeground(new java.awt.Color(255, 255, 255));
+        btnProdutos.setText("Produtos");
+        btnProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMenuProdutoMouseClicked(evt);
+                btnProdutosMouseClicked(evt);
             }
         });
-        btnMenuProduto.addActionListener(new java.awt.event.ActionListener() {
+        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuProdutoActionPerformed(evt);
+                btnProdutosActionPerformed(evt);
             }
         });
-        jMenuBar1.add(btnMenuProduto);
 
-        btnMenuMontarPc.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenuMontarPc.setText("Ver Pedidos");
-        jMenuBar1.add(btnMenuMontarPc);
+        btnMontarPc.setSelected(true);
+        btnMontarPc.setText("Pedidos");
+        btnMontarPc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMontarPcActionPerformed(evt);
+            }
+        });
+        btnProdutos.add(btnMontarPc);
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("Produtos");
+        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem1ActionPerformed(evt);
+            }
+        });
+        btnProdutos.add(jRadioButtonMenuItem1);
+
+        jMenuBar1.add(btnProdutos);
 
         btnContainerConta.setForeground(new java.awt.Color(255, 255, 255));
         btnContainerConta.setText("Conta");
@@ -193,21 +221,16 @@ public class EditarPedidosView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuLoginActionPerformed
-
+        new LoginController(new LoginView());
+        this.dispose();
     }//GEN-LAST:event_btnMenuLoginActionPerformed
 
     private void btnMenuRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuRegistrarActionPerformed
         // TODO add your handling code here:
+        new RegistrarController(new RegistrarView());
+        this.dispose();                                   
+
     }//GEN-LAST:event_btnMenuRegistrarActionPerformed
-
-    private void btnMenuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuProdutoActionPerformed
-
-    }//GEN-LAST:event_btnMenuProdutoActionPerformed
-
-    private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
-
-
-    }//GEN-LAST:event_btnMenuProdutoMouseClicked
 
     private void btnSendDelProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendDelProdutoActionPerformed
         //int resposta = JOptionPane.showConfirmDialog(this, );
@@ -215,17 +238,26 @@ public class EditarPedidosView extends javax.swing.JFrame {
         int resposta = JOptionPane.showOptionDialog(this, "Você tem certeza que quer editar esse produto", "Editar Pedido", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         
         if(resposta == 0) {
-            PedidosDAO pedidosDAO = new PedidosDAO();
-            Object selected = this.comboEdit.getSelectedItem();
-            
-            int id = ((ComboItem)selected).getKey();
-            
-            pedidosDAO.editarPedidos(id, comboEstatus.getSelectedItem().toString());
-           
-            JOptionPane.showMessageDialog(this, "Pedido editado com sucesso!");
-           
-            new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos()));
-            this.dispose();
+            ContaDAO contaDAO = new ContaDAO();
+
+               
+            if(contaDAO.isADmin() == true) {
+                
+                PedidosDAO pedidosDAO = new PedidosDAO();
+                Object selected = this.comboEdit.getSelectedItem();
+
+                int id = ((ComboItem)selected).getKey();
+
+                pedidosDAO.editarPedidos(id, comboEstatus.getSelectedItem().toString(), contaDAO.isLogado());
+
+                JOptionPane.showMessageDialog(this, "Pedido editado com sucesso!");
+
+                new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos(contaDAO.isLogado())));
+                this.dispose();
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "Você não tem permissão para alterar essa pagina!");
+            }
         } 
     }//GEN-LAST:event_btnSendDelProdutoActionPerformed
 
@@ -236,6 +268,29 @@ public class EditarPedidosView extends javax.swing.JFrame {
     private void comboEstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEstatusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboEstatusActionPerformed
+
+    private void btnMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMontarPcActionPerformed
+        // TODO add your handling code here:
+        PedidosDAO pedidosDAO = new PedidosDAO();
+        ContaDAO contaDAO = new ContaDAO();
+        new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos(contaDAO.isLogado())));
+    }//GEN-LAST:event_btnMontarPcActionPerformed
+
+    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
+        this.dispose();
+    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
+
+    private void btnProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProdutosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProdutosMouseClicked
+
+    private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+
+        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
+    }//GEN-LAST:event_btnProdutosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -282,14 +337,15 @@ public class EditarPedidosView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu btnContainerConta;
     private javax.swing.JMenuItem btnMenuLogin;
-    private javax.swing.JMenu btnMenuMontarPc;
-    private javax.swing.JMenu btnMenuProduto;
     private javax.swing.JMenuItem btnMenuRegistrar;
+    private javax.swing.JRadioButtonMenuItem btnMontarPc;
+    private javax.swing.JMenu btnProdutos;
     private javax.swing.JButton btnSendDelProduto;
     private javax.swing.JComboBox comboEdit;
     private javax.swing.JComboBox comboEstatus;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JLabel labelCategoria;
     private javax.swing.JLabel labelCategoria1;
     // End of variables declaration//GEN-END:variables

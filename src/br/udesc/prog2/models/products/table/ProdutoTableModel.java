@@ -5,6 +5,7 @@
  */
 package br.udesc.prog2.models.products.table;
 
+import br.udesc.prog2.dao.Conta.ContaDAO;
 import br.udesc.prog2.dao.Produto.ProdutoDAO;
 import br.udesc.prog2.models.products.Produto;
 import java.awt.Dimension;
@@ -22,6 +23,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ProdutoTableModel extends AbstractTableModel {
     private List<Produto> produtos;
+    private ContaDAO contaDAO = new ContaDAO();
+
     
     private final String[] dados = {"ID", "Nome", "Categoria", "Quantidade", "Preço"};
     private final int Col_Id = 0;
@@ -31,17 +34,28 @@ public class ProdutoTableModel extends AbstractTableModel {
     private final int Col_Preco = 4;
     
     public ProdutoTableModel(List<Produto> produtos) {
+        
+
+        if(contaDAO.isADmin() == true) {
         this.produtos = produtos;
+    
+        }
     }
     
     @Override
     public int getRowCount() {
-        return produtos.size();
+        if(contaDAO.isADmin() == true) {
+            return produtos.size();
+        }
+        return 0;
     }
 
     @Override
     public int getColumnCount() {
-        return dados.length;
+        if(contaDAO.isADmin() == true) {
+            return dados.length;
+        }
+        return 0;
     }
     
     @Override
@@ -53,58 +67,73 @@ public class ProdutoTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Produto produtos = this.produtos.get(rowIndex);
         String valor = null;
-        switch(columnIndex){
-            case Col_Id:
-                valor = String.valueOf(produtos.getId());
-                break;
-            case Col_Nome:
-                valor = produtos.getNome();
-                break;
-            case Col_Categoria:
-                valor = produtos.getCategoria();
-                break;
-            case Col_Quantidade:
-                valor = String.valueOf( produtos.getQuantidade());
-                break;
-            case Col_Preco:
-                valor = String.valueOf( produtos.getPreco());
-                break;
+        ContaDAO contaDAO = new ContaDAO();
+
+        if(contaDAO.isADmin() == true) {
+            switch(columnIndex){
+                case Col_Id:
+                    valor = String.valueOf(produtos.getId());
+                    break;
+                case Col_Nome:
+                    valor = produtos.getNome();
+                    break;
+                case Col_Categoria:
+                    valor = produtos.getCategoria();
+                    break;
+                case Col_Quantidade:
+                    valor = String.valueOf( produtos.getQuantidade());
+                    break;
+                case Col_Preco:
+                    valor = String.valueOf( produtos.getPreco());
+                    break;
+            }
         }
         return valor;
     }
     
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
+        ContaDAO contaDAO = new ContaDAO();
         
-        if(columnIndex == Col_Id || columnIndex == Col_Categoria)
-            return false;
-        return true;
+        if(contaDAO.isADmin() == true) {
+            
+            if(columnIndex == Col_Id || columnIndex == Col_Categoria) {
+
+                return false;
+            }
+            return true;
+        } 
+        
+        return false;
     }
     
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-    	Produto produto = this.produtos.get(rowIndex);
+        ContaDAO contaDAO = new ContaDAO();
 
-        switch (columnIndex) {
-            case Col_Id:
-                produto.setId((Integer) aValue);
-                break;
-            case Col_Nome:
-                produto.setNome((String) aValue);
-                break;
-            case Col_Categoria:
-                produto.setCategoria((String) aValue);
-                break;
-            case Col_Quantidade:
-                produto.setQuantidade(Integer.valueOf((String) aValue));
-                break;
-            case Col_Preco:
-                produto.setPreco(Double.valueOf((String) aValue));
-                break;
+        if(contaDAO.isADmin() == true) {
+            Produto produto = this.produtos.get(rowIndex);
+            switch (columnIndex) {
+                case Col_Id:
+                    produto.setId((Integer) aValue);
+                    break;
+                case Col_Nome:
+                    produto.setNome((String) aValue);
+                    break;
+                case Col_Categoria:
+                    produto.setCategoria((String) aValue);
+                    break;
+                case Col_Quantidade:
+                    produto.setQuantidade(Integer.valueOf((String) aValue));
+                    break;
+                case Col_Preco:
+                    produto.setPreco(Double.valueOf((String) aValue));
+                    break;
+            }
+            //este método é que notifica a tabela que houve alteração de dados
+            fireTableDataChanged();
+            fireTableCellUpdated(rowIndex, columnIndex);
         }
-        //este método é que notifica a tabela que houve alteração de dados
-        fireTableDataChanged();
-        fireTableCellUpdated(rowIndex, columnIndex);
     }
 
     public void setProdutos(List<Produto> produtos) {

@@ -24,6 +24,7 @@ public class Pedidos {
     private int id_product;
     private Double preco;
     private String nomeProduto;
+    private int id_user;
     
 
     public Pedidos(Integer id_product,
@@ -34,10 +35,12 @@ public class Pedidos {
             String estatus,
             Integer quantidade, 
             double preco,
-            String nomeProduto
+            String nomeProduto,
+            Integer id_user
     ) {
         
         this.id_product = id_product;
+        this.id_user = id_user;
         this.complemento = complemento;
         this.cep = cep;
         this.numero = numero;
@@ -50,6 +53,16 @@ public class Pedidos {
         this.preco = preco;
         this.nomeProduto = nomeProduto;
     }
+
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+    
+    
 
     public String getNomeProduto() {
         return nomeProduto;

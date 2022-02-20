@@ -6,7 +6,9 @@
 package br.udesc.prog2.views.products;
 
 import br.udesc.prog2.controllers.contas.RegistrarController;
+import br.udesc.prog2.controllers.products.ListarProdutosController;
 import br.udesc.prog2.controllers.products.pedidos.ControladorListarPedidos;
+import br.udesc.prog2.dao.Conta.ContaDAO;
 import br.udesc.prog2.dao.Produto.PedidosDAO;
 import br.udesc.prog2.dao.Produto.ProdutoDAO;
 import br.udesc.prog2.models.products.Produto;
@@ -14,9 +16,11 @@ import br.udesc.prog2.exceptions.ExceptionDadosIncompletos;
 import br.udesc.prog2.models.clients.Pedidos;
 import br.udesc.prog2.models.products.EStatus;
 import br.udesc.prog2.models.products.pedidos.table.PedidoTableModel;
+import br.udesc.prog2.models.products.table.ProdutoTableModel;
 import br.udesc.prog2.utils.CategoriaOpcao;
 import static br.udesc.prog2.utils.CategoriaOpcao.categoriasOpcao;
 import br.udesc.prog2.utils.ComboItem;
+import br.udesc.prog2.utils.PegarTodosProdutoParaTableModels;
 import br.udesc.prog2.views.accounts.RegistrarView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -133,14 +137,14 @@ public class CompraView extends javax.swing.JFrame {
         inputComplemento = new javax.swing.JTextField();
         inputNumero = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
-        btnMenuProduto = new javax.swing.JMenu();
+        btnProdutos = new javax.swing.JMenu();
+        btnMontarPc = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         btnContainerConta = new javax.swing.JMenu();
         btnMenuLogin = new javax.swing.JMenuItem();
         btnMenuRegistrar = new javax.swing.JMenuItem();
-        btnMenuProduto1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(600, 600));
         setMinimumSize(new java.awt.Dimension(590, 590));
         setResizable(false);
 
@@ -222,19 +226,38 @@ public class CompraView extends javax.swing.JFrame {
         jMenuBar1.setBackground(java.awt.Color.darkGray);
         jMenuBar1.setAlignmentY(0.5F);
 
-        btnMenuProduto.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenuProduto.setText("Produtos");
-        btnMenuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnProdutos.setForeground(new java.awt.Color(255, 255, 255));
+        btnProdutos.setText("Produtos");
+        btnProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMenuProdutoMouseClicked(evt);
+                btnProdutosMouseClicked(evt);
             }
         });
-        btnMenuProduto.addActionListener(new java.awt.event.ActionListener() {
+        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuProdutoActionPerformed(evt);
+                btnProdutosActionPerformed(evt);
             }
         });
-        jMenuBar1.add(btnMenuProduto);
+
+        btnMontarPc.setSelected(true);
+        btnMontarPc.setText("Pedidos");
+        btnMontarPc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMontarPcActionPerformed(evt);
+            }
+        });
+        btnProdutos.add(btnMontarPc);
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("Produtos");
+        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem1ActionPerformed(evt);
+            }
+        });
+        btnProdutos.add(jRadioButtonMenuItem1);
+
+        jMenuBar1.add(btnProdutos);
 
         btnContainerConta.setForeground(new java.awt.Color(255, 255, 255));
         btnContainerConta.setText("Conta");
@@ -256,20 +279,6 @@ public class CompraView extends javax.swing.JFrame {
         btnContainerConta.add(btnMenuRegistrar);
 
         jMenuBar1.add(btnContainerConta);
-
-        btnMenuProduto1.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenuProduto1.setText("Ver Pedidos");
-        btnMenuProduto1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMenuProduto1MouseClicked(evt);
-            }
-        });
-        btnMenuProduto1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuProduto1ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(btnMenuProduto1);
 
         setJMenuBar(jMenuBar1);
 
@@ -361,21 +370,11 @@ public class CompraView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuLoginActionPerformed
 
     private void btnMenuRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuRegistrarActionPerformed
-        // TODO add your handling code here:
         RegistrarController registrarController = new RegistrarController(new RegistrarView());
+        this.dispose();
     }//GEN-LAST:event_btnMenuRegistrarActionPerformed
 
-    private void btnMenuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuProdutoActionPerformed
-
-    }//GEN-LAST:event_btnMenuProdutoActionPerformed
-
-    private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
-
-
-    }//GEN-LAST:event_btnMenuProdutoMouseClicked
-
     private void btnComprarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProdutoActionPerformed
-        //int resposta = JOptionPane.showConfirmDialog(this, );
         try {
             if(
                 !InputPreco.getText().equals("") 
@@ -407,7 +406,7 @@ public class CompraView extends javax.swing.JFrame {
                             PedidosDAO pedidosDAO = new PedidosDAO();
                             String estatus = String.valueOf(EStatus.em_andamento);
                             String nomeProduto = produtoDAO.getNomeById(id);
-                            
+                            ContaDAO contaDAO = new ContaDAO();
                             
                             Pedidos pedido = new Pedidos(id, 
                                     inputComplemento.getText(), 
@@ -417,13 +416,14 @@ public class CompraView extends javax.swing.JFrame {
                                     estatus, 
                                     quantidadeFormatada, 
                                     Double.parseDouble(InputPreco.getText()),
-                                    nomeProduto
+                                    nomeProduto,
+                                    contaDAO.isLogado()
                             );
                             
                             if(pedidosDAO.inserir(pedido) == true) {
                                 JOptionPane.showMessageDialog(this, "Pedido inserido com sucesso!");
-                                
-                                new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos()));
+
+                                new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos(contaDAO.isLogado())));
                                 
                                 this.dispose();
                             } else {
@@ -476,17 +476,28 @@ public class CompraView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboCategoriaActionPerformed
 
-    private void btnMenuProduto1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProduto1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMenuProduto1MouseClicked
-
-    private void btnMenuProduto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuProduto1ActionPerformed
+    private void btnMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMontarPcActionPerformed
         // TODO add your handling code here:
         PedidosDAO pedidosDAO = new PedidosDAO();
-        
-        new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos()));
+        ContaDAO contaDAO = new ContaDAO();
+        new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos(contaDAO.isLogado())));
+    }//GEN-LAST:event_btnMontarPcActionPerformed
+
+    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
         this.dispose();
-    }//GEN-LAST:event_btnMenuProduto1ActionPerformed
+    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
+
+    private void btnProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProdutosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProdutosMouseClicked
+
+    private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+
+        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
+    }//GEN-LAST:event_btnProdutosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -531,9 +542,9 @@ public class CompraView extends javax.swing.JFrame {
     private javax.swing.JButton btnComprarProduto;
     private javax.swing.JMenu btnContainerConta;
     private javax.swing.JMenuItem btnMenuLogin;
-    private javax.swing.JMenu btnMenuProduto;
-    private javax.swing.JMenu btnMenuProduto1;
     private javax.swing.JMenuItem btnMenuRegistrar;
+    private javax.swing.JRadioButtonMenuItem btnMontarPc;
+    private javax.swing.JMenu btnProdutos;
     private javax.swing.JComboBox<Object> comboCategoria;
     private javax.swing.JComboBox comboProduto;
     private javax.swing.JTextField inputCep;
@@ -543,6 +554,7 @@ public class CompraView extends javax.swing.JFrame {
     private javax.swing.JTextField inputRua;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JLabel labelCategoria;
     private javax.swing.JLabel labelCategoria1;
     private javax.swing.JLabel labelNome;
