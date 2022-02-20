@@ -144,7 +144,7 @@ public class CriarProdutoView extends javax.swing.JFrame {
         jMenuBar1.add(btnMenuProduto);
 
         bntMenuMontarPc.setForeground(new java.awt.Color(255, 255, 255));
-        bntMenuMontarPc.setText("Montar Pc");
+        bntMenuMontarPc.setText("Ver Pedidos");
         bntMenuMontarPc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntMenuMontarPcActionPerformed(evt);
@@ -197,7 +197,7 @@ public class CriarProdutoView extends javax.swing.JFrame {
                         .addComponent(inputQuantidadeIdeal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1)
                     .addComponent(inputNome)
-                    .addComponent(inputRecomendado, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                    .addComponent(inputRecomendado)
                     .addComponent(labelRecomendado)
                     .addComponent(inputCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(150, Short.MAX_VALUE))

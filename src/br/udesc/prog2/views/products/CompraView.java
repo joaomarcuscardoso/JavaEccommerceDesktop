@@ -25,17 +25,22 @@ public class CompraView extends javax.swing.JFrame {
     public CompraView() {
         initComponents();
         popularCategoriaComboBox();
-        ArrayList<Produto> listaProdutos = popularComboBox();
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        
+        ArrayList<Produto> listaProdutos = popularComboBoxProdutos(produtoDAO.getProdutos());
         
         if(comboCategoria.getSelectedItem() != null) {
         
             comboCategoria.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("entrou no action");
+                    comboProduto.removeAllItems();
+                    InputPreco.setText("");
                     ProdutoDAO produtoDAO = new ProdutoDAO();
 
                     ArrayList<Produto>  produtosPorCategoria = produtoDAO.selecionarProdutoPorCategoria(comboCategoria.getSelectedItem().toString());
+                    System.out.println("produtosPorCategoriaSIZE: "+ produtosPorCategoria.size());
                     selecionouCategoria(produtosPorCategoria);
+                    popularComboBoxProdutos(produtosPorCategoria);
                 }
 
             });
@@ -89,15 +94,13 @@ public class CompraView extends javax.swing.JFrame {
         }
     }
     
-    public ArrayList<Produto> popularComboBox() {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        ArrayList<Produto> produtos = produtoDAO.getProdutos();
+    public ArrayList<Produto> popularComboBoxProdutos(ArrayList<Produto> listaProdutos) {
 
-        for(Produto p : produtos) {
+        for(Produto p : listaProdutos) {
             comboProduto.addItem(new ComboItem(p.getId(), p.toString()));
         }
         
-        return produtos;
+        return listaProdutos;
     }
 
 
@@ -132,6 +135,9 @@ public class CompraView extends javax.swing.JFrame {
         btnMenuRegistrar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(600, 600));
+        setMinimumSize(new java.awt.Dimension(590, 590));
+        setResizable(false);
 
         btnComprarProduto.setBackground(new java.awt.Color(191, 75, 75));
         btnComprarProduto.setText("Comprar Produto");
@@ -226,7 +232,7 @@ public class CompraView extends javax.swing.JFrame {
         jMenuBar1.add(btnMenuProduto);
 
         btnMenuMontarPc.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenuMontarPc.setText("Montar Pc");
+        btnMenuMontarPc.setText("Ver Pedidos");
         jMenuBar1.add(btnMenuMontarPc);
 
         btnContainerConta.setForeground(new java.awt.Color(255, 255, 255));
@@ -257,10 +263,16 @@ public class CompraView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(comboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputCep, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputRua, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(labelQuantidade)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -277,17 +289,12 @@ public class CompraView extends javax.swing.JFrame {
                                 .addComponent(labelRS, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(InputPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(inputComplemento)
-                            .addComponent(inputNumero)
-                            .addComponent(inputRua)
-                            .addComponent(inputCep)
-                            .addComponent(comboProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnComprarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(jLabel2)))
-                .addGap(0, 49, Short.MAX_VALUE))
+                            .addComponent(btnComprarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 71, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(331, 331, 331)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -209,6 +209,7 @@ public class ProdutoDAO {
     }
     
     public ArrayList<Produto> selecionarProdutoPorCategoria(String categoria) {
+        System.out.println("SELEICIONARPRODUTO: "+ categoria);
         ArrayList<Produto> produtos = new ArrayList<Produto>();
 
         criarTabela();

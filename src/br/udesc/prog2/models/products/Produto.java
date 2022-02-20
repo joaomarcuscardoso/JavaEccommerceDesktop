@@ -96,11 +96,14 @@ public class Produto {
     public String getRecomendacao() {
         return this.recomendacao;
     }
-
     @Override
     public String toString() {
-        return "\nProduto{"+"\n id="+id+ "\n nome=" + nome + "\n descricao=" + descricao + "\n categoria=" + categoria + "\n recomendacao=" + recomendacao + "\n quantidade=" + quantidade + "\n quantidadeIdeal=" + quantidadeIdeal + "\n preco=" + preco +"\n"+ '}';
+        return "\nProduto{ \n nome=" + nome  +  "\n quantidade=" + quantidade+ "\n preco=" + preco +"\n"+ '}';
     }
+//    @Override
+//    public String toString() {
+//        return "\nProduto{"+"\n id="+id+ "\n nome=" + nome + "\n descricao=" + descricao + "\n categoria=" + categoria + "\n recomendacao=" + recomendacao + "\n quantidade=" + quantidade + "\n quantidadeIdeal=" + quantidadeIdeal + "\n preco=" + preco +"\n"+ '}';
+//    }
        
        
        

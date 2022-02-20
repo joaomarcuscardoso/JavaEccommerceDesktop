@@ -198,7 +198,7 @@ public class ProdutoView extends javax.swing.JFrame {
         jMenuBar1.add(btnProdutos);
 
         btnMontarPc.setForeground(new java.awt.Color(255, 255, 255));
-        btnMontarPc.setText("Montar Pc");
+        btnMontarPc.setText("Ver Pedidos");
         btnMontarPc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMontarPcActionPerformed(evt);

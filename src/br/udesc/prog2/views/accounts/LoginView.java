@@ -150,7 +150,7 @@ public class LoginView extends javax.swing.JFrame {
         jMenuBar1.add(btnMenuProduto);
 
         btnMenuMontarPc.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenuMontarPc.setText("Montar Pc");
+        btnMenuMontarPc.setText("Ver Pedidos");
         btnMenuMontarPc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMenuMontarPcMouseClicked(evt);

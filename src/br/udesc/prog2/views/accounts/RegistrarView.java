@@ -174,7 +174,7 @@ public class RegistrarView extends javax.swing.JFrame {
         jMenuBar1.add(btnMenuProduto);
 
         btnMenuMontarPc.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenuMontarPc.setText("Montar Pc");
+        btnMenuMontarPc.setText("Ver Pedidos");
         jMenuBar1.add(btnMenuMontarPc);
 
         btnContainerConta.setForeground(new java.awt.Color(255, 255, 255));
