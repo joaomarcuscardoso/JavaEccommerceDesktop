@@ -117,7 +117,6 @@ public class ContaDAO {
             
             ResultSet resultado = pstmt.executeQuery();
             if(resultado.next()) {
-                System.out.println("resultado: "+ resultado);
 
                 return true;
             }
@@ -129,7 +128,7 @@ public class ContaDAO {
         return false;
     }
     
-    public boolean verificarLoginDaConta(String email, String senha) {
+    public Conta verificarLoginDaConta(String email, String senha) {
         criarTabela();
 
         Connection conexao = ConexaoDB.getConnection();
@@ -144,19 +143,45 @@ public class ContaDAO {
             
             ResultSet resultado = pstmt.executeQuery();
             if(resultado.next()) {
+
+                int id = resultado.getInt("id");
+                updateLogado(id);
                 
-                pstmt = conexao.prepareStatement("Update contas SET logado = ? WHERE email = ?, senha = ?");
-                pstmt.setBoolean(1, true);
-                pstmt.setString(2, email);
-                pstmt.setString(3, senha); 
+                String nome = resultado.getString("nome");
+                String sobrenome = resultado.getString("sobrenome");
+                boolean admin = resultado.getBoolean("admin");
                 
-                return true;
+                Conta conta = new Conta(nome, sobrenome, email, senha);
+                
+                conta.setId(id);
+                conta.setAdmin(admin);
+                
+                return conta;
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
 
         ConexaoDB.desconectarDB();
-        return false;  
+        return null;  
+    }
+    
+    
+    public void updateLogado(int id) {
+        criarTabela();
+
+        Connection conexao = ConexaoDB.getConnection();     
+        
+        String sql = "Update contas SET logado = ? WHERE id = ?";
+        try {
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            pstmt.setBoolean(1, true);
+            pstmt.setInt(2, id);
+
+            pstmt.executeUpdate();
+ 
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

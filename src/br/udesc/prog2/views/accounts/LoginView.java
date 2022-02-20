@@ -5,12 +5,21 @@
  */
 package br.udesc.prog2.views.accounts;
 
+import br.udesc.prog2.controllers.contas.LoginController;
+import br.udesc.prog2.controllers.contas.RegistrarController;
+import br.udesc.prog2.controllers.products.CompraController;
+import br.udesc.prog2.controllers.products.ListarProdutosController;
 import br.udesc.prog2.dao.Conta.ContaDAO;
+import br.udesc.prog2.dao.Produto.ProdutoDAO;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import br.udesc.prog2.models.Conta;
 import br.udesc.prog2.exceptions.ExceptionDadosIncompletos;
 import br.udesc.prog2.exceptions.ExceptionUsuarioInvalido;
+import br.udesc.prog2.models.products.Produto;
+import br.udesc.prog2.models.products.table.ProdutoTableModel;
+import br.udesc.prog2.utils.PegarTodosProdutoParaTableModels;
+import br.udesc.prog2.views.products.CompraView;
 import br.udesc.prog2.views.products.ProdutoView;
 
 /**
@@ -18,7 +27,13 @@ import br.udesc.prog2.views.products.ProdutoView;
  * @author rfcjo
  */
 public class LoginView extends javax.swing.JFrame {
+    private Conta contaSalva;
   
+    
+    public Conta getConta() {
+        return contaSalva;
+    }
+    
     public LoginView() {
         initComponents();
     }
@@ -196,12 +211,23 @@ public class LoginView extends javax.swing.JFrame {
                     
                     String senhaCriptografada = contaDAO.criptografarSenha(inputSenha.getText());
                     System.out.println("senhaCripto: "+senhaCriptografada );
-                    if(contaDAO.verificarLoginDaConta(inputEmail.getText(), senhaCriptografada) == true) {
+                    Conta conta = contaDAO.verificarLoginDaConta(inputEmail.getText(), senhaCriptografada);
+                    if( conta != null) {
                         
-                       JOptionPane.showMessageDialog(this, "Usuário logado com sucesso.");
+                        contaSalva = conta;
+                        JOptionPane.showMessageDialog(this, "Usuário logado com sucesso.");
+                        
+                        if(conta.isAdmin() == true ) {
+                            ProdutoDAO produtoDAO = new ProdutoDAO();
+                            
+                            new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
+                            this.dispose();
+                            
+                        } else {
+                            new CompraController(new CompraView());
+                            this.dispose();
+                        }
                        
-                       this.dispose();
-                       new ProdutoView().setVisible(true);
                     } else {
                         throw new ExceptionUsuarioInvalido(this, "E-mail ou senha invalidos");
                     } 
@@ -217,20 +243,20 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin1ActionPerformed
-        new LoginView().setVisible(true);
-        this.dispose();
+        new LoginController(new LoginView());
     }//GEN-LAST:event_btnLogin1ActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        new RegistrarView().setVisible(true);
-        this.dispose();
+        new RegistrarController(new RegistrarView());
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
         // TODO add your handling code here:
-        new ProdutoView().setVisible(true);
-        this.dispose();
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        
+        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
+    
     }//GEN-LAST:event_btnMenuProdutoMouseClicked
 
     private void btnMenuMontarPcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMontarPcMouseClicked

@@ -8,7 +8,7 @@ public class LoginController {
     
     public LoginController(LoginView loginView) {
         this.loginView = loginView;
-                                
+        exibir();
     }
     
     public void exibir(){

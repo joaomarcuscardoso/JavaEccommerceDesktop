@@ -21,4 +21,9 @@ public class CategoriaOpcao {
         "Mouse Pad", "Fone de Ouvido", 
         "Headset", "Microfone"
     };
+    
+    
+    public String[] getCategoriaOpcao() {
+        return categoriasOpcao;
+    }
 }

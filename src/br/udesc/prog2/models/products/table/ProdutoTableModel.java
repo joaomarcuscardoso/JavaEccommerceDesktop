@@ -34,7 +34,7 @@ public class ProdutoTableModel extends AbstractTableModel {
         this.produtos = produtos;
     }
     
-        @Override
+    @Override
     public int getRowCount() {
         return produtos.size();
     }
@@ -76,7 +76,7 @@ public class ProdutoTableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         
-        if(columnIndex == Col_Id)
+        if(columnIndex == Col_Id || columnIndex == Col_Categoria)
             return false;
         return true;
     }

@@ -5,6 +5,8 @@
  */
 package br.udesc.prog2.views.accounts;
 
+import br.udesc.prog2.controllers.contas.LoginController;
+import br.udesc.prog2.controllers.products.ListarProdutosController;
 import br.udesc.prog2.dao.Conta.ContaDAO;
 import br.udesc.prog2.exceptions.ExceptionDadosIncompletos;
 import br.udesc.prog2.exceptions.ExceptionEmailExiste;
@@ -13,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import br.udesc.prog2.models.Conta;
+import br.udesc.prog2.models.products.table.ProdutoTableModel;
+import br.udesc.prog2.utils.PegarTodosProdutoParaTableModels;
 import br.udesc.prog2.views.products.ProdutoView;
 
 public class RegistrarView extends javax.swing.JFrame {
@@ -23,6 +27,11 @@ public class RegistrarView extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+    public void mostrarTela(){
+        setVisible(true);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -243,9 +252,8 @@ public class RegistrarView extends javax.swing.JFrame {
 
                         contaDAO.criarConta(conta);
                         JOptionPane.showMessageDialog(this, "Usuário Cadastrado com sucesso");
-                        this.dispose();
-                        LoginView loginView = new LoginView();
-                        loginView.setVisible(true);
+                        
+                        new LoginController(new LoginView());
                        
                     } catch(ExceptionEmailExiste error) {
                         error.printStackTrace();
@@ -267,15 +275,14 @@ public class RegistrarView extends javax.swing.JFrame {
 
     private void btnMenuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuProdutoActionPerformed
         // TODO add your handling code here:
-        new ProdutoView().setVisible(true);
+        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
         this.dispose();
     }//GEN-LAST:event_btnMenuProdutoActionPerformed
 
     private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
         // TODO add your handling code here:
-        new ProdutoView().setVisible(true);
+        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
         this.dispose();
-
     }//GEN-LAST:event_btnMenuProdutoMouseClicked
 
     private void inputSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSenhaActionPerformed

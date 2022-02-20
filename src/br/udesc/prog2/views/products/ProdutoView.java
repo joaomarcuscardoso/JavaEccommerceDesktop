@@ -5,10 +5,12 @@
  */
 package br.udesc.prog2.views.products;
 
+import br.udesc.prog2.controllers.contas.LoginController;
+import br.udesc.prog2.controllers.contas.RegistrarController;
+import br.udesc.prog2.controllers.products.CriarProdutoController;
 import br.udesc.prog2.controllers.products.ListarProdutosController;
 import br.udesc.prog2.views.accounts.LoginView;
 import br.udesc.prog2.views.accounts.RegistrarView;
-import br.udesc.prog2.views.products.EditarProdutoView;
 import br.udesc.prog2.views.products.CriarProdutoView;
 import br.udesc.prog2.views.products.RemoverProdutoView;
 import br.udesc.prog2.dao.Produto.ProdutoDAO;
@@ -24,9 +26,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
-import br.udesc.prog2.models.workers.Cliente;
 import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.models.products.table.ProdutoTableModel;
+import br.udesc.prog2.utils.PegarTodosProdutoParaTableModels;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,10 +53,11 @@ public class ProdutoView extends javax.swing.JFrame {
     public ProdutoView() {
         initComponents();
     }
-
-    public void salvarBuscarInput(String texto) {
-        
+    
+    public void mostrarTela(){
+        setVisible(true);
     }
+
     
     public void setTableModel(TableModel tableModel){
         tbPrincipal.setModel(tableModel);
@@ -132,15 +135,22 @@ public class ProdutoView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Categoria", "Quantidade", "Preço", "Excluir"
+                "id", "Nome", "Categoria", "Quantidade", "Preço", "Excluir"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tbPrincipal.setMaximumSize(new java.awt.Dimension(500, 500));
@@ -272,20 +282,20 @@ public class ProdutoView extends javax.swing.JFrame {
         ArrayList<Produto> produtos = produtoDAO.getProdutosByName(buscaNome);
 
         ListarProdutosController controlador = new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(produtos));
-        setVisible(false);
 
         controlador.exibir();
     }//GEN-LAST:event_btnPesquisaActionPerformed
 
     private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
         // TODO add your handling code here:
-        new CriarProdutoView().setVisible(true);
+        new CriarProdutoController(new CriarProdutoView());
         this.dispose();
     }//GEN-LAST:event_btnAddProdutoActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        new LoginView().setVisible(true);
+        new LoginController(new LoginView());
         this.dispose();
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMontarPcActionPerformed
@@ -293,8 +303,9 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMontarPcActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        new RegistrarView().setVisible(true);
+        new RegistrarController(new RegistrarView());
         this.dispose();
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
@@ -311,9 +322,7 @@ public class ProdutoView extends javax.swing.JFrame {
         return tbPrincipal.getModel().getValueAt(tbPrincipal.getSelectedRow(), 0).toString();
     }
     
-    public void mostrarTela(){
-        setVisible(true);
-    }
+
     
     public void btnProdutosDelete(java.awt.event.ActionListener acao) {
         btnExcluir.addActionListener(acao);
@@ -321,7 +330,7 @@ public class ProdutoView extends javax.swing.JFrame {
     
     private void btnProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProdutosMouseClicked
         // TODO add your handling code here:
-        new ProdutoView().setVisible(true);
+        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
         this.dispose();
     }//GEN-LAST:event_btnProdutosMouseClicked
 

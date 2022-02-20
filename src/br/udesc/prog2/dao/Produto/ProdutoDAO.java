@@ -44,7 +44,7 @@ public class ProdutoDAO {
     public boolean setProduto(Produto produto) {
         criarTabela();
         Connection conexao = ConexaoDB.getConnection();
-        System.out.println("entrou");
+
         String sql = "INSERT INTO produtos (nome, descricao, categoria, quantidade, preco, quantidade_ideal, recomendacao) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt;
         try {
@@ -207,5 +207,40 @@ public class ProdutoDAO {
             return false;
         } 
     }
+    
+    public ArrayList<Produto> selecionarProdutoPorCategoria(String categoria) {
+        ArrayList<Produto> produtos = new ArrayList<Produto>();
+
+        criarTabela();
+        Connection conexao = ConexaoDB.getConnection();
+        String sql = "SELECT * FROM produtos WHERE categoria = ?";
+        try {
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            pstmt.setString(1, categoria); 
+            
+            ResultSet resultado = pstmt.executeQuery();
+
+            while(resultado.next()) {
+                int id = resultado.getInt("id");
+                String nome = resultado.getString("nome");
+                String descricao = resultado.getString("descricao");
+                int quantidade = resultado.getInt("quantidade");
+                double preco = resultado.getDouble("preco");
+                int quantidadeIdeal = resultado.getInt("quantidade_ideal");
+
+                Produto p = new Produto(nome, descricao, categoria, quantidade, preco, quantidadeIdeal);
+                p.setRecomendacao(resultado.getString("recomendacao"));
+                p.setId(id);
+                produtos.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+
+        ConexaoDB.desconectarDB();
+        return produtos;  
+    }
+    
     
 }

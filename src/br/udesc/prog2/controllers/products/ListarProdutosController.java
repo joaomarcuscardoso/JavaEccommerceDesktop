@@ -27,12 +27,13 @@ public class ListarProdutosController {
     public ListarProdutosController(ProdutoView produtoView, ProdutoTableModel produtoTableModel) {
         this.produtoView = produtoView;
         this.produtoTableModel = produtoTableModel;
+        
         setTableModel();
         adicionarAcaoBotaoExcluir();
         adicionarEventos(); 
         
+        exibir();
                                 
-        System.out.println(produtoDao);
     }
     
     private void setTableModel(){

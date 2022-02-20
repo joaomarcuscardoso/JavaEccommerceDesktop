@@ -19,6 +19,7 @@ public class Conta extends Pessoa {
     private String estado;
     private String cidade;
     private int numero;
+    private boolean admin;
     
     public Conta(String nome, String sobrenome, String email, String senha) {
         super(nome, sobrenome, email, senha);
@@ -36,7 +37,16 @@ public class Conta extends Pessoa {
         this.numero = numero;
 
     }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
  
+    
     
     public int getId() {
         return id;

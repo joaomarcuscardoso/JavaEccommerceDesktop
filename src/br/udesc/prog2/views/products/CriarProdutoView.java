@@ -5,6 +5,7 @@
  */
 package br.udesc.prog2.views.products;
 
+import br.udesc.prog2.controllers.contas.LoginController;
 import br.udesc.prog2.controllers.products.ListarProdutosController;
 import br.udesc.prog2.dao.Produto.ProdutoDAO;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import br.udesc.prog2.exceptions.ExceptionPrecoMenorZero;
 import br.udesc.prog2.models.products.table.ProdutoTableModel;
 import static br.udesc.prog2.utils.CategoriaOpcao.categoriasOpcao;
 import br.udesc.prog2.utils.ComboItem;
+import br.udesc.prog2.utils.PegarTodosProdutoParaTableModels;
 import br.udesc.prog2.views.accounts.LoginView;
 
 /**
@@ -30,6 +32,10 @@ public class CriarProdutoView extends javax.swing.JFrame {
         initComponents();
         
         popularCategoriaComboBox();
+    }
+    
+    public void mostrarTela(){
+        setVisible(true);
     }
     
     public void popularCategoriaComboBox() {
@@ -286,7 +292,7 @@ public class CriarProdutoView extends javax.swing.JFrame {
 
     private void btnMenuLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuLoginActionPerformed
         // TODO add your handling code here:
-        new LoginView().setVisible(true);
+        new LoginController(new LoginView());
         this.dispose();
     }//GEN-LAST:event_btnMenuLoginActionPerformed
 
@@ -305,8 +311,10 @@ public class CriarProdutoView extends javax.swing.JFrame {
 
     private void btnMenuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProdutoMouseClicked
         // TODO add your handling code here:
-        new ProdutoView().setVisible(true);
+                
+        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
         this.dispose();
+
     }//GEN-LAST:event_btnMenuProdutoMouseClicked
 
     private void adicionarProduto(String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal, String recomendacao) {
@@ -316,13 +324,12 @@ public class CriarProdutoView extends javax.swing.JFrame {
         produtoDAO.setProduto(prod);
         
         ArrayList<Produto> produtos = produtoDAO.getProdutos();
+        JOptionPane.showMessageDialog(this, "Adicionou produto.");
+        
         ListarProdutosController controlador = new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(produtos));
         
-        JOptionPane.showMessageDialog(this, "Adicionou produto.");
- 
-        controlador.exibir();
+        this.dispose();
         
-        setVisible(false);
     }
 
     
