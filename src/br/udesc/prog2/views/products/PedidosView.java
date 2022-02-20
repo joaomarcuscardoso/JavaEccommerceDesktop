@@ -9,6 +9,7 @@ import br.udesc.prog2.controllers.contas.LoginController;
 import br.udesc.prog2.controllers.contas.RegistrarController;
 import br.udesc.prog2.controllers.products.CriarProdutoController;
 import br.udesc.prog2.controllers.products.ListarProdutosController;
+import br.udesc.prog2.controllers.products.pedidos.EditarPedidosController;
 import br.udesc.prog2.views.accounts.LoginView;
 import br.udesc.prog2.views.accounts.RegistrarView;
 import br.udesc.prog2.views.products.CriarProdutoView;
@@ -42,7 +43,7 @@ import javax.swing.table.TableModel;
  *
  * @author rfcjo
  */
-public class ProdutoView extends javax.swing.JFrame {
+public class PedidosView extends javax.swing.JFrame {
     private ArrayList<Produto> listaProdutos;
     private DefaultTableModel model;
     private static String salvaBusca;
@@ -50,7 +51,7 @@ public class ProdutoView extends javax.swing.JFrame {
     /**
      * Creates new form HomeView
      */
-    public ProdutoView() {
+    public PedidosView() {
         initComponents();
     }
     
@@ -60,7 +61,7 @@ public class ProdutoView extends javax.swing.JFrame {
 
     
     public void setTableModel(TableModel tableModel){
-        tbPrincipal.setModel(tableModel);
+        tbPedidosView.setModel(tableModel);
     }
      
     /**
@@ -78,8 +79,9 @@ public class ProdutoView extends javax.swing.JFrame {
         btnPesquisa = new javax.swing.JButton();
         btnAddProduto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbPrincipal = new javax.swing.JTable();
+        tbPedidosView = new javax.swing.JTable();
         btnExcluir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         btnProdutos = new javax.swing.JMenu();
         btnMontarPc = new javax.swing.JMenu();
@@ -129,19 +131,19 @@ public class ProdutoView extends javax.swing.JFrame {
         jScrollPane1.setMaximumSize(new java.awt.Dimension(500, 500));
         jScrollPane1.setMinimumSize(null);
 
-        tbPrincipal.setModel(new javax.swing.table.DefaultTableModel(
+        tbPedidosView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "id", "Nome", "Categoria", "Quantidade", "Preço", "Excluir"
+                "id", "nome", "Quantidade", "Preço", "Status", "Excluir"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, true, true, true
+                false, false, false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -152,8 +154,8 @@ public class ProdutoView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbPrincipal.setMaximumSize(new java.awt.Dimension(500, 500));
-        jScrollPane1.setViewportView(tbPrincipal);
+        tbPedidosView.setMaximumSize(new java.awt.Dimension(500, 500));
+        jScrollPane1.setViewportView(tbPedidosView);
 
         btnExcluir.setBackground(new java.awt.Color(191, 75, 75));
         btnExcluir.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
@@ -164,6 +166,18 @@ public class ProdutoView extends javax.swing.JFrame {
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setBackground(new java.awt.Color(191, 75, 75));
+        btnEditar.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setText("Editar Produto");
+        btnEditar.setBorderPainted(false);
+        btnEditar.setMaximumSize(new java.awt.Dimension(500, 500));
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
             }
         });
 
@@ -222,18 +236,19 @@ public class ProdutoView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buscaContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(129, 129, 129)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)))
-                .addGap(25, 25, 25))
+                        .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,9 +256,11 @@ public class ProdutoView extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buscaContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61))
@@ -264,9 +281,9 @@ public class ProdutoView extends javax.swing.JFrame {
         String buscaNome = buscaContainer.getText();
         ArrayList<Produto> produtos = produtoDAO.getProdutosByName(buscaNome);
 
-        ListarProdutosController controlador = new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(produtos));
+//        ListarProdutosController controlador = new ListarProdutosController(new PedidosView(), new ProdutoTableModel(produtos));
 
-        controlador.exibir();
+//        controlador.exibir();
     }//GEN-LAST:event_btnPesquisaActionPerformed
 
     private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
@@ -297,12 +314,12 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     public String getIdLinhaSelecionada(){
-        if(tbPrincipal.getSelectedRow() == -1){
+        if(tbPedidosView.getSelectedRow() == -1){
             System.out.println("Nenhuma Linha selecionada");
             return null;
         }
         
-        return tbPrincipal.getModel().getValueAt(tbPrincipal.getSelectedRow(), 0).toString();
+        return tbPedidosView.getModel().getValueAt(tbPedidosView.getSelectedRow(), 0).toString();
     }
     
 
@@ -313,7 +330,7 @@ public class ProdutoView extends javax.swing.JFrame {
     
     private void btnProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProdutosMouseClicked
         // TODO add your handling code here:
-        new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
+//        new ListarProdutosController(new PedidosView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
         this.dispose();
     }//GEN-LAST:event_btnProdutosMouseClicked
 
@@ -324,6 +341,11 @@ public class ProdutoView extends javax.swing.JFrame {
 //        this.dispose();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        new EditarPedidosController(new EditarPedidosView());
+        this.dispose();
+    }//GEN-LAST:event_btnEditarActionPerformed
+
     public void exibirMensagem(String msg){
         JOptionPane.showMessageDialog(null, msg);
     }
@@ -331,7 +353,7 @@ public class ProdutoView extends javax.swing.JFrame {
 
     
     public void addEventAlterTable(TableModelListener l){
-        tbPrincipal.getModel().addTableModelListener(l);
+        tbPedidosView.getModel().addTableModelListener(l);
     }
     
     
@@ -353,14 +375,18 @@ public class ProdutoView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PedidosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PedidosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PedidosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PedidosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //tablePrincipal.add(new Object[]{)
+        //tablePrincipal.add(new Object[]{)
+        //tablePrincipal.add(new Object[]{)
+        //tablePrincipal.add(new Object[]{)
         //tablePrincipal.add(new Object[]{)
         //tablePrincipal.add(new Object[]{)
         //tablePrincipal.add(new Object[]{)
@@ -371,7 +397,7 @@ public class ProdutoView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProdutoView().setVisible(true);
+                new PedidosView().setVisible(true);
             }
         });
 
@@ -381,6 +407,7 @@ public class ProdutoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduto;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JMenuItem btnLogin;
     private javax.swing.JMenu btnMontarPc;
@@ -392,7 +419,7 @@ public class ProdutoView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbPrincipal;
+    private javax.swing.JTable tbPedidosView;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -67,14 +67,14 @@ public class ListarProdutosController {
             int id = Integer.valueOf(idString);
             
             if(this.produtoDao.deletarProdutoPorId(id)){
-                produtoView.exibirMensagem("Paciente excluido com sucesso");
+                produtoView.exibirMensagem("Produto excluido com sucesso");
                 atualizarDados();
             } else {
-                produtoView.exibirMensagem("Não foi possível excluir o paciente");
+                produtoView.exibirMensagem("Não foi possível excluir o produto");
             }
             
         } else {
-            produtoView.exibirMensagem("Não foi possível excluir o paciente");
+            produtoView.exibirMensagem("Não foi possível excluir o produto");
         }
     }
     

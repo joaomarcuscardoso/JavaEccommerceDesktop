@@ -6,9 +6,14 @@
 package br.udesc.prog2.views.products;
 
 import br.udesc.prog2.controllers.contas.RegistrarController;
+import br.udesc.prog2.controllers.products.pedidos.ControladorListarPedidos;
+import br.udesc.prog2.dao.Produto.PedidosDAO;
 import br.udesc.prog2.dao.Produto.ProdutoDAO;
 import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.exceptions.ExceptionDadosIncompletos;
+import br.udesc.prog2.models.clients.Pedidos;
+import br.udesc.prog2.models.products.EStatus;
+import br.udesc.prog2.models.products.pedidos.table.PedidoTableModel;
 import br.udesc.prog2.utils.CategoriaOpcao;
 import static br.udesc.prog2.utils.CategoriaOpcao.categoriasOpcao;
 import br.udesc.prog2.utils.ComboItem;
@@ -25,9 +30,9 @@ public class CompraView extends javax.swing.JFrame {
     public CompraView() {
         initComponents();
         popularCategoriaComboBox();
-        ProdutoDAO produtoDAO = new ProdutoDAO();
+        //ProdutoDAO produtoDAO = new ProdutoDAO();
         
-        ArrayList<Produto> listaProdutos = popularComboBoxProdutos(produtoDAO.getProdutos());
+        //ArrayList<Produto> listaProdutos = popularComboBoxProdutos(produtoDAO.getProdutos());
         
         if(comboCategoria.getSelectedItem() != null) {
         
@@ -38,7 +43,7 @@ public class CompraView extends javax.swing.JFrame {
                     ProdutoDAO produtoDAO = new ProdutoDAO();
 
                     ArrayList<Produto>  produtosPorCategoria = produtoDAO.selecionarProdutoPorCategoria(comboCategoria.getSelectedItem().toString());
-                    System.out.println("produtosPorCategoriaSIZE: "+ produtosPorCategoria.size());
+                    
                     selecionouCategoria(produtosPorCategoria);
                     popularComboBoxProdutos(produtosPorCategoria);
                 }
@@ -68,8 +73,8 @@ public class CompraView extends javax.swing.JFrame {
     
     public void popularCategoriaComboBox() {
         CategoriaOpcao categoriaClass = new CategoriaOpcao();
-        System.out.println("entrou");
-        
+        comboCategoria.addItem(new ComboItem(0, ""));
+
         String[] categoriasOPS = categoriaClass.getCategoriaOpcao();
         for(int i=0;i < categoriasOPS.length;i++) {
             comboCategoria.addItem(new ComboItem(i, categoriasOPS[i]));
@@ -129,10 +134,10 @@ public class CompraView extends javax.swing.JFrame {
         inputNumero = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         btnMenuProduto = new javax.swing.JMenu();
-        btnMenuMontarPc = new javax.swing.JMenu();
         btnContainerConta = new javax.swing.JMenu();
         btnMenuLogin = new javax.swing.JMenuItem();
         btnMenuRegistrar = new javax.swing.JMenuItem();
+        btnMenuProduto1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(600, 600));
@@ -231,10 +236,6 @@ public class CompraView extends javax.swing.JFrame {
         });
         jMenuBar1.add(btnMenuProduto);
 
-        btnMenuMontarPc.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenuMontarPc.setText("Ver Pedidos");
-        jMenuBar1.add(btnMenuMontarPc);
-
         btnContainerConta.setForeground(new java.awt.Color(255, 255, 255));
         btnContainerConta.setText("Conta");
 
@@ -256,6 +257,20 @@ public class CompraView extends javax.swing.JFrame {
 
         jMenuBar1.add(btnContainerConta);
 
+        btnMenuProduto1.setForeground(new java.awt.Color(255, 255, 255));
+        btnMenuProduto1.setText("Ver Pedidos");
+        btnMenuProduto1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuProduto1MouseClicked(evt);
+            }
+        });
+        btnMenuProduto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuProduto1ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(btnMenuProduto1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -263,6 +278,7 @@ public class CompraView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(comboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,26 +286,24 @@ public class CompraView extends javax.swing.JFrame {
                     .addComponent(inputRua, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inputNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inputComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelQuantidade)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inputQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(labelCategoria1)
-                            .addComponent(labelCategoria)
-                            .addComponent(labelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelNome2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelNome3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelPreco)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labelRS, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(InputPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnComprarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(labelQuantidade)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(inputQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(labelCategoria1)
+                        .addComponent(labelCategoria)
+                        .addComponent(labelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelNome2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelNome3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(labelPreco)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(labelRS, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(InputPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnComprarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 71, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(331, 331, 331)
@@ -376,22 +390,56 @@ public class CompraView extends javax.swing.JFrame {
                 ProdutoDAO produtoDAO = new ProdutoDAO();
                 Object selected = this.comboProduto.getSelectedItem();
                 int id = ((ComboItem)selected).getKey();
-                // Remove produto do estoque, e adicionar a lista de compra do usuário
-                
-//                boolean editado = produtoDAO.editarProduto
-//                (
-//                        id,
-//                        inputNome.getText(), 
-//                        inputDescricao.getText(), 
-//                        inputCategoria.getSelectedItem().toString(), 
-//                        (Integer) inputQuantidade.getValue(), 
-//                        Double.parseDouble(InputPreco.getText()), 
-//                        (Integer) inputQuantidadeIdeal.getValue(),
-//                        inputRecomendado.getText()
-//                );
 
+                if(inputNumero.getText().matches("[+-]?\\d*(\\.\\d+)?")) {
+                    
+                    int quantidadeProdutoSql = produtoDAO.verificarQuantidadeProduto(id);
+                    
+                    if(Integer.parseInt(inputQuantidade.getValue().toString()) <= quantidadeProdutoSql) {
+                        int quantidadeFormatada = Integer.parseInt(inputQuantidade.getValue().toString());
+                        boolean vendido = produtoDAO.venderProduto(
+                                id, 
+                                quantidadeFormatada,
+                                quantidadeProdutoSql
+                        );
+                        if(vendido == true) {
+                            
+                            PedidosDAO pedidosDAO = new PedidosDAO();
+                            String estatus = String.valueOf(EStatus.em_andamento);
+                            String nomeProduto = produtoDAO.getNomeById(id);
+                            
+                            
+                            Pedidos pedido = new Pedidos(id, 
+                                    inputComplemento.getText(), 
+                                    inputCep.getText(), 
+                                    Integer.valueOf(inputNumero.getText()), 
+                                    inputRua.getText(),
+                                    estatus, 
+                                    quantidadeFormatada, 
+                                    Double.parseDouble(InputPreco.getText()),
+                                    nomeProduto
+                            );
+                            
+                            if(pedidosDAO.inserir(pedido) == true) {
+                                JOptionPane.showMessageDialog(this, "Pedido inserido com sucesso!");
+                                
+                                new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos()));
+                                
+                                this.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Algo deu errado, verifique os campos!");
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Quantidade invalida!");
+                    }
+                 
+                } else {
+                        JOptionPane.showMessageDialog(this, "Caracteres invalido no campo número!");
 
-                this.dispose();
+                }
+
+                //this.dispose();
             } else {
                 throw new ExceptionDadosIncompletos(this, "Preencha todos os dados por favor!");
             }
@@ -427,6 +475,18 @@ public class CompraView extends javax.swing.JFrame {
     private void comboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboCategoriaActionPerformed
+
+    private void btnMenuProduto1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuProduto1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMenuProduto1MouseClicked
+
+    private void btnMenuProduto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuProduto1ActionPerformed
+        // TODO add your handling code here:
+        PedidosDAO pedidosDAO = new PedidosDAO();
+        
+        new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos()));
+        this.dispose();
+    }//GEN-LAST:event_btnMenuProduto1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -471,8 +531,8 @@ public class CompraView extends javax.swing.JFrame {
     private javax.swing.JButton btnComprarProduto;
     private javax.swing.JMenu btnContainerConta;
     private javax.swing.JMenuItem btnMenuLogin;
-    private javax.swing.JMenu btnMenuMontarPc;
     private javax.swing.JMenu btnMenuProduto;
+    private javax.swing.JMenu btnMenuProduto1;
     private javax.swing.JMenuItem btnMenuRegistrar;
     private javax.swing.JComboBox<Object> comboCategoria;
     private javax.swing.JComboBox comboProduto;

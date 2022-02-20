@@ -9,17 +9,19 @@ import br.udesc.prog2.controllers.contas.LoginController;
 import br.udesc.prog2.controllers.contas.RegistrarController;
 import br.udesc.prog2.controllers.products.CompraController;
 import br.udesc.prog2.controllers.products.ListarProdutosController;
+import br.udesc.prog2.controllers.products.pedidos.ControladorListarPedidos;
 import br.udesc.prog2.dao.Conta.ContaDAO;
+import br.udesc.prog2.dao.Produto.PedidosDAO;
 import br.udesc.prog2.dao.Produto.ProdutoDAO;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import br.udesc.prog2.models.Conta;
 import br.udesc.prog2.exceptions.ExceptionDadosIncompletos;
 import br.udesc.prog2.exceptions.ExceptionUsuarioInvalido;
-import br.udesc.prog2.models.products.Produto;
+import br.udesc.prog2.models.products.pedidos.table.PedidoTableModel;
 import br.udesc.prog2.models.products.table.ProdutoTableModel;
 import br.udesc.prog2.utils.PegarTodosProdutoParaTableModels;
 import br.udesc.prog2.views.products.CompraView;
+import br.udesc.prog2.views.products.PedidosView;
 import br.udesc.prog2.views.products.ProdutoView;
 
 /**
@@ -224,7 +226,12 @@ public class LoginView extends javax.swing.JFrame {
                             this.dispose();
                             
                         } else {
-                            new CompraController(new CompraView());
+                            
+                            PedidosDAO pedidosDAO = new PedidosDAO();
+        
+                            new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos()));
+                            
+//                          new CompraController(new CompraView());
                             this.dispose();
                         }
                        

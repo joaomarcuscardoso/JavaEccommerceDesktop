@@ -113,6 +113,30 @@ public class ProdutoDAO {
         return produtos;      
     }
     
+    
+    public String getNomeById(int id) {
+        criarTabela();
+        Connection conexao = ConexaoDB.getConnection();
+        
+        String sql = "SELECT * FROM produtos WHERE id = ?";
+        try {
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            pstmt.setInt(1, id); 
+            ResultSet resultado = pstmt.executeQuery();
+
+            while(resultado.next()) {
+
+                return resultado.getString("nome");
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        ConexaoDB.desconectarDB();
+        return null;       
+    }
+    
     public ArrayList<Produto> getProdutos() {
         ArrayList<Produto> produtos = new ArrayList<Produto>();
 
@@ -147,6 +171,29 @@ public class ProdutoDAO {
         ConexaoDB.desconectarDB();
         return produtos;
 
+    }
+    
+    public int verificarQuantidadeProduto(int id) {
+        criarTabela();
+        Connection conexao = ConexaoDB.getConnection();
+        String sql = "SELECT quantidade FROM produtos WHERE id = ?";
+        try {
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            pstmt.setInt(1, id); 
+            
+            ResultSet resultado = pstmt.executeQuery();
+
+            while(resultado.next()) {
+                int quantidade = resultado.getInt("quantidade");
+
+                return quantidade;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        ConexaoDB.desconectarDB();
+        return 0;       
     }
 
     
@@ -209,19 +256,21 @@ public class ProdutoDAO {
     }
     
     public ArrayList<Produto> selecionarProdutoPorCategoria(String categoria) {
-        System.out.println("SELEICIONARPRODUTO: "+ categoria);
         ArrayList<Produto> produtos = new ArrayList<Produto>();
 
         criarTabela();
         Connection conexao = ConexaoDB.getConnection();
-        String sql = "SELECT * FROM produtos WHERE categoria = ?";
+        String sql = "SELECT * FROM produtos WHERE categoria = ? and quantidade > ? ORDER BY quantidade DESC";
         try {
             PreparedStatement pstmt = conexao.prepareStatement(sql);
             pstmt.setString(1, categoria); 
+            pstmt.setInt(2, 0); 
             
             ResultSet resultado = pstmt.executeQuery();
 
             while(resultado.next()) {
+                System.out.println("resultado.getInt(\"quantidade\"):" + resultado.getInt("quantidade"));
+                    
                 int id = resultado.getInt("id");
                 String nome = resultado.getString("nome");
                 String descricao = resultado.getString("descricao");
@@ -233,6 +282,7 @@ public class ProdutoDAO {
                 p.setRecomendacao(resultado.getString("recomendacao"));
                 p.setId(id);
                 produtos.add(p);
+                
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -241,6 +291,34 @@ public class ProdutoDAO {
 
         ConexaoDB.desconectarDB();
         return produtos;  
+    }
+    
+    
+    public boolean venderProduto(int id, int quantidade, int quantidadeProdutoSql) {
+        criarTabela();
+        Connection conexao = ConexaoDB.getConnection();
+        String sql = "UPDATE produtos SET "
+                + " quantidade = ?"
+                + " WHERE id = ?";
+        PreparedStatement pstmt;
+        
+        quantidade = quantidadeProdutoSql -  quantidade;
+        
+        try {
+            pstmt = conexao.prepareStatement(sql);
+            pstmt.setInt(1, quantidade);
+            pstmt.setInt(2, id);
+            pstmt.execute();
+
+            
+            ConexaoDB.desconectarDB(); 
+            return true;
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            ConexaoDB.desconectarDB();
+            return false;
+        }       
     }
     
     
