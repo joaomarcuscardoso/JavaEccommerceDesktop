@@ -248,7 +248,7 @@ public class EditarPedidosView extends javax.swing.JFrame {
 
                 int id = ((ComboItem)selected).getKey();
 
-                pedidosDAO.editarPedidos(id, comboEstatus.getSelectedItem().toString(), contaDAO.isLogado());
+                pedidosDAO.editarPedidos(id, comboEstatus.getSelectedItem().toString());
 
                 JOptionPane.showMessageDialog(this, "Pedido editado com sucesso!");
 
@@ -274,6 +274,8 @@ public class EditarPedidosView extends javax.swing.JFrame {
         PedidosDAO pedidosDAO = new PedidosDAO();
         ContaDAO contaDAO = new ContaDAO();
         new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos(contaDAO.isLogado())));
+        this.dispose();
+
     }//GEN-LAST:event_btnMontarPcActionPerformed
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
@@ -290,6 +292,8 @@ public class EditarPedidosView extends javax.swing.JFrame {
         ProdutoDAO produtoDAO = new ProdutoDAO();
 
         new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
+        this.dispose();
+
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     /**

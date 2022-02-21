@@ -10,7 +10,6 @@ import br.udesc.prog2.controllers.contas.RegistrarController;
 import br.udesc.prog2.controllers.products.CompraController;
 import br.udesc.prog2.controllers.products.CriarProdutoController;
 import br.udesc.prog2.controllers.products.ListarProdutosController;
-import br.udesc.prog2.controllers.products.pedidos.ComprarPedidosController;
 import br.udesc.prog2.controllers.products.pedidos.ControladorListarPedidos;
 import br.udesc.prog2.controllers.products.pedidos.EditarPedidosController;
 import br.udesc.prog2.dao.Conta.ContaDAO;
@@ -336,8 +335,9 @@ public class PedidosView extends javax.swing.JFrame {
         ArrayList<Pedidos> pedidos = pedidosDAO.getPedidosByName(buscaNome, contaDAO.isLogado());
 
         ControladorListarPedidos controlador = new ControladorListarPedidos(new PedidosView(), new PedidoTableModel(pedidos));
-
         controlador.exibir();
+        this.dispose();
+
     }//GEN-LAST:event_btnPesquisaActionPerformed
 
     private void buscaContainerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaContainerActionPerformed
@@ -346,6 +346,8 @@ public class PedidosView extends javax.swing.JFrame {
 
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
         new EditarPedidosController(new EditarPedidosView());
+        this.dispose();
+
     }//GEN-LAST:event_btnEditar1ActionPerformed
 
     private void btnMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMontarPcActionPerformed
@@ -353,6 +355,7 @@ public class PedidosView extends javax.swing.JFrame {
         PedidosDAO pedidosDAO = new PedidosDAO();
         ContaDAO contaDAO = new ContaDAO();
         new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos(contaDAO.isLogado())));
+        this.dispose();
     }//GEN-LAST:event_btnMontarPcActionPerformed
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
@@ -369,6 +372,8 @@ public class PedidosView extends javax.swing.JFrame {
         ProdutoDAO produtoDAO = new ProdutoDAO();
 
         new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
+        this.dispose();
+
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     public void exibirMensagem(String msg){

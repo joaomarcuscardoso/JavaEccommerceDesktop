@@ -326,6 +326,7 @@ public class CriarProdutoView extends javax.swing.JFrame {
     private void btnMenuRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuRegistrarActionPerformed
         // TODO add your handling code here:
         new RegistrarController(new RegistrarView());
+        this.dispose();
     }//GEN-LAST:event_btnMenuRegistrarActionPerformed
 
     private void btnMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMontarPcActionPerformed
@@ -333,6 +334,7 @@ public class CriarProdutoView extends javax.swing.JFrame {
         PedidosDAO pedidosDAO = new PedidosDAO();
         ContaDAO contaDAO = new ContaDAO();
         new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos(contaDAO.isLogado())));
+        this.dispose();
     }//GEN-LAST:event_btnMontarPcActionPerformed
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
@@ -349,6 +351,7 @@ public class CriarProdutoView extends javax.swing.JFrame {
         ProdutoDAO produtoDAO = new ProdutoDAO();
 
         new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
+        this.dispose();
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     private void adicionarProduto(String nome, String descricao, String categoria, int quantidade, double preco, int quantidadeIdeal, String recomendacao) {

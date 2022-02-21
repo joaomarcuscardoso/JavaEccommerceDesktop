@@ -220,10 +220,13 @@ public class LoginView extends javax.swing.JFrame {
 
     private void btnLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin1ActionPerformed
         new LoginController(new LoginView());
+        this.dispose();
+
     }//GEN-LAST:event_btnLogin1ActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         new RegistrarController(new RegistrarView());
+        this.dispose();
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 

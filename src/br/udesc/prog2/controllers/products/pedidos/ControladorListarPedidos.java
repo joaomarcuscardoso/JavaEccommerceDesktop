@@ -69,7 +69,7 @@ public class ControladorListarPedidos {
             int id = Integer.valueOf(idString);
             ContaDAO contaDAO = new ContaDAO();
 
-            if(this.pedidosDAO.deletarPedidosPorId(id, contaDAO.isLogado())){
+            if(this.pedidosDAO.deletarPedidosPorId(id)){
                 pedidosView.exibirMensagem("pedido excluido com sucesso");
                 atualizarDados();
             } else {

@@ -269,6 +269,7 @@ public class RegistrarView extends javax.swing.JFrame {
     private void btnContainerContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContainerContaActionPerformed
         // TODO add your handling code here:
         new RegistrarController(new RegistrarView());
+        this.dispose();
     }//GEN-LAST:event_btnContainerContaActionPerformed
 
 

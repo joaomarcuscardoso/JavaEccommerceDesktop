@@ -358,6 +358,7 @@ public class ProdutoView extends javax.swing.JFrame {
         PedidosDAO pedidosDAO = new PedidosDAO();
         ContaDAO contaDAO = new ContaDAO();
         new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos(contaDAO.isLogado())));
+        this.dispose();
     }//GEN-LAST:event_btnMontarPcActionPerformed
 
     public void exibirMensagem(String msg){
