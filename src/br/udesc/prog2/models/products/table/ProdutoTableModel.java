@@ -32,30 +32,21 @@ public class ProdutoTableModel extends AbstractTableModel {
     private final int Col_Categoria = 2;
     private final int Col_Quantidade = 3;
     private final int Col_Preco = 4;
+    private boolean isAdmin = false;
     
     public ProdutoTableModel(List<Produto> produtos) {
-        
-
-        if(contaDAO.isADmin() == true) {
         this.produtos = produtos;
-    
-        }
     }
     
     @Override
     public int getRowCount() {
-        if(contaDAO.isADmin() == true) {
-            return produtos.size();
-        }
-        return 0;
+        return produtos.size();
     }
 
     @Override
     public int getColumnCount() {
-        if(contaDAO.isADmin() == true) {
-            return dados.length;
-        }
-        return 0;
+        return dados.length;
+        
     }
     
     @Override
@@ -67,10 +58,8 @@ public class ProdutoTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Produto produtos = this.produtos.get(rowIndex);
         String valor = null;
-        ContaDAO contaDAO = new ContaDAO();
 
-        if(contaDAO.isADmin() == true) {
-            switch(columnIndex){
+        switch(columnIndex){
                 case Col_Id:
                     valor = String.valueOf(produtos.getId());
                     break;
@@ -86,54 +75,47 @@ public class ProdutoTableModel extends AbstractTableModel {
                 case Col_Preco:
                     valor = String.valueOf( produtos.getPreco());
                     break;
-            }
         }
         return valor;
     }
     
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        ContaDAO contaDAO = new ContaDAO();
         
-        if(contaDAO.isADmin() == true) {
             
-            if(columnIndex == Col_Id || columnIndex == Col_Categoria) {
+        if(columnIndex == Col_Id || columnIndex == Col_Categoria) {
 
-                return false;
-            }
-            return true;
-        } 
+            return false;
+        }
+    
+        return true;
         
-        return false;
     }
     
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        ContaDAO contaDAO = new ContaDAO();
 
-        if(contaDAO.isADmin() == true) {
-            Produto produto = this.produtos.get(rowIndex);
-            switch (columnIndex) {
-                case Col_Id:
-                    produto.setId((Integer) aValue);
-                    break;
-                case Col_Nome:
-                    produto.setNome((String) aValue);
-                    break;
-                case Col_Categoria:
-                    produto.setCategoria((String) aValue);
-                    break;
-                case Col_Quantidade:
-                    produto.setQuantidade(Integer.valueOf((String) aValue));
-                    break;
-                case Col_Preco:
-                    produto.setPreco(Double.valueOf((String) aValue));
-                    break;
-            }
-            //este método é que notifica a tabela que houve alteração de dados
-            fireTableDataChanged();
-            fireTableCellUpdated(rowIndex, columnIndex);
+        Produto produto = this.produtos.get(rowIndex);
+        switch (columnIndex) {
+            case Col_Id:
+                produto.setId((Integer) aValue);
+                break;
+            case Col_Nome:
+                produto.setNome((String) aValue);
+                break;
+            case Col_Categoria:
+                produto.setCategoria((String) aValue);
+                break;
+            case Col_Quantidade:
+                produto.setQuantidade(Integer.valueOf((String) aValue));
+                break;
+            case Col_Preco:
+                produto.setPreco(Double.valueOf((String) aValue));
+                break;
         }
+        //este método é que notifica a tabela que houve alteração de dados
+        fireTableDataChanged();
+        fireTableCellUpdated(rowIndex, columnIndex);
     }
 
     public void setProdutos(List<Produto> produtos) {

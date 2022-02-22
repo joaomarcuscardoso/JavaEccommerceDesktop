@@ -26,12 +26,8 @@ public class PedidoTableModel extends AbstractTableModel {
     
     @Override
     public int getRowCount() {
-        if(pedidos == null) {
-            return 0;
-        } else {
             
-            return pedidos.size();
-        }
+        return pedidos.size();
     }
 
     @Override

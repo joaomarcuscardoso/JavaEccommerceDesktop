@@ -1,9 +1,13 @@
 package br.udesc.prog2.controllers.products;
 
 
+import br.udesc.prog2.dao.Conta.ContaDAO;
 import br.udesc.prog2.dao.Produto.ProdutoDAO;
+import br.udesc.prog2.models.Conta;
 import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.models.products.table.ProdutoTableModel;
+import br.udesc.prog2.utils.Instance;
+import br.udesc.prog2.utils.VerifyAdmin;
 import br.udesc.prog2.views.products.ProdutoView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,11 +27,13 @@ public class ListarProdutosController {
     private ProdutoView produtoView;
     private ProdutoTableModel produtoTableModel;
     private ProdutoDAO produtoDao = new ProdutoDAO();
+    private Conta conta;
+
     
     public ListarProdutosController(ProdutoView produtoView, ProdutoTableModel produtoTableModel) {
         this.produtoView = produtoView;
         this.produtoTableModel = produtoTableModel;
-        
+
         setTableModel();
         adicionarAcaoBotaoExcluir();
         adicionarEventos(); 

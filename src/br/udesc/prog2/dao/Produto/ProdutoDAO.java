@@ -67,6 +67,7 @@ public class ProdutoDAO {
                 int id = resultado.getInt(1);
                 produto.setId(id);
             }
+            
             ConexaoDB.desconectarDB();
             return true;
             
@@ -133,7 +134,6 @@ public class ProdutoDAO {
             System.out.println(ex.getMessage());
         }
 
-        ConexaoDB.desconectarDB();
         return null;       
     }
     
@@ -168,7 +168,8 @@ public class ProdutoDAO {
             return null;
         }
         
-        ConexaoDB.desconectarDB();
+
+        System.out.println(produtos);
         return produtos;
 
     }
@@ -192,7 +193,6 @@ public class ProdutoDAO {
             System.out.println(ex.getMessage());
         }
 
-        ConexaoDB.desconectarDB();
         return 0;       
     }
 
@@ -212,7 +212,6 @@ public class ProdutoDAO {
             System.out.println(ex.getMessage());
         }
         
-        ConexaoDB.desconectarDB();
         return false;
     }
     
@@ -245,12 +244,11 @@ public class ProdutoDAO {
 
             System.out.println("Producto atualizado com sucesso!");
             
-            ConexaoDB.desconectarDB(); 
             return true;
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            ConexaoDB.desconectarDB();
+
             return false;
         } 
     }
@@ -289,7 +287,6 @@ public class ProdutoDAO {
             return null;
         }
 
-        ConexaoDB.desconectarDB();
         return produtos;  
     }
     
@@ -311,12 +308,10 @@ public class ProdutoDAO {
             pstmt.execute();
 
             
-            ConexaoDB.desconectarDB(); 
             return true;
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            ConexaoDB.desconectarDB();
             return false;
         }       
     }

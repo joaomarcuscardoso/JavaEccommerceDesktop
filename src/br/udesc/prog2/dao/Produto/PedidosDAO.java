@@ -9,6 +9,7 @@ import br.udesc.prog2.dao.Conta.ContaDAO;
 import br.udesc.prog2.models.clients.Pedidos;
 import br.udesc.prog2.models.products.EStatus;
 import br.udesc.prog2.models.products.Produto;
+import br.udesc.prog2.utils.Instance;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -49,10 +50,9 @@ public class PedidosDAO {
         
         criarTabela();
         Connection conexao = ConexaoDB.getConnection();
-        ContaDAO contaDAO = new ContaDAO();
         String sql;
         
-        if(contaDAO.isADmin() == false) {
+        if(new Instance().getInstanceVerifyAdmin().isAdmin == false) {
             sql = "SELECT * FROM pedidos WHERE nome_produto LIKE ? and id_user = ?";
         } else {
             sql = "SELECT * FROM pedidos WHERE nome_produto LIKE ?";
@@ -62,7 +62,8 @@ public class PedidosDAO {
         try {
             PreparedStatement pstmt = conexao.prepareStatement(sql);
             pstmt.setString(1,"%" + nomeSearch + "%"); 
-            if(contaDAO.isADmin() == false) {
+            
+            if(new Instance().getInstanceVerifyAdmin().isAdmin == false) {
                 pstmt.setInt(2, id_user);
             }
             
@@ -95,13 +96,12 @@ public class PedidosDAO {
     
     public ArrayList<Pedidos> getPedidos(int id_user) {
         ArrayList<Pedidos> pedidos = new ArrayList<Pedidos>();
+        Connection conexao = ConexaoDB.getConnection();
 
         criarTabela();
-        Connection conexao = ConexaoDB.getConnection();
-        ContaDAO contaDAO = new ContaDAO();
         String sql;
         
-        if(contaDAO.isADmin() == true) {
+        if(new Instance().getInstanceVerifyAdmin().isAdmin == true) {
             sql = "SELECT * FROM pedidos";
         } else {
             
@@ -111,7 +111,7 @@ public class PedidosDAO {
         PreparedStatement pstmt;
         try {
             pstmt = conexao.prepareStatement(sql);
-            if(contaDAO.isADmin() == false) {
+            if(new Instance().getInstanceVerifyAdmin().isAdmin == false) {
                 pstmt.setInt(1, id_user);
             }
              ResultSet resultado = pstmt.executeQuery();
@@ -205,7 +205,7 @@ public class PedidosDAO {
         Connection conexao = ConexaoDB.getConnection();
         String sql = "UPDATE pedidos SET "
                 + " estatus = ?"
-                + " WHERE id = ? and id_user = ?";
+                + " WHERE id = ?";
         PreparedStatement pstmt;
 
         try {

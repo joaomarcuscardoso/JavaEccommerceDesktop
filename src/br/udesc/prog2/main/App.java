@@ -7,15 +7,14 @@ package br.udesc.prog2.main;
 
 import br.udesc.prog2.views.accounts.LoginView;
 import br.udesc.prog2.controllers.contas.LoginController;
+import br.udesc.prog2.utils.VerifyAdmin;
 
-/**
- *
- * @author rfcjo
- */
 public class App {
     public static void main(String[] args){
         LoginController loginController = new LoginController(new LoginView());
+    
         loginController.exibir();
     }
     
+ 
 }

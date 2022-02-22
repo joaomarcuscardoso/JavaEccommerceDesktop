@@ -19,12 +19,19 @@ import br.udesc.prog2.exceptions.ExceptionDadosIncompletos;
 import br.udesc.prog2.exceptions.ExceptionUsuarioInvalido;
 import br.udesc.prog2.models.products.pedidos.table.PedidoTableModel;
 import br.udesc.prog2.models.products.table.ProdutoTableModel;
+import br.udesc.prog2.utils.Instance;
 import br.udesc.prog2.utils.PegarTodosProdutoParaTableModels;
+import br.udesc.prog2.utils.VerifyAdmin;
 import br.udesc.prog2.views.products.CompraView;
 import br.udesc.prog2.views.products.PedidosView;
 import br.udesc.prog2.views.products.ProdutoView;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 public class LoginView extends javax.swing.JFrame {
+
     
     public LoginView() {
         initComponents();
@@ -174,12 +181,24 @@ public class LoginView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputEmailActionPerformed
 
-   
+    public JButton getBtnLogin() {
+        return btnLogin;
+    }
+    
+    public JLabel getEmail() {
+        return labelEmail;
+    }
+    
+    public JLabel getSenha() {
+        return labelEmail;
+    }
+  
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        try {
-            if(!inputEmail.getText().equals("") && !inputSenha.getText().equals("")) {
+       
+       try {
+            if(!inputEmail.getText().equals("") && !inputSenha.getText().equals("")) {;
                 try {
                     
                     ContaDAO contaDAO = new ContaDAO();
@@ -193,6 +212,9 @@ public class LoginView extends javax.swing.JFrame {
                         
                         if(conta.isAdmin() == true ) {
                             ProdutoDAO produtoDAO = new ProdutoDAO();
+                            
+                            new Instance().getInstanceVerifyAdmin().isAdmin = conta.isAdmin();
+                            
                             
                             new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
                             this.dispose();
@@ -216,6 +238,7 @@ public class LoginView extends javax.swing.JFrame {
         } catch(ExceptionDadosIncompletos e ) {
             e.printStackTrace();
         }
+    
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin1ActionPerformed
@@ -282,4 +305,8 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JLabel labelEmail;
     private javax.swing.JLabel labelSenha;
     // End of variables declaration//GEN-END:variables
+
+    public void btnLogin(ActionListener actionListener) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

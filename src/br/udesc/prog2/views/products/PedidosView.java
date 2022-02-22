@@ -35,6 +35,7 @@ import javax.swing.table.AbstractTableModel;
 import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.models.products.pedidos.table.PedidoTableModel;
 import br.udesc.prog2.models.products.table.ProdutoTableModel;
+import br.udesc.prog2.utils.Instance;
 import br.udesc.prog2.utils.PegarTodosProdutoParaTableModels;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
@@ -62,7 +63,13 @@ public class PedidosView extends javax.swing.JFrame {
     }
     
     public void mostrarTela(){
+        
+        btnProduto.setEnabled(new Instance().getInstanceVerifyAdmin().isAdmin);
+        btnEditar1.setEnabled(new Instance().getInstanceVerifyAdmin().isAdmin);
+        btnExcluir.setEnabled(new Instance().getInstanceVerifyAdmin().isAdmin);
+        
         setVisible(true);
+        
         
     }
 
@@ -92,10 +99,7 @@ public class PedidosView extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         btnProdutos = new javax.swing.JMenu();
         btnMontarPc = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        btnLogin = new javax.swing.JMenuItem();
-        btnRegistrar = new javax.swing.JMenuItem();
+        btnProduto = new javax.swing.JRadioButtonMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -213,37 +217,16 @@ public class PedidosView extends javax.swing.JFrame {
         });
         btnProdutos.add(btnMontarPc);
 
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("Produtos");
-        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        btnProduto.setSelected(true);
+        btnProduto.setText("Produtos");
+        btnProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem1ActionPerformed(evt);
+                btnProdutoActionPerformed(evt);
             }
         });
-        btnProdutos.add(jRadioButtonMenuItem1);
+        btnProdutos.add(btnProduto);
 
         jMenuBar1.add(btnProdutos);
-
-        jMenu4.setForeground(new java.awt.Color(255, 255, 255));
-        jMenu4.setText("Conta");
-
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
-        jMenu4.add(btnLogin);
-
-        btnRegistrar.setText("Registrar-se");
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
-        jMenu4.add(btnRegistrar);
-
-        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -292,18 +275,6 @@ public class PedidosView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCompraPedidoActionPerformed
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        new LoginController(new LoginView());
-        this.dispose();
-
-    }//GEN-LAST:event_btnLoginActionPerformed
-
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        new RegistrarController(new RegistrarView());
-        this.dispose();
-
-    }//GEN-LAST:event_btnRegistrarActionPerformed
-
     public String getIdLinhaSelecionada(){
         if(tbPedidosView.getSelectedRow() == -1){
             System.out.println("Nenhuma Linha selecionada");
@@ -320,10 +291,7 @@ public class PedidosView extends javax.swing.JFrame {
     }
     
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
-//        System.out.println("entrou");
-//        new EditarPedidosView().setVisible(true);
-//        this.dispose();
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
@@ -358,11 +326,11 @@ public class PedidosView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnMontarPcActionPerformed
 
-    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+    private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
         // TODO add your handling code here:
         new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
         this.dispose();
-    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
+    }//GEN-LAST:event_btnProdutoActionPerformed
 
     private void btnProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProdutosMouseClicked
         // TODO add your handling code here:
@@ -439,16 +407,13 @@ public class PedidosView extends javax.swing.JFrame {
     private javax.swing.JButton btnCompraPedido;
     private javax.swing.JButton btnEditar1;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JMenuItem btnLogin;
     private javax.swing.JRadioButtonMenuItem btnMontarPc;
     private javax.swing.JButton btnPesquisa;
+    private javax.swing.JRadioButtonMenuItem btnProduto;
     private javax.swing.JMenu btnProdutos;
-    private javax.swing.JMenuItem btnRegistrar;
     private javax.swing.JTextField buscaContainer;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbPedidosView;
     // End of variables declaration//GEN-END:variables

@@ -20,6 +20,7 @@ import br.udesc.prog2.models.products.table.ProdutoTableModel;
 import br.udesc.prog2.utils.CategoriaOpcao;
 import static br.udesc.prog2.utils.CategoriaOpcao.categoriasOpcao;
 import br.udesc.prog2.utils.ComboItem;
+import br.udesc.prog2.utils.Instance;
 import br.udesc.prog2.utils.PegarTodosProdutoParaTableModels;
 import br.udesc.prog2.views.accounts.RegistrarView;
 import java.awt.event.ActionEvent;
@@ -60,6 +61,8 @@ public class CompraView extends javax.swing.JFrame {
     
     
     public void mostrarTela(){
+        btnProduto.setEnabled(new Instance().getInstanceVerifyAdmin().isAdmin);
+        System.out.println("btnProduto.setEnabled(new Instance().getInstanceVerifyAdmin().isAdmin) " + new Instance().getInstanceVerifyAdmin().isAdmin);
         setVisible(true);
         
     }
@@ -139,10 +142,7 @@ public class CompraView extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         btnProdutos = new javax.swing.JMenu();
         btnMontarPc = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        btnContainerConta = new javax.swing.JMenu();
-        btnMenuLogin = new javax.swing.JMenuItem();
-        btnMenuRegistrar = new javax.swing.JMenuItem();
+        btnProduto = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(590, 590));
@@ -248,37 +248,16 @@ public class CompraView extends javax.swing.JFrame {
         });
         btnProdutos.add(btnMontarPc);
 
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("Produtos");
-        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        btnProduto.setSelected(true);
+        btnProduto.setText("Produtos");
+        btnProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem1ActionPerformed(evt);
+                btnProdutoActionPerformed(evt);
             }
         });
-        btnProdutos.add(jRadioButtonMenuItem1);
+        btnProdutos.add(btnProduto);
 
         jMenuBar1.add(btnProdutos);
-
-        btnContainerConta.setForeground(new java.awt.Color(255, 255, 255));
-        btnContainerConta.setText("Conta");
-
-        btnMenuLogin.setText("Login");
-        btnMenuLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuLoginActionPerformed(evt);
-            }
-        });
-        btnContainerConta.add(btnMenuLogin);
-
-        btnMenuRegistrar.setText("Registrar-se");
-        btnMenuRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuRegistrarActionPerformed(evt);
-            }
-        });
-        btnContainerConta.add(btnMenuRegistrar);
-
-        jMenuBar1.add(btnContainerConta);
 
         setJMenuBar(jMenuBar1);
 
@@ -364,15 +343,6 @@ public class CompraView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnMenuLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuLoginActionPerformed
-
-    }//GEN-LAST:event_btnMenuLoginActionPerformed
-
-    private void btnMenuRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuRegistrarActionPerformed
-        RegistrarController registrarController = new RegistrarController(new RegistrarView());
-        this.dispose();
-    }//GEN-LAST:event_btnMenuRegistrarActionPerformed
 
     private void btnComprarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProdutoActionPerformed
         try {
@@ -483,11 +453,11 @@ public class CompraView extends javax.swing.JFrame {
         new ControladorListarPedidos(new  PedidosView(), new PedidoTableModel(pedidosDAO.getPedidos(contaDAO.isLogado())));
     }//GEN-LAST:event_btnMontarPcActionPerformed
 
-    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+    private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
         // TODO add your handling code here:
         new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
         this.dispose();
-    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
+    }//GEN-LAST:event_btnProdutoActionPerformed
 
     private void btnProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProdutosMouseClicked
         // TODO add your handling code here:
@@ -540,10 +510,8 @@ public class CompraView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField InputPreco;
     private javax.swing.JButton btnComprarProduto;
-    private javax.swing.JMenu btnContainerConta;
-    private javax.swing.JMenuItem btnMenuLogin;
-    private javax.swing.JMenuItem btnMenuRegistrar;
     private javax.swing.JRadioButtonMenuItem btnMontarPc;
+    private javax.swing.JRadioButtonMenuItem btnProduto;
     private javax.swing.JMenu btnProdutos;
     private javax.swing.JComboBox<Object> comboCategoria;
     private javax.swing.JComboBox comboProduto;
@@ -554,7 +522,6 @@ public class CompraView extends javax.swing.JFrame {
     private javax.swing.JTextField inputRua;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JLabel labelCategoria;
     private javax.swing.JLabel labelCategoria1;
     private javax.swing.JLabel labelNome;

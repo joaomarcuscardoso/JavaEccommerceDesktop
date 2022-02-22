@@ -9,6 +9,7 @@ import br.udesc.prog2.dao.Produto.PedidosDAO;
 import br.udesc.prog2.models.clients.Pedidos;
 import br.udesc.prog2.models.products.pedidos.table.PedidoTableModel;
 import br.udesc.prog2.models.products.table.ProdutoTableModel;
+import br.udesc.prog2.utils.Instance;
 import br.udesc.prog2.views.products.PedidosView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

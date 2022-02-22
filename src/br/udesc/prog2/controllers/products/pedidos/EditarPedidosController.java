@@ -4,6 +4,7 @@
  */
 package br.udesc.prog2.controllers.products.pedidos;
 
+import br.udesc.prog2.utils.Instance;
 import br.udesc.prog2.views.products.CriarProdutoView;
 import br.udesc.prog2.views.products.EditarPedidosView;
 
@@ -16,7 +17,8 @@ public class EditarPedidosController {
     
     public EditarPedidosController(EditarPedidosView editarPedidosView) {
         this.editarPedidosView = editarPedidosView;
-        exibir();                       
+
+        exibir();                      
     }
     
     public void exibir(){

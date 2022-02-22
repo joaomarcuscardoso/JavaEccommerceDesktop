@@ -52,7 +52,7 @@ public class ContaDAO {
 
         Connection conexao = ConexaoDB.getConnection();
 
-        String sql = "SELECT * FROM contas WHERE logado = ? and admin = ?";
+        String sql = "SELECT * FROM contas WHERE id = ? and admin = ?";
         try {
             PreparedStatement pstmt = conexao.prepareStatement(sql);
             pstmt.setBoolean(1, true);

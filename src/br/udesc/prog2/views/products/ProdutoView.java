@@ -15,28 +15,13 @@ import br.udesc.prog2.dao.Produto.PedidosDAO;
 import br.udesc.prog2.views.accounts.LoginView;
 import br.udesc.prog2.views.accounts.RegistrarView;
 import br.udesc.prog2.views.products.CriarProdutoView;
-import br.udesc.prog2.views.products.EditarPedidosView;
 import br.udesc.prog2.dao.Produto.ProdutoDAO;
-import br.udesc.prog2.main.App;
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-import java.io.Console;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.AbstractTableModel;
 import br.udesc.prog2.models.products.Produto;
 import br.udesc.prog2.models.products.pedidos.table.PedidoTableModel;
 import br.udesc.prog2.models.products.table.ProdutoTableModel;
+import br.udesc.prog2.utils.Instance;
 import br.udesc.prog2.utils.PegarTodosProdutoParaTableModels;
-import java.awt.ScrollPane;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -51,14 +36,16 @@ public class ProdutoView extends javax.swing.JFrame {
     private DefaultTableModel model;
     private static String salvaBusca;
     
-    /**
-     * Creates new form HomeView
-     */
+  
     public ProdutoView() {
         initComponents();
     }
     
+    
+    
     public void mostrarTela(){
+        btnProduto.setEnabled(new Instance().getInstanceVerifyAdmin().isAdmin);
+
         setVisible(true);
     }
 
@@ -90,10 +77,7 @@ public class ProdutoView extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         btnProdutos = new javax.swing.JMenu();
         btnMontarPc = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        btnLogin = new javax.swing.JMenuItem();
-        btnRegistrar = new javax.swing.JMenuItem();
+        btnProduto = new javax.swing.JRadioButtonMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -208,37 +192,16 @@ public class ProdutoView extends javax.swing.JFrame {
         });
         btnProdutos.add(btnMontarPc);
 
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("Produtos");
-        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        btnProduto.setSelected(true);
+        btnProduto.setText("Produtos");
+        btnProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem1ActionPerformed(evt);
+                btnProdutoActionPerformed(evt);
             }
         });
-        btnProdutos.add(jRadioButtonMenuItem1);
+        btnProdutos.add(btnProduto);
 
         jMenuBar1.add(btnProdutos);
-
-        jMenu4.setForeground(new java.awt.Color(255, 255, 255));
-        jMenu4.setText("Conta");
-
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
-        jMenu4.add(btnLogin);
-
-        btnRegistrar.setText("Registrar-se");
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
-        jMenu4.add(btnRegistrar);
-
-        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -292,26 +255,13 @@ public class ProdutoView extends javax.swing.JFrame {
 
         ListarProdutosController controlador = new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(produtos));
 
-        controlador.exibir();
+        this.dispose();
     }//GEN-LAST:event_btnPesquisaActionPerformed
 
     private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
-        // TODO add your handling code here:
         new CriarProdutoController(new CriarProdutoView());
         this.dispose();
     }//GEN-LAST:event_btnAddProdutoActionPerformed
-
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        new LoginController(new LoginView());
-        this.dispose();
-
-    }//GEN-LAST:event_btnLoginActionPerformed
-
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        new RegistrarController(new RegistrarView());
-        this.dispose();
-
-    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
         ProdutoDAO produtoDAO = new ProdutoDAO();
@@ -347,11 +297,11 @@ public class ProdutoView extends javax.swing.JFrame {
 //        this.dispose();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+    private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
         // TODO add your handling code here:
         new ListarProdutosController(new ProdutoView(), new ProdutoTableModel(new PegarTodosProdutoParaTableModels().listarProdutos()));
         this.dispose();
-    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
+    }//GEN-LAST:event_btnProdutoActionPerformed
 
     private void btnMontarPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMontarPcActionPerformed
         // TODO add your handling code here:
@@ -419,19 +369,16 @@ public class ProdutoView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduto;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JMenuItem btnLogin;
     private javax.swing.JRadioButtonMenuItem btnMontarPc;
     private javax.swing.JButton btnPesquisa;
+    private javax.swing.JRadioButtonMenuItem btnProduto;
     private javax.swing.JMenu btnProdutos;
-    private javax.swing.JMenuItem btnRegistrar;
     private javax.swing.JTextField buscaContainer;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbPrincipal;
     // End of variables declaration//GEN-END:variables
